@@ -78,8 +78,9 @@ if (action === 'raw') {
   execSync(`node "${path.join(toolsDir, 'verify_sub.js')}" "${dialoguesJson}" "${transJson}"`, { stdio: 'inherit' });
 
   console.log(`\n=== BƯỚC 2: TÁI TẠO FILE PHỤ ĐỀ VIỆT (.ASS & .SRT) ===`);
+  const templateAss = fs.existsSync(extractedAss) ? extractedAss : path.join(dir, `${base}_raw.ass`);
   const subViAss = path.join(dir, `${base}.vie.ass`);
-  execSync(`node "${path.join(toolsDir, 'build_sub.js')}" "${extractedAss}" "${transJson}" "${path.join(dir, base)}"`, { stdio: 'inherit' });
+  execSync(`node "${path.join(toolsDir, 'build_sub.js')}" "${templateAss}" "${transJson}" "${path.join(dir, base)}"`, { stdio: 'inherit' });
 
   console.log(`\n=== BƯỚC 3: ĐÓNG GÓI VIDEO (REMUX) ===`);
   execSync(`node "${path.join(toolsDir, 'remux.js')}" "${videoFile}" "${subViAss}"`, { stdio: 'inherit' });

@@ -37,14 +37,17 @@ metadata:
 [BƯỚC 6: ĐÓNG GÓI PHIM & XUẤT ĐA ĐỊNH DẠNG (Remux & Export)]
 ```
 
-### Bước 0: Xử lý Video thô & Quản lý vòng đời Docker (Auto-Start / Auto-Stop)
-- **Khi video chưa có phụ đề sẵn**: AI sử dụng Speech-to-Text Engine để bóc tách lời thoại trực tiếp từ âm thanh video gốc.
-- **Quy tắc quản lý Docker tiết kiệm tài nguyên**:
-  1. **Khởi động Docker khi cần**: Chạy container chép lời thoại bằng lệnh:
-     `docker compose run --rm transcribe "/videos/[tên_phim].mkv" --model large-v3 --separate`
-  2. **Tắt Docker ngay khi hoàn thành**: Ngay sau khi file `_dialogues.json` được tạo ra, AI **BẮT BUỘC PHẢI THỰC THI**:
-     `docker compose down`
-     để dừng toàn bộ container, giải phóng hoàn toàn 100% VRAM của card đồ họa và RAM hệ thống, tránh để container chạy ngầm gây hao pin hoặc nặng máy.
+### Bước 0: Xử lý Video thô & Tự động nhận diện phần cứng (Auto-Detect Engine)
+- **Cơ chế tự động nhận biết định dạng đầu vào**:
+  - Khi người dùng gửi video: AI kiểm tra xem video đã có track phụ đề (softsub) chưa.
+  - **Nếu đã có track sub**: Bỏ qua Bước 0, chuyển ngay sang **Bước 1** (Trích xuất nhanh bằng FFmpeg chỉ mất 1-2 giây).
+  - **Nếu là Video thô (RAW không có sub)**: AI tự động kích hoạt Engine Speech-to-Text để nghe và bóc tách tiếng Nhật/Hàn trực tiếp:
+    1. **Ưu tiên 1 (NATIVE GPU PYTHON)**: Nếu phát hiện môi trường `F:\Python311\python.exe` (hoặc Python có CUDA trên máy như RTX 3070 Ti), AI chạy trực tiếp lệnh:
+       `& "F:\Python311\python.exe" engine/transcribe.py "<đường_dẫn_video>" --model large-v3 --separate`
+       *(Tốc độ siêu nhanh ~60s/tập, tận dụng tối đa GPU phần cứng và lưu cache vào ổ F, không tốn dung lượng ổ C)*.
+    2. **Ưu tiên 2 (DOCKER GPU)**: Nếu chạy qua Docker:
+       - **Khởi động**: `docker compose run --rm transcribe "/videos/[tên_phim].mkv" --model large-v3 --separate`
+       - **Tắt sạch ngay lập tức**: Ngay sau khi file `_dialogues.json` xuất hiện, AI **BẮT BUỘC CHẠY** `docker compose down` để giải phóng 100% VRAM và RAM.
 
 ### Bước 1: Trích xuất & Khảo sát Subtitle
 - Dùng công cụ `tools/extract.js` hoặc ffmpeg để lấy stream subtitle (nếu video đã có sẵn track phụ đề gốc).

@@ -18,6 +18,28 @@ import json
 import shutil
 from pathlib import Path
 
+# Fix Unicode on Windows CMD/PowerShell
+try:
+    if hasattr(sys.stdout, 'reconfigure'):
+        sys.stdout.reconfigure(encoding='utf-8')
+    if hasattr(sys.stderr, 'reconfigure'):
+        sys.stderr.reconfigure(encoding='utf-8')
+except Exception:
+    pass
+
+# Cấu hình cache sang ổ F để bảo vệ ổ C (tránh đầy ổ C 128GB)
+if "HF_HOME" not in os.environ:
+    os.environ["HF_HOME"] = r"F:\AI_Cache\huggingface"
+if "TORCH_HOME" not in os.environ:
+    os.environ["TORCH_HOME"] = r"F:\AI_Cache\torch"
+
+# Tự động nạp Scripts của Python hiện tại vào PATH (để tìm ffmpeg.exe và demucs.exe)
+scripts_dir = str(Path(sys.executable).parent / "Scripts")
+python_dir = str(Path(sys.executable).parent)
+current_path = os.environ.get("PATH", "")
+if scripts_dir not in current_path:
+    os.environ["PATH"] = f"{scripts_dir};{python_dir};{current_path}"
+
 def format_timestamp_ass(seconds: float) -> str:
     """Đổi giây sang định dạng ASS: H:MM:SS.cs"""
     h = int(seconds // 3600)

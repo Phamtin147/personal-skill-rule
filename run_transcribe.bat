@@ -14,7 +14,18 @@ if "%~1"=="" (
 set VIDEO_FILE=%~1
 echo [Dang xu ly file]: %VIDEO_FILE%
 
-:: Kiem tra neu co Docker
+:: Thiet lap thu muc luu Model AI sang o F de bao ve o C 128GB
+set "HF_HOME=F:\AI_Cache\huggingface"
+set "TORCH_HOME=F:\AI_Cache\torch"
+
+:: 1. Uu tien so 1: Chay truc tiep bang Python 3.11 GPU cuc bo (NVIDIA RTX 3070 Ti)
+if exist "F:\Python311\python.exe" (
+    echo [Phat hien NVIDIA GPU Python 3.11] Dang chay Faster-Whisper + Demucs cuc nhanh...
+    "F:\Python311\python.exe" "%~dp0engine\transcribe.py" "%VIDEO_FILE%" --model large-v3 --separate
+    goto END
+)
+
+:: 2. Uu tien so 2: Docker GPU (neu may khac clone repo ve co Docker)
 where docker >nul 2>nul
 if %errorlevel% equ 0 (
     echo [Phat hien Docker] Dang chay AI Engine qua Docker GPU...
@@ -24,11 +35,11 @@ if %errorlevel% equ 0 (
     goto END
 )
 
-:: Kiem tra neu co Python
+:: 3. Uu tien so 3: Python he thong
 where python >nul 2>nul
 if %errorlevel% equ 0 (
     echo [Phat hien Python] Dang chay engine Python truc tiep...
-    python engine/transcribe.py "%VIDEO_FILE%" --model large-v3 --separate
+    python "%~dp0engine\transcribe.py" "%VIDEO_FILE%" --model large-v3 --separate
     goto END
 )
 
