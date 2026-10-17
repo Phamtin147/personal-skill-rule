@@ -57,3 +57,17 @@ Tiếng Anh chỉ có *I - You*, nhưng tiếng Việt có hệ thống đại t
 * **Ký tự ngắt dòng**: Bắt buộc là `\N` (chữ N in hoa). Ký tự `\n` in thường sẽ bị một số renderer hiển thị thành lỗi ký tự lạ.
 * **Thẻ in nghiêng**: Dùng `{\i1}Nội dung{\i0}` cho suy nghĩ nội tâm hoặc tên riêng tác phẩm/chiêu thức.
 * **Toàn vẹn dòng**: Số câu thoại dịch phải chuẩn xác 100% khớp với timeline ban đầu. Không gộp dòng, không tách dòng làm lệch phụ đề.
+
+---
+
+## 4. QUY TẮC GHI CÔNG & CREDITS FANSUB (CREDITS LOCALIZATION)
+
+Khi gặp các dòng Credit ở cuối tập phim (các dòng có style `credits` hoặc nội dung về Translator, Timer, Editor, Quality Control, QC, Typesetter, Encoder,...):
+* **Quy chuẩn ghi công**: Bắt buộc thay thế toàn bộ tên của nhóm sub ngoại quốc ban đầu bằng tên dịch giả tiếng Việt: **Phamtin147**.
+* **Mẫu chuyển ngữ chuẩn Fansub**:
+  - `Translator: [Tên gốc]` ➔ `Phụ đề Việt ngữ (VietSub): Phamtin147`
+  - `Timer: [Tên gốc]` ➔ `Timing & Kỹ thuật: Phamtin147`
+  - `Editor: [Tên gốc]` ➔ `Dịch thuật & Biên tập: Phamtin147`
+  - `Quality Control / QC: [Tên gốc]` ➔ `Kiểm định chất lượng (QC): Phamtin147`
+  - `Final QC / Release: [Tên gốc]` ➔ `Phát hành bởi: Phamtin147`
+

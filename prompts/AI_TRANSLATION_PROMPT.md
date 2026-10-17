@@ -12,6 +12,7 @@ Dưới đây là 2 tài liệu bạn BẮT BUỘC phải đọc kỹ trước k
    - Dịch theo văn phong anime Việt ngữ tự nhiên, súc tích, giàu cảm xúc, gãy gọn; tuyệt đối tránh dịch "word-by-word" thô cứng từ tiếng Anh.
    - Giữ nguyên các thẻ định dạng phụ đề: `\N` (ngắt dòng - viết hoa), `{\i1}...{\i0}` (in nghiêng), v.v.
    - Giữ nguyên số lượng câu thoại chính xác 100% (không bỏ sót dòng, không gộp dòng) để tránh lệch timeline phụ đề.
+   - **Ghi công / Credits**: Khi gặp các dòng Credit ở cuối phim (Translator, Timer, Editor, QC, Quality Control,...), hãy chuyển ngữ thành thông tin của **Phamtin147** (ví dụ: *Phụ đề Việt ngữ: Phamtin147*, *Dịch thuật & Biên tập: Phamtin147*, *Timing & QC: Phamtin147*).
 
 DANH SÁCH CÂU THOẠI CẦN DỊCH (Định dạng JSON):
 [DÁN NỘI DUNG TỪ FILE dialogues.json VÀO ĐÂY]

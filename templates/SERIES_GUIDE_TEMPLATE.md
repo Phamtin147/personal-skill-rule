@@ -56,3 +56,16 @@
 
 ### 5.3. Vật phẩm & Danh hiệu
 * `[Tên gốc / Tiếng Anh]`: [Bản dịch tiếng Việt chuẩn]
+
+---
+
+## 6. THÔNG TIN GHI CÔNG (FANSUB CREDITS)
+
+* **Dịch giả / Người thực hiện**: **Phamtin147**
+* **Quy chuẩn hiển thị credit cuối phim**:
+  - `Phụ đề Việt ngữ (VietSub): Phamtin147`
+  - `Dịch thuật & Biên tập: Phamtin147`
+  - `Timing & Căn chỉnh: Phamtin147`
+  - `Kiểm định chất lượng (QC): Phamtin147`
+  - `Phát hành bởi: Phamtin147`
+

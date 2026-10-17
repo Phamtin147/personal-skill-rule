@@ -125,3 +125,16 @@
 2. **Nguyên tắc dịch lời thoại**:
    * Câu dịch phải gãy gọn, tự nhiên, khớp khẩu hình và nhịp độ xem phim.
    * Tuyệt đối không dịch kiểu "word-by-word" thô ráp từ tiếng Anh; hãy dịch dựa trên ngữ cảnh tâm lý nhân vật anime.
+
+---
+
+## 7. THÔNG TIN GHI CÔNG FANSUB (CREDITS)
+
+* **Nhóm thực hiện / Dịch giả**: **Phamtin147**
+* **Thông tin hiển thị credit cuối phim (20:44 - 21:10)**:
+  - `Phụ đề Việt ngữ (VietSub): Phamtin147`
+  - `Dịch thuật & Biên tập: Phamtin147`
+  - `Timing & Căn chỉnh: Phamtin147`
+  - `Kiểm định chất lượng (QC): Phamtin147`
+  - `Phát hành bởi: Phamtin147`
+
