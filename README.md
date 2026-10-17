@@ -1,100 +1,91 @@
-# 🎬 ANIME SUB TOOLKIT & SPECIALIST PIPELINE
-
-> **Bộ công cụ và phương pháp luận dịch phụ đề Anime / Phim ảnh tiếng Việt chuẩn phong cách Fansub chuyên nghiệp.**  
-> Tự động trích xuất, phân tích bối cảnh, thiết lập ma trận đại từ xưng hô, kiểm thử tính toàn vẹn 100% và đóng gói video có phụ đề tích hợp.
-
----
-
-## 🌟 TẠI SAO BẢN DỊCH NÀY KHÁC BIỆT?
-
-Hầu hết các công cụ dịch tự động hoặc AI thông thường đều thất bại khi dịch Anime vì:
-1. **Tiếng Anh chỉ có *I/You***, trong khi tiếng Việt có hàng chục cách xưng hô (*Tôi - Cậu, Ta - Ngươi, Con - Mẹ, Lão - Công chúa, Thuộc hạ - Đại nhân,...*).
-2. Dịch thô từng từ (*Literal Translation*) làm mất đi nhịp điệu và cảm xúc của nhân vật.
-3. Không giữ được định dạng phụ đề ASS (`\N`, `{\i}`, màu sắc, bảng hiệu), dẫn đến lỗi hiển thị hoặc lệch timeline.
-
-**Anime Sub Toolkit** giải quyết triệt để vấn đề này bằng **Quy trình 6 bước khép kín** kết hợp giữa **Nghiên cứu bối cảnh (`search-specialist`)** + **Ma trận xưng hô (Pronoun Matrix)** + **Công cụ tự động hóa Node.js/FFmpeg**.
+# 🎬 PERSONAL SKILL & RULE: AUTONOMOUS ANIME FANSUB STUDIO
+> **Tác giả**: [Phamtin147](https://github.com/Phamtin147)  
+> **Repository**: [https://github.com/Phamtin147/personal-skill-rule](https://github.com/Phamtin147/personal-skill-rule)  
+> **Định nghĩa**: Một hệ sinh thái toàn diện kết hợp giữa **AI Agent Skill (Bộ Não)** + **Speech-to-Text Engine (Tai Nghe)** + **Automated Remux Tools (Tay Chân)** để biến bất kỳ AI nào thành một **Studio Fansub Anime chuyên nghiệp 1-người**.
 
 ---
 
-## 📁 CẤU TRÚC THƯ MỤC
+## 💡 ĐÂY CÒN GỌI LÀ MỘT "SKILL" NỮA KHÔNG?
+
+Câu trả lời là: **Nó đã vượt xa khái niệm của một Skill đơn thuần!**
+* **Một Skill thông thường**: Chỉ là một file hướng dẫn văn bản (Prompt/Rule) bảo AI phải hành xử thế nào. Nó có "Bộ não" nhưng bị liệt "Tay chân" và điếc "Tai mắt", hoàn toàn phụ thuộc vào việc người dùng phải chuẩn bị sẵn phụ đề tiếng Anh cho nó đọc.
+* **Hệ thống này của bạn là một *Autonomous AI Agentic Framework* (Hệ Thống AI Agent Tự Hành)**:
+  * **Tai Mắt (Perception Engine)**: `engine/transcribe.py` + `Demucs` + `Faster-Whisper` tự động nghe trực tiếp âm thanh từ video thô (Raw Anime), bóc tách nhạc nền và nhận diện lời thoại tiếng Nhật chuẩn xác.
+  * **Bộ Não (Reasoning & Skill)**: `skills/anime-sub-specialist/` + `rules/ANIME_SUB_RULES.md` giữ vai trò của Trưởng nhóm Fansub (QC Leader), nghiên cứu bối cảnh và điều phối ma trận xưng hô chéo (*Tôi - Cậu, Ta - Ngươi, Lão - Công chúa,...*).
+  * **Tay Chân (Action Tools & Docker)**: `tools/` + `docker/` tự động bóc tách, kiểm thử lệch timeline và đóng gói file phim mới với phụ đề Việt mặc định chỉ trong vài giây.
+
+---
+
+## 📁 CẤU TRÚC HỆ SINH THÁI
 
 ```text
-anime-sub-toolkit/
-├── skills/
+personal-skill-rule/
+├── engine/                     # 🎧 TAI MẮT: Engine chép lời thoại từ âm thanh video
+│   ├── transcribe.py           # Core script: Tách nhạc nền (Demucs) + Nhận diện giọng nói (Faster-Whisper)
+│   └── requirements.txt        # Thư viện PyTorch, Faster-Whisper, Demucs
+├── docker/                     # 🐳 MÔI TRƯỜNG DOCKER CHẠY ỔN ĐỊNH 100%
+│   └── Dockerfile              # Image Docker tích hợp sẵn GPU CUDA, FFmpeg, Whisper
+├── docker-compose.yml          # Chạy Docker 1 lệnh đơn giản: docker compose run
+├── notebooks/                  # ☁️ CHẠY MIỄN PHÍ TRÊN CLOUD CHO MÁY YẾU
+│   └── Google_Colab_Anime_Transcribe.ipynb # Colab 1-click dùng GPU T4 miễn phí của Google
+├── run_transcribe.bat          # ⚡ Script 1-click kéo thả video trên Windows
+├── skills/                     # 🧠 BỘ NÃO: Kỹ năng chuyên gia cho AI Agent
 │   └── anime-sub-specialist/
-│       └── SKILL.md            # Skill định nghĩa năng lực chuyên gia cho AI (Claude, Antigravity,...)
-├── rules/
-│   └── ANIME_SUB_RULES.md      # Bộ quy tắc vàng dịch thuật và văn phong Fansub Việt Nam
-├── templates/
-│   └── SERIES_GUIDE_TEMPLATE.md# Mẫu cẩm nang bối cảnh & ma trận xưng hô cho phim mới
-├── tools/                      # Bộ công cụ tự động hóa chạy bằng Node.js & FFmpeg
+│       └── SKILL.md            # Skill định nghĩa tư duy dịch thuật Fansub chuẩn xác
+├── rules/                      # 📜 LUẬT LỆ: Quy tắc dịch và ma trận xưng hô
+│   └── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Phamtin147
+├── templates/                  # 📝 MẪU CẨM NANG BỐI CẢNH
+│   └── SERIES_GUIDE_TEMPLATE.md# Template ma trận xưng hô cho phim mới
+├── tools/                      # 🛠️ TAY CHÂN: Bộ công cụ xử lý phụ đề & video
 │   ├── extract.js              # Trích xuất track subtitle từ MKV/MP4
 │   ├── parse_dialogues.js      # Bóc tách lời thoại thành file JSON cấu trúc cho AI
 │   ├── verify_sub.js           # Kiểm thử toàn vẹn (lệch dòng, lỗi thẻ ASS, \N)
 │   ├── build_sub.js            # Tái tạo file .vie.ass và .vie.srt từ JSON bản dịch
 │   ├── remux.js                # Đóng gói phim MKV mới với sub Việt mặc định
-│   ├── pipeline.js             # Bộ điều phối toàn bộ quy trình tự động (CLI)
+│   ├── pipeline.js             # Bộ điều phối toàn bộ chu trình (CLI)
 │   └── ffmpeg-helper.js        # Helper tự tìm ffmpeg có sẵn trên hệ thống
 ├── prompts/
 │   └── AI_TRANSLATION_PROMPT.md# Prompt mẫu chuẩn để copy-paste gửi cho bất kỳ AI nào
 ├── examples/
-│   └── SHUIRO_NO_KAMEN_TRANSLATION_GUIDE.md # Ví dụ thực tế từ bộ phim Shuiro no Kamen
+│   └── SHUIRO_NO_KAMEN_TRANSLATION_GUIDE.md # Ví dụ mẫu thực tế đã thực hiện
 └── package.json
 ```
 
 ---
 
-## 🚀 HƯỚNG DẪN SỬ DỤNG CHO BỘ PHIM MỚI
+## 🚀 2 CHẾ ĐỘ SỬ DỤNG
 
-Bạn có thể áp dụng quy trình này theo 2 cách: **Nhờ AI tự động hoàn toàn** hoặc **Tự chạy công cụ kết hợp với Chat AI**.
+### 🎯 CHẾ ĐỘ 1: XỬ LÝ PHIM THÔ CHƯA CÓ PHỤ ĐỀ (RAW ANIME ➔ VIETSUB)
 
-### CÁCH 1: NHỜ AI TỰ ĐỘNG LÀM TẤT CẢ (Khuyên dùng với Antigravity / Cursor / Claude)
+> Dành cho phim vừa chiếu ở Nhật Bản hoặc video không có sẵn phụ đề tiếng Anh.
 
-Chỉ cần đưa file phim vào và yêu cầu AI:
-> *"Hãy dùng skill trong thư mục `anime-sub-toolkit` để nghiên cứu bối cảnh, lập file `[TÊN_PHIM]_TRANSLATION_GUIDE.md` và dịch phụ đề cho file phim `duong_dan_phim.mkv` sang tiếng Việt."*
+#### Cách 1: Chạy qua Docker (Ổn định nhất trên máy có GPU)
+```bash
+# Khởi động và chạy qua docker-compose
+docker compose run --rm transcribe "/videos/ten_phim_raw.mkv" --model large-v3 --separate
+```
 
-AI sẽ tự động:
-1. Chạy `tools/extract.js` và `tools/parse_dialogues.js`.
-2. Dùng kỹ năng `search-specialist` để tra cứu tác giả, nhân vật, tuổi tác, quan hệ.
-3. Tạo file `[TÊN_PHIM]_TRANSLATION_GUIDE.md`.
-4. Dịch thoại áp dụng 100% ma trận xưng hô.
-5. Chạy `tools/verify_sub.js` và `tools/build_sub.js` tạo ra `.vie.ass` và `.vie.srt`.
-6. Chạy `tools/remux.js` để đóng gói ra video hoàn chỉnh!
+#### Cách 2: Kéo thả trên Windows (`run_transcribe.bat`)
+Chỉ cần **kéo thả file video** thả vào biểu tượng file `run_transcribe.bat`. Script sẽ tự động gọi Docker hoặc Python để xuất ra file `_dialogues.json`.
+
+#### Cách 3: Chạy trên Google Colab (0đ - Dành cho máy không có GPU)
+Mở file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](file:///notebooks/Google_Colab_Anime_Transcribe.ipynb) trên Google Colab, bấm Run All để mượn GPU T4 miễn phí của Google tách âm và xuất file `_dialogues.json` về máy.
 
 ---
 
-### CÁCH 2: TỰ CHẠY BẰNG DÒNG LỆNH (Áp dụng với ChatGPT, Claude Web, DeepSeek,...)
+### 🎯 CHẾ ĐỘ 2: DỊCH PHIM ĐÃ CÓ PHỤ ĐỀ SẴN
 
-#### Bước 1: Chuẩn bị dữ liệu thoại
-Mở PowerShell/Terminal tại thư mục `anime-sub-toolkit`:
 ```powershell
-node tools/pipeline.js prepare "F:\anime\Ten_Phim_Tap_01.mkv"
+# Bước 1: Trích xuất thoại
+node tools/pipeline.js prepare "F:\anime\phim.mkv"
+
+# Bước 2: AI dịch thoại theo ma trận xưng hô trong SERIES_GUIDE.md
+
+# Bước 3: Kiểm thử và đóng gói phim
+node tools/pipeline.js finish "F:\anime\phim.mkv" "F:\anime\phim_translations.json"
 ```
-Lệnh này sẽ tự động:
-* Trích xuất file phụ đề gốc: `Ten_Phim_Tap_01_extracted.ass`.
-* Tạo file JSON chứa toàn bộ thoại: `Ten_Phim_Tap_01_dialogues.json`.
-
-#### Bước 2: Tạo cẩm nang xưng hô (Chỉ làm 1 lần cho mỗi bộ phim)
-* Copy file `templates/SERIES_GUIDE_TEMPLATE.md` thành `[TEN_PHIM]_TRANSLATION_GUIDE.md`.
-* Tra cứu thông tin nhân vật hoặc nhờ AI điền giúp hồ sơ nhân vật + ma trận xưng hô.
-
-#### Bước 3: Gửi cho AI dịch
-* Mở file `prompts/AI_TRANSLATION_PROMPT.md`, copy toàn bộ nội dung prompt.
-* Dán kèm nội dung file `[TEN_PHIM]_TRANSLATION_GUIDE.md` và file `Ten_Phim_Tap_01_dialogues.json`.
-* Nhận kết quả mảng JSON từ AI và lưu vào file `Ten_Phim_Tap_01_translations.json`.
-
-#### Bước 4: Kiểm thử và Đóng gói tự động
-Chạy lệnh kết thúc:
-```powershell
-node tools/pipeline.js finish "F:\anime\Ten_Phim_Tap_01.mkv" "F:\anime\Ten_Phim_Tap_01_translations.json"
-```
-Hệ thống sẽ:
-1. **Kiểm tra QA**: Xác nhận 100% số dòng khớp nhau, không có lỗi tag.
-2. **Xuất phụ đề**: Tạo file `Ten_Phim_Tap_01.vie.ass` và `Ten_Phim_Tap_01.vie.srt`.
-3. **Remux phim**: Tạo file `Ten_Phim_Tap_01_vi.mkv` có phụ đề tiếng Việt mặc định trong vài giây!
 
 ---
 
-## 📚 TÀI LIỆU THAM KHẢO & QUY TẮC
-* Đọc [ANIME_SUB_RULES.md](file:///rules/ANIME_SUB_RULES.md) để hiểu sâu về cách lựa chọn đại từ nhân xưng và bản địa hóa ngữ cảnh.
-* Tham khảo [SHUIRO_NO_KAMEN_TRANSLATION_GUIDE.md](file:///examples/SHUIRO_NO_KAMEN_TRANSLATION_GUIDE.md) để xem một cẩm nang mẫu hoàn chỉnh.
+## 🏆 BẢN QUYỀN & GHI CÔNG (CREDITS)
+Hệ thống được thiết lập mặc định ghi công người tạo: **Phamtin147** trên mọi bản dịch phụ đề, file phim remux và mã nguồn.

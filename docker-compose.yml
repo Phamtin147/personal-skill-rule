@@ -1,0 +1,26 @@
+version: '3.8'
+
+services:
+  transcribe:
+    build:
+      context: .
+      dockerfile: docker/Dockerfile
+    image: phamtin147/anime-transcribe-engine:latest
+    container_name: anime_transcribe
+    volumes:
+      # Ánh xạ thư mục chứa anime vào container
+      - F:/anime:/videos
+      # Cache các model AI đã tải về để không phải tải lại lần sau
+      - huggingface_cache:/root/.cache/huggingface
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    deploy:
+      resources:
+        reservations:
+          devices:
+            - driver: nvidia
+              count: all
+              capabilities: [gpu]
+
+volumes:
+  huggingface_cache:
