@@ -16,7 +16,10 @@ metadata:
 ## 6 BƯỚC CỐT LÕI CỦA PHƯƠNG PHÁP DỊCH ANIME CHUẨN XÁC
 
 ```
-[BƯỚC 1: TRÍCH XUẤT PHỤ ĐỀ]
+[BƯỚC 0: TÁCH ÂM & BẬT/TẮT DOCKER TỰ ĐỘNG (Dành cho Video thô chưa có sub)]
+       │ (Khởi động Docker GPU ➔ Chép lời ➔ Tắt sạch Docker giải phóng RAM/VRAM)
+       ▼
+[BƯỚC 1: TRÍCH XUẤT PHỤ ĐỀ / PHÂN TÍCH DIALOGUES]
        │
        ▼
 [BƯỚC 2: NGHIÊN CỨU THỰC THỂ & BỐI CẢNH (Search Specialist)]
@@ -34,8 +37,17 @@ metadata:
 [BƯỚC 6: ĐÓNG GÓI PHIM & XUẤT ĐA ĐỊNH DẠNG (Remux & Export)]
 ```
 
+### Bước 0: Xử lý Video thô & Quản lý vòng đời Docker (Auto-Start / Auto-Stop)
+- **Khi video chưa có phụ đề sẵn**: AI sử dụng Speech-to-Text Engine để bóc tách lời thoại trực tiếp từ âm thanh video gốc.
+- **Quy tắc quản lý Docker tiết kiệm tài nguyên**:
+  1. **Khởi động Docker khi cần**: Chạy container chép lời thoại bằng lệnh:
+     `docker compose run --rm transcribe "/videos/[tên_phim].mkv" --model large-v3 --separate`
+  2. **Tắt Docker ngay khi hoàn thành**: Ngay sau khi file `_dialogues.json` được tạo ra, AI **BẮT BUỘC PHẢI THỰC THI**:
+     `docker compose down`
+     để dừng toàn bộ container, giải phóng hoàn toàn 100% VRAM của card đồ họa và RAM hệ thống, tránh để container chạy ngầm gây hao pin hoặc nặng máy.
+
 ### Bước 1: Trích xuất & Khảo sát Subtitle
-- Dùng công cụ `tools/extract.js` hoặc ffmpeg để lấy stream subtitle (ưu tiên ASS để giữ format/timing/font).
+- Dùng công cụ `tools/extract.js` hoặc ffmpeg để lấy stream subtitle (nếu video đã có sẵn track phụ đề gốc).
 - Dùng `tools/parse_dialogues.js` để bóc tách thành danh sách câu thoại và nhận diện các speaker (tên nhân vật xuất hiện trong subtitle).
 
 ### Bước 2: Nghiên cứu Thực thể (Character & Lore Discovery)

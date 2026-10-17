@@ -47,7 +47,15 @@ if (action === 'raw') {
   console.log(`\n=== CHẾ ĐỘ XỬ LÝ VIDEO THÔ (SPEECH-TO-TEXT ENGINE) ===`);
   const rootDir = path.join(toolsDir, '..');
   const batScript = path.join(rootDir, 'run_transcribe.bat');
-  execSync(`cmd.exe /c "${batScript}" "${videoFile}"`, { stdio: 'inherit' });
+  try {
+    execSync(`cmd.exe /c "${batScript}" "${videoFile}"`, { stdio: 'inherit' });
+  } finally {
+    // Tự động tắt và dọn dẹp Docker container sau khi xử lý xong
+    try {
+      execSync('docker compose down', { cwd: rootDir, stdio: 'ignore' });
+      console.log(`[Docker Lifecycle] Đã tự động tắt Docker để giải phóng 100% tài nguyên RAM/VRAM.`);
+    } catch (e) {}
+  }
   console.log(`\n[HOÀN TẤT BÓC TÁCH ÂM THANH] File ${dialoguesJson} đã sẵn sàng cho AI dịch!`);
 } else if (action === 'prepare') {
   console.log(`\n=== BƯỚC 1: TRÍCH XUẤT SUBTITLE TỪ VIDEO ===`);

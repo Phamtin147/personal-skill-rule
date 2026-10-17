@@ -73,19 +73,50 @@ Mở file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](file:///notebooks/Go
 
 ---
 
-### 🎯 CHẾ ĐỘ 2: DỊCH PHIM ĐÃ CÓ PHỤ ĐỀ SẴN
+## 🛠️ HƯỚNG DẪN CÀI ĐẶT CHI TIẾT TỪ A-Z (SETUP GUIDE)
 
-```powershell
-# Bước 1: Trích xuất thoại
-node tools/pipeline.js prepare "F:\anime\phim.mkv"
+Bạn có thể chọn 1 trong 3 cách cài đặt sau tùy theo sở thích và cấu hình máy:
 
-# Bước 2: AI dịch thoại theo ma trận xưng hô trong SERIES_GUIDE.md
+### 🟢 LỰA CHỌN 1: CÀI ĐẶT BẰNG DOCKER (KHUYÊN DÙNG - CỰC KỲ ỔN ĐỊNH)
+* **Ưu điểm**: Không bao giờ lo xung đột thư viện Python, chạy được cả GPU CUDA, tự động bật khi dùng và tắt sạch khi xong để không tốn RAM.
+* **Các bước chuẩn bị**:
+  1. Tải và cài đặt [Docker Desktop cho Windows](https://www.docker.com/products/docker-desktop/).
+  2. Bật tính năng **WSL 2 backend** trong Docker Settings.
+  3. (Nếu có card NVIDIA): Cài đặt [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) để Docker nhận card đồ họa.
+  4. Mở PowerShell tại thư mục dự án và build image:
+     ```powershell
+     docker compose build
+     ```
+  5. **Cơ chế tự động**: Khi chạy lệnh dịch, hệ thống sẽ tự động bật container để chép lời, và ngay khi hoàn tất sẽ tự chạy `docker compose down` để giải phóng 100% tài nguyên RAM/VRAM cho máy tính của bạn!
 
-# Bước 3: Kiểm thử và đóng gói phim
-node tools/pipeline.js finish "F:\anime\phim.mkv" "F:\anime\phim_translations.json"
-```
+---
+
+### 🟡 LỰA CHỌN 2: CÀI ĐẶT PYTHON NATIVE TRỰC TIẾP TRÊN WINDOWS
+* **Ưu điểm**: Chạy trực tiếp không cần ảo hóa Docker.
+* **Các bước thực hiện**:
+  1. Tải và cài đặt **Python 3.10 hoặc 3.11** (nhớ tích chọn *Add Python to PATH*).
+  2. Cài đặt PyTorch hỗ trợ GPU CUDA:
+     ```powershell
+     pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
+     ```
+  3. Cài đặt các thư viện lõi của engine:
+     ```powershell
+     pip install -r engine/requirements.txt
+     ```
+  4. Cài đặt [FFmpeg](https://ffmpeg.org/download.html) và thêm vào biến môi trường PATH.
+
+---
+
+### 🔵 LỰA CHỌN 3: DÙNG GOOGLE COLAB (0 CẦN CÀI ĐẶT TRÊN MÁY - MIỄN PHÍ 100%)
+* **Ưu điểm**: Máy yếu, laptop văn phòng không có card đồ họa vẫn "quất" mượt mà nhờ mượn card T4 GPU miễn phí của Google trên trình duyệt.
+* **Các bước thực hiện**:
+  1. Đăng nhập [Google Colab](https://colab.research.google.com/).
+  2. Tải file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](notebooks/Google_Colab_Anime_Transcribe.ipynb) lên.
+  3. Chọn menu **Runtime** ➔ **Change runtime type** ➔ Chọn **T4 GPU**.
+  4. Bấm **Run All**, tải file video lên, chờ 2 phút và tải về file `_dialogues.json` để dịch!
 
 ---
 
 ## 🏆 BẢN QUYỀN & GHI CÔNG (CREDITS)
 Hệ thống được thiết lập mặc định ghi công người tạo: **Phamtin147** trên mọi bản dịch phụ đề, file phim remux và mã nguồn.
+
