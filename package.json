@@ -1,0 +1,28 @@
+{
+  "name": "anime-sub-toolkit",
+  "version": "1.0.0",
+  "description": "Bộ công cụ tự động hóa trích xuất, nghiên cứu bối cảnh, dịch phụ đề anime chính xác chuẩn văn phong tiếng Việt và đóng gói phim.",
+  "main": "tools/pipeline.js",
+  "scripts": {
+    "extract": "node tools/extract.js",
+    "parse": "node tools/parse_dialogues.js",
+    "verify": "node tools/verify_sub.js",
+    "build": "node tools/build_sub.js",
+    "remux": "node tools/remux.js",
+    "pipeline": "node tools/pipeline.js"
+  },
+  "keywords": [
+    "anime",
+    "subtitle",
+    "translation",
+    "ass",
+    "srt",
+    "ffmpeg",
+    "fansub"
+  ],
+  "author": "Antigravity AI Fansub Framework",
+  "license": "MIT",
+  "dependencies": {
+    "ffmpeg-static": "^5.3.0"
+  }
+}
