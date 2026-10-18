@@ -69,7 +69,37 @@ docker compose run --rm transcribe "/videos/ten_phim_raw.mkv" --model large-v3 -
 Chỉ cần **kéo thả file video** thả vào biểu tượng file `run_transcribe.bat`. Script sẽ tự động gọi Docker hoặc Python để xuất ra file `_dialogues.json`.
 
 #### Cách 3: Chạy trên Google Colab (0đ - Dành cho máy không có GPU)
-Mở file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](file:///notebooks/Google_Colab_Anime_Transcribe.ipynb) trên Google Colab, bấm Run All để mượn GPU T4 miễn phí của Google tách âm và xuất file `_dialogues.json` về máy.
+Mở file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](notebooks/Google_Colab_Anime_Transcribe.ipynb) trên Google Colab, bấm Run All để mượn GPU T4 miễn phí của Google tách âm và xuất file `_dialogues.json` về máy.
+
+---
+
+### 🎯 CHẾ ĐỘ 2: HOÀN THIỆN & XUẤT SUB BẢO VỆ Ổ CỨNG (ZERO DISK BLOAT)
+
+> 🛡️ **Tối ưu dung lượng 100%**: Tuyệt đối không sinh ra file video copy trùng lặp làm tốn dung lượng ổ đĩa hay lỗi torrent seeding trên qBittorrent.
+
+#### 1. Mặc định (Khuyến nghị số 1 - Softsub External):
+```bash
+node tools/pipeline.js finish "F:\anime\video.mkv"
+```
+* **Kết quả**: Tạo file `video.vie.ass`, `video.ass` và `video.vie.srt` ngay cạnh file video gốc.
+* **Dung lượng**: Chỉ tốn **~30KB - 50KB** (0MB video phát sinh).
+* **Trình phát**: Mở `video.mkv` trên **MPC-HC** hoặc **VLC** sẽ tự động nạp phụ đề Việt ngay lập tức!
+* **Torrent**: File gốc nguyên vẹn 100%, tiếp tục seed torrent bình thường.
+
+#### 2. Đóng gói MKV 1 File duy nhất (In-Place Replace):
+```bash
+node tools/pipeline.js finish "F:\anime\video.mkv" --remux
+# hoặc gọi trực tiếp công cụ remux:
+node tools/remux.js "F:\anime\video.mkv" "F:\anime\video.vie.ass" --replace
+```
+* **Cơ chế an toàn**: Remux ra file tạm, kiểm tra toàn vẹn, sau đó thay thế file gốc cũ.
+* **Kết quả**: Thư mục luôn **chỉ có 1 file video duy nhất**, không bị nhân đôi dung lượng ổ cứng!
+
+#### 3. Xuất file bản sao riêng biệt (`--copy`):
+```bash
+node tools/pipeline.js finish "F:\anime\video.mkv" --remux --copy
+```
+* Chỉ dùng khi bạn muốn tạo riêng một file `[Tên_phim]_vi.mkv` độc lập và giữ nguyên file gốc ban đầu.
 
 ---
 

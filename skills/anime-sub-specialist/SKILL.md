@@ -34,7 +34,7 @@ metadata:
 [BƯỚC 5: KIỂM THỬ KỸ THUẬT & TOÀN VẸN (Line-by-line QA)]
        │
        ▼
-[BƯỚC 6: ĐÓNG GÓI PHIM & XUẤT ĐA ĐỊNH DẠNG (Remux & Export)]
+[BƯỚC 6: XUẤT PHỤ ĐỀ BẢO VỆ DUNG LƯỢNG Ổ CỨNG (Zero Disk Bloat & External Sub Default)]
 ```
 
 ### Bước 0: Xử lý Video thô & Tự động nhận diện phần cứng (Auto-Detect Engine)
@@ -78,10 +78,21 @@ metadata:
   - Phát hiện ký tự `\n` viết thường để đổi thành `\N`.
   - Kiểm tra các cặp ngoặc thẻ nhọn `{}` không bị rách/thiếu.
 
-### Bước 6: Tái tạo & Đóng gói (Build & Remux)
-- Dùng `tools/build_sub.js` để tạo file `.vie.ass` và `.vie.srt`.
-- Dùng `tools/remux.js` để ghép vào MKV gốc thành file `[Tên_phim]_vi.mkv` với:
-  - Video + Audio gốc (stream copy không giảm chất lượng, chỉ mất 1-2 giây).
-  - Sub Việt làm mặc định.
-  - Sub Anh làm dự phòng.
-  - Giữ nguyên tất cả font chữ đính kèm.
+### Bước 6: Tái tạo & Xuất Phụ Đề Bảo Vệ Dung Lượng Ổ Cứng (Storage-Safe Export)
+
+> [!IMPORTANT]
+> **QUY TẮC BẢO VỆ DUNG LƯỢNG Ổ CỨNG (ZERO DISK BLOAT)**:
+> Tuyệt đối **KHÔNG TỰ Ý TẠO FILE VIDEO BẢN SAO (`_vi.mkv`)** khi người dùng không yêu cầu. Phim/anime dung lượng từ 1.5GB đến hàng chục GB, nếu nhân đôi dung lượng sẽ nhanh chóng làm đầy ổ cứng và làm hỏng trạng thái seeding của các phần mềm torrent (như qBittorrent).
+
+- **1. Chế độ Mặc định (Khuyến nghị số 1 - Phụ đề rời Softsub External)**:
+  - Dùng `tools/build_sub.js` để tạo file `.vie.ass`, `.ass` và `.vie.srt` cùng thư mục và cùng tên với video gốc.
+  - Các trình phát phim phổ biến (**MPC-HC**, **VLC**, **PotPlayer**, **MPV**) sẽ **tự động nạp Sub Việt ngay lập tức** khi mở video gốc.
+  - **Lợi ích vượt trội**:
+    - Tốn đúng **~30KB - 50KB** (tiết kiệm 100% dung lượng video).
+    - Giữ nguyên vẹn file gốc để tiếp tục seeding trên qBittorrent mà không bị lỗi hash.
+    - Xong ngay trong 0.5 giây.
+- **2. Chế độ Đóng gói MKV In-Place (Khi người dùng yêu cầu gộp thành 1 file duy nhất)**:
+  - Dùng `node tools/remux.js "<video_goc>" "<sub_vi.ass>" --replace` (hoặc `pipeline.js finish ... --remux`).
+  - Hệ thống remux an toàn qua file tạm và thay thế file gốc. Thư mục **LUÔN DUY TRÌ DUY NHẤT 1 FILE VIDEO**, không nhân đôi dung lượng!
+- **3. Chế độ Tạo bản sao riêng biệt (`--copy`)**:
+  - Chỉ áp dụng khi người dùng yêu cầu rõ ràng: *"hãy tạo một bản copy riêng giữ lại file gốc"*.

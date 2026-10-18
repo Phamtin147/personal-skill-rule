@@ -4,11 +4,16 @@
  * Sử dụng: node tools/pipeline.js <action> [options]
  *
  * Các action:
+ *   node tools/pipeline.js raw <video.mkv>
+ *     -> Tự động bóc tách âm thanh, nhận diện lời thoại sang dialogues.json
+ *
  *   node tools/pipeline.js prepare <video.mkv>
  *     -> Tự động trích xuất phụ đề và xuất ra file dialogues.json để AI dịch
  *
- *   node tools/pipeline.js finish <video.mkv> <translations.json>
- *     -> Tự động verify, build .vie.ass, .vie.srt và remux ra video_vi.mkv
+ *   node tools/pipeline.js finish <video.mkv> [translations.json] [flags]
+ *     -> [MẶC ĐỊNH] Tạo file phụ đề rời .vie.ass và .vie.srt trùng tên video (MPC-HC/VLC tự động nhận, 0MB dung lượng thừa phát sinh)
+ *     -> [TÙY CHỌN --remux] Đóng gói vào MKV an toàn (thay thế in-place để không nhân đôi dung lượng)
+ *     -> [TÙY CHỌN --copy] Tạo file copy riêng [video]_vi.mkv nếu muốn giữ cả 2 bản
  */
 
 const { execSync } = require('child_process');
@@ -31,8 +36,10 @@ Cách dùng:
      -> Tự động trích xuất sub và tạo dialogues.json sẵn sàng đưa vào AI dịch.
 
   3. Hoàn thiện sau khi AI trả về kết quả dịch:
-     node tools/pipeline.js finish <duong_dan_video.mkv> <file_dich.json>
-     -> Kiểm tra lỗi, tạo file .vie.ass, .vie.srt và đóng gói video có phụ đề Việt mặc định.
+     node tools/pipeline.js finish <duong_dan_video.mkv> [file_dich.json]
+     -> [MẶC ĐỊNH] Tạo file .vie.ass, .ass và .vie.srt (Mở video trên MPC-HC/VLC là tự nạp ngay, 0MB tốn thêm!).
+     -> [ĐÓNG GÓI MKV]: node tools/pipeline.js finish <video.mkv> [file_dich.json] --remux
+        (In-place replace an toàn, không sinh file _vi.mkv trùng lặp làm đầy ổ cứng).
 `);
   process.exit(0);
 }
@@ -68,11 +75,21 @@ if (action === 'raw') {
   console.log(`Hãy mở file: ${dialoguesJson}`);
   console.log(`Áp dụng System Prompt trong thư mục 'prompts/AI_TRANSLATION_PROMPT.md' để AI tiến hành dịch.`);
 } else if (action === 'finish') {
-  const transJson = process.argv[4] || path.join(dir, `${base}_translations.json`);
+  const extraArgs = process.argv.slice(4);
+  let transJson = path.join(dir, `${base}_translations.json`);
+
+  // Nếu arg thứ 4 là file json thì dùng file đó
+  if (extraArgs[0] && !extraArgs[0].startsWith('-') && extraArgs[0].endsWith('.json')) {
+    transJson = extraArgs[0];
+  }
+
   if (!fs.existsSync(transJson)) {
     console.error(`Lỗi: Không tìm thấy file bản dịch: ${transJson}`);
     process.exit(1);
   }
+
+  const shouldRemux = extraArgs.includes('--remux');
+  const isCopy = extraArgs.includes('--copy');
 
   console.log(`\n=== BƯỚC 1: KIỂM THỬ TÍNH TOÀN VẸN (VERIFY) ===`);
   execSync(`node "${path.join(toolsDir, 'verify_sub.js')}" "${dialoguesJson}" "${transJson}"`, { stdio: 'inherit' });
@@ -82,10 +99,24 @@ if (action === 'raw') {
   const subViAss = path.join(dir, `${base}.vie.ass`);
   execSync(`node "${path.join(toolsDir, 'build_sub.js')}" "${templateAss}" "${transJson}" "${path.join(dir, base)}"`, { stdio: 'inherit' });
 
-  console.log(`\n=== BƯỚC 3: ĐÓNG GÓI VIDEO (REMUX) ===`);
-  execSync(`node "${path.join(toolsDir, 'remux.js')}" "${videoFile}" "${subViAss}"`, { stdio: 'inherit' });
+  if (shouldRemux) {
+    console.log(`\n=== BƯỚC 3: ĐÓNG GÓI VIDEO (REMUX) ===`);
+    const remuxFlag = isCopy ? '--copy' : '--replace';
+    execSync(`node "${path.join(toolsDir, 'remux.js')}" "${videoFile}" "${subViAss}" ${remuxFlag}`, { stdio: 'inherit' });
+  } else {
+    console.log(`\n======================================================`);
+    console.log(`=== BẢO VỆ DUNG LƯỢNG Ổ CỨNG (ZERO DISK BLOAT) ===`);
+    console.log(`======================================================`);
+    console.log(`[+] Đã tạo file phụ đề rời chuẩn Fansub:`);
+    console.log(`    1. ${subViAss}`);
+    console.log(`    2. ${path.join(dir, base + '.ass')}`);
+    console.log(`    3. ${path.join(dir, base + '.vie.srt')}`);
+    console.log(`\n-> Trình phát (MPC-HC, VLC, PotPlayer, MPV) sẽ TỰ ĐỘNG NẠP SUB VIỆT ngay khi mở file video gốc.`);
+    console.log(`-> Dung lượng video phát sinh: 0 MB (Không nhân đôi dung lượng ổ đĩa, giữ nguyên hash seed torrent!).`);
+    console.log(`-> Nếu muốn tích hợp thẳng vào container MKV, chạy lại với cờ: --remux`);
+  }
 
   console.log(`\n[HOÀN TẤT TOÀN BỘ QUY TRÌNH!]`);
 } else {
-  console.error(`Action không hợp lệ: ${action}. Hãy dùng 'prepare' hoặc 'finish'.`);
+  console.error(`Action không hợp lệ: ${action}. Hãy dùng 'raw', 'prepare' hoặc 'finish'.`);
 }

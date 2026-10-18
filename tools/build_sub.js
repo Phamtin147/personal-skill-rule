@@ -55,14 +55,30 @@ const newLines = lines.map(line => {
 fs.writeFileSync(outAss, newLines.join('\r\n'), 'utf8');
 console.log(`[1/2] Đã xuất file ASS tiếng Việt: ${outAss} (${dIdx} câu thoại)`);
 
+// Tự động tạo thêm bản trùng tên [video].ass để mọi trình phát (MPC-HC, VLC) tự động nạp ngay
+const directAss = outputBase.endsWith('.ass') ? outputBase : `${outputBase}.ass`;
+if (outAss !== directAss) {
+  try {
+    fs.copyFileSync(outAss, directAss);
+    console.log(`[+] Đã tạo file auto-load cho MPC-HC/VLC: ${directAss}`);
+  } catch (e) {}
+}
+
 // Chuyển đổi sang file SRT bằng ffmpeg
 try {
   const ffmpeg = getFfmpegPath();
   const cmd = `"${ffmpeg}" -i "${outAss}" "${outSrt}" -y`;
   execSync(cmd, { stdio: 'ignore' });
   console.log(`[2/2] Đã tạo file SRT tương thích: ${outSrt}`);
+
+  const directSrt = outputBase.endsWith('.srt') ? outputBase : `${outputBase}.srt`;
+  if (outSrt !== directSrt && fs.existsSync(outSrt)) {
+    try {
+      fs.copyFileSync(outSrt, directSrt);
+    } catch (e) {}
+  }
 } catch (e) {
   console.warn(`[Chú ý] Không thể chuyển đổi SRT tự động (${e.message}). Vẫn giữ file ASS chuẩn.`);
 }
 
-console.log('[Hoàn thành] Đã tạo phụ đề thành công!');
+console.log('[Hoàn thành] Đã tạo phụ đề thành công (0MB dung lượng video thừa phát sinh)!');
