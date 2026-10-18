@@ -33,6 +33,21 @@ Tiếng Anh chỉ có *I - You*, nhưng tiếng Việt có hệ thống đại t
 * Khi nhân vật nổi giận hoặc tuyên chiến: Có thể chuyển từ `Tôi - Cậu` sang `Tôi - Anh/Cô` hoặc `Tao - Mày` để nhấn mạnh kịch tính.
 * Khi hấp hối, giãi bày tình cảm: Chuyển sang ngữ điệu dịu dàng, mềm mại hơn.
 
+### 1.6. Quy tắc Xưng hô khi KHÔNG CÓ DỮ LIỆU THAM KHẢO (Zero-Knowledge / Fallback Pronouns)
+Khi gặp nhân vật phụ, người qua đường (Citizen, Mob, Soldier, Stranger, Mysterious voice), hoặc nhân vật mới mà:
+* Không có nguồn tra cứu / Wiki / Fandom để biết giới tính (nam hay nữ) hoặc tuổi tác.
+* Không rõ vai vế xã hội hoặc quan hệ chính xác giữa các bên.
+👉 **TUYỆT ĐỐI KHÔNG ĐOÁN MÒ**: Cấm tự ý gán ghép xưng hô thân mật kiểu gia đình/tình cảm (*anh - em*, *chú - cháu*, *chị - em*) khi chưa rõ giới tính hay tuổi tác thật sự.
+👉 **BẮT BUỘC DÙNG ĐẠI TỪ TRUNG TÍNH / CHUNG CHUNG PHÙ HỢP VỚI BỐI CẢNH TỨC THỜI CỦA PHIM**:
+* **Bối cảnh Hiện đại, Đời thường, Học đường, Phiêu lưu đồng trang lứa (Casual / Modern / Peers)**:
+  * Dùng: **`Tôi - Cậu`** (hoặc `Tớ - Cậu` / `Tôi - Bạn`).
+  * Đây là cặp đại từ an toàn tuyệt đối, dùng được cho cả nam lẫn nữ, không sợ bị nhầm lẫn giới tính.
+* **Bối cảnh Chiến đấu, Đối đầu, Cổ trang, Kiếm hiệp, Huyền huyễn / Fantasy, Quái vật / Kẻ thù (Battle / Fantasy / Adversarial)**:
+  * Dùng: **`Ta - Ngươi`** (số nhiều: `Ta - Các ngươi`, hoặc `Ngươi - Ta`).
+  * Phù hợp trọn vẹn với không khí giao chiến hoặc đối thoại giữa hai phe khi chưa biết danh tính đối phương.
+* **Bối cảnh Xã giao lịch sự, Tiếp xúc người lạ nơi công cộng (Polite / Stranger / Public)**:
+  * Dùng: **`Tôi - Vị này`**, **`Tôi - Đằng ấy`**, hoặc **`Tôi - Mọi người`** (với đám đông).
+
 ---
 
 ## 2. NGUYÊN TẮC BẢN ĐỊA HÓA CÂU TỪ (LOCALIZATION RULES)

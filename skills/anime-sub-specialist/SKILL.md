@@ -63,9 +63,15 @@ metadata:
 - Nếu bộ phim chưa có file `[TÊN_PHIM]_TRANSLATION_GUIDE.md`, AI lập tức tạo file này dựa theo mẫu trong `templates/SERIES_GUIDE_TEMPLATE.md`.
 - Lập **Bảng ma trận xưng hô chéo**: Ai nói với ai thì xưng gì - gọi gì.
 - Lập **Bảng thuật ngữ chuẩn**: Tên chiêu thức, tổ chức, địa danh, vật phẩm.
+- **Chiến lược Xưng hô Dự phòng (Zero-Knowledge Fallback Strategy)**:
+  - Khi gặp nhân vật phụ, người qua đường (mob/citizen), hoặc nhân vật mới mà **không có nguồn tham khảo** để biết giới tính (nam/nữ) hay tuổi tác: **TUYỆT ĐỐI KHÔNG ĐOÁN MÒ** (không tự tiện gán ghép xưng hô thân mật như *anh - em*, *chú - cháu*).
+  - Bắt buộc dùng đại từ trung tính / chung chung phù hợp nhất với bối cảnh tức thời của phim:
+    + **Học đường, đời thường, phiêu lưu đồng trang lứa**: **`Tôi - Cậu`** (hoặc `Tớ - Cậu` / `Tôi - Bạn`).
+    + **Chiến đấu, đối đầu, fantasy / kiếm hiệp, kẻ thù / quái vật**: **`Ta - Ngươi`** (số nhiều: `Ta - Các ngươi`).
+    + **Xã giao lịch sự nơi công cộng**: **`Tôi - Vị này`** / **`Tôi - Đằng ấy`** / **`Tôi - Mọi người`**.
 
 ### Bước 4: Dịch ngữ cảnh 2 bước (2-Pass Translation)
-- **Pass 1 (Đúng nghĩa & Đúng xưng hô)**: Dịch sát ngữ cảnh, tuyệt đối áp dụng ma trận xưng hô đã định nghĩa.
+- **Pass 1 (Đúng nghĩa & Đúng xưng hô)**: Dịch sát ngữ cảnh, tuyệt đối áp dụng ma trận xưng hô đã định nghĩa. Với các tình huống thiếu dữ liệu nhân vật, tự động kích hoạt chiến lược Xưng hô Dự phòng trung tính (`Tôi - Cậu` hoặc `Ta - Ngươi`) chuẩn bối cảnh.
 - **Pass 2 (Chuốt văn phong Anime)**:
   - Thoại phải gãy gọn, súc tích, hợp nhịp thở và chuyển động môi của nhân vật.
   - Tuyệt đối tránh dịch "word-by-word" thô ráp từ tiếng Anh (ví dụ: *"my ass"* -> *"cái con khỉ"*, *"hocus pocus"* -> *"úm ba la xì bùa"*, *"snot-nosed kid"* -> *"thằng nhóc hỉ mũi chưa sạch"*).

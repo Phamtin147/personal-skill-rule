@@ -44,6 +44,12 @@
 | [Nhân vật B] | [Nhân vật A] | [Tôi/Em/Ta] | [Cậu/Anh/Ngươi] | [Tôn kính, thân thiết,...] |
 | [Nhân vật C] | [Nhân vật A] | [Thần/Tôi] | [Đại nhân/Bệ hạ] | [Cấp dưới với cấp trên] |
 
+> 💡 **Quy tắc dự phòng khi thiếu thông tin (Zero-Knowledge Fallback)**:
+> Với nhân vật phụ, người qua đường, hoặc đối tượng chưa rõ tuổi tác/giới tính: Tuyệt đối không đoán mò xưng hô gia đình/tình cảm (*anh - em*, *chú - cháu*). Tự động dùng đại từ trung tính phù hợp bối cảnh:
+> - Đời thường / Học đường / Đồng trang lứa: **`Tôi - Cậu`** (hoặc `Tớ - Cậu`).
+> - Chiến đấu / Đối đầu / Huyền huyễn / Quái vật: **`Ta - Ngươi`** (số nhiều: `Ta - Các ngươi`).
+> - Xã giao nơi công cộng: **`Tôi - Vị này / Đằng ấy / Mọi người`**.
+
 ---
 
 ## 5. BẢNG THUẬT NGỮ CHUẨN (GLOSSARY)
