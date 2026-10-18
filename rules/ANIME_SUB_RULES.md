@@ -71,3 +71,19 @@ Khi gặp các dòng Credit ở cuối tập phim (các dòng có style `credits
   - `Quality Control / QC: [Tên gốc]` ➔ `Kiểm định chất lượng (QC): Phamtin147`
   - `Final QC / Release: [Tên gốc]` ➔ `Phát hành bởi: Phamtin147`
 
+---
+
+## 5. NGUYÊN TẮC CHỐNG LỖI FONT TIẾNG VIỆT & Ô VUÔNG TOFU (ANTI-TOFU FONT RULES)
+
+1. **Tuyệt đối không giữ nguyên Font tiếng Anh từ file gốc**:
+   * Các release group rip anime từ Crunchyroll/Erai-raws thường đính kèm file font rút gọn (subset) chỉ 1KB - 2KB (như `trebuc_0.ttf`, `arialbd_3.ttf`, `times_1.ttf`).
+   * Các font này bị cắt sạch các ký tự mở rộng của tiếng Việt (Latin Extended Additional: `ẩ, ẫ, ợ, ứ, ế, ặ, ...`). Khi player nạp font đính kèm này, chữ sẽ bị biến thành ô vuông rỗng `□` (Ví dụ: *"run rẩy"* ➔ *"run r□y"*).
+2. **Ép chuẩn sang Font tiếng Việt tiêu chuẩn (Segoe UI / Arial)**:
+   * **`Segoe UI`**: Font chuẩn mặc định của Windows, thiết kế hiện đại, nét thanh mảnh rõ nét, 100% hỗ trợ đầy đủ tiếng Việt có dấu, và không bao giờ bị đụng độ với font attachment rác trong MKV.
+   * **Encoding**: Bắt buộc ép `Encoding: 1` (Unicode) trong toàn bộ Style ASS.
+3. **Chuẩn hóa Unicode NFC (Precomposed Normalization)**:
+   * Toàn bộ văn bản dịch phải được chuẩn hóa qua `String.normalize('NFC')` để các ký tự có dấu thanh là 1 ký tự dựng sẵn duy nhất, không dùng dạng tổ hợp NFD làm vỡ font.
+4. **Lưu file với UTF-8 with BOM (`\uFEFF`)**:
+   * Đảm bảo mọi renderer trên Windows (MPC-HC, VSFilter, DirectVobSub, VLC) nhận diện chính xác UTF-8 ngay khi mở phim.
+
+

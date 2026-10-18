@@ -31,10 +31,10 @@ metadata:
 [BƯỚC 4: DỊCH NGỮ CẢNH THEO VĂN PHONG FANSUB (2-Pass Translation)]
        │
        ▼
-[BƯỚC 5: KIỂM THỬ KỸ THUẬT & TOÀN VẸN (Line-by-line QA)]
+[BƯỚC 5: KIỂM THỬ KỸ THUẬT & TOÀN VẸN (Line-by-line & Font QA)]
        │
        ▼
-[BƯỚC 6: XUẤT PHỤ ĐỀ BẢO VỆ DUNG LƯỢNG Ổ CỨNG (Zero Disk Bloat & External Sub Default)]
+[BƯỚC 6: XUẤT PHỤ ĐỀ CHUẨN FONT TIẾNG VIỆT & BẢO VỆ Ổ CỨNG (Segoe UI & Zero Disk Bloat)]
 ```
 
 ### Bước 0: Xử lý Video thô & Tự động nhận diện phần cứng (Auto-Detect Engine)
@@ -72,13 +72,21 @@ metadata:
   - Giữ nguyên thẻ định dạng ASS: `\N` (viết hoa), `{\i1}...{\i0}` (in nghiêng), các thẻ tọa độ/màu.
   - **Bản địa hóa Credits cuối phim**: Tự động thay thế tên nhóm sub ngoại quốc (Translator, Timer, Editor, QC,...) thành tên dịch giả tiếng Việt: **Phamtin147** (Ví dụ: *Phụ đề Việt ngữ: Phamtin147, Dịch & Timer: Phamtin147, QC: Phamtin147*).
 
-### Bước 5: Kiểm thử toàn vẹn (QA Verification)
+### Bước 5: Kiểm thử toàn vẹn & Tương thích Font (QA & Font Verification)
 - Chạy `tools/verify_sub.js`:
   - Khớp 1:1 số lượng dòng (tuyệt đối không để thiếu dòng gây lệch phụ đề).
   - Phát hiện ký tự `\n` viết thường để đổi thành `\N`.
   - Kiểm tra các cặp ngoặc thẻ nhọn `{}` không bị rách/thiếu.
+  - **Kiểm định Font chữ tiếng Việt**: Phát hiện và chặn triệt để các font tiếng Anh subset (Trebuchet MS, Aparajita, Adobe Arabic, Times New Roman, Roboto,...) có nguy cơ biến dấu tiếng Việt thành ô vuông tofu `□`.
 
-### Bước 6: Tái tạo & Xuất Phụ Đề Bảo Vệ Dung Lượng Ổ Cứng (Storage-Safe Export)
+### Bước 6: Tái tạo & Xuất Phụ Đề Chuẩn Font Tiếng Việt & Bảo Vệ Ổ Cứng (Typography & Storage-Safe Export)
+
+> [!IMPORTANT]
+> **QUY TẮC BẮT BUỘC VỀ FONT TIẾNG VIỆT (ANTI-TOFU FONT RULE)**:
+> 1. Tuyệt đối **KHÔNG GIỮ NGUYÊN FONT TIẾNG ANH GỐC** (như *Trebuchet MS*, *Aparajita*, *Times New Roman*) trong file ASS. Các nhóm rip MKV thường đính kèm file font subset chỉ 1-2KB không chứa ký tự tiếng Việt có dấu. Khi gặp các từ như *"run rẩy"*, chữ *"ẩy"* sẽ bị vỡ thành ô vuông rỗng `r□y`.
+> 2. Bắt buộc ép Style sang font Unicode tiếng Việt tiêu chuẩn: **`Segoe UI`** (hoặc `Arial`). `Segoe UI` hỗ trợ 100% đầy đủ 134 ký tự tiếng Việt có dấu, nét chữ thanh thoát, viền đen sắc nét và không bao giờ bị đụng độ với font attachment rác trong MKV.
+> 3. Bắt buộc đặt `Encoding: 1` (Unicode) trong Style và chuẩn hóa Unicode NFC (Precomposed) cho toàn bộ câu thoại.
+> 4. Lưu file với `UTF-8 with BOM` (`\uFEFF`) để mọi video player (MPC-HC, VLC) luôn nhận diện đúng mã UTF-8.
 
 > [!IMPORTANT]
 > **QUY TẮC BẢO VỆ DUNG LƯỢNG Ổ CỨNG (ZERO DISK BLOAT)**:
