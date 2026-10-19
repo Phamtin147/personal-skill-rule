@@ -117,6 +117,44 @@ if (action === 'raw') {
   }
 
   console.log(`\n[HOÀN TẤT TOÀN BỘ QUY TRÌNH!]`);
+} else if (action === 'scan') {
+  const targetDir = videoFile;
+  if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) {
+    console.error(`Lỗi: Thư mục không tồn tại: ${targetDir}`);
+    process.exit(1);
+  }
+
+  console.log(`\n=== QUÉT DANH SÁCH ANIME / PHIM: ${targetDir} ===`);
+  const files = fs.readdirSync(targetDir);
+  const videoExts = ['.mkv', '.mp4', '.avi', '.ts'];
+  const videos = files.filter(f => videoExts.includes(path.extname(f).toLowerCase()) && !f.includes('_vi.') && !f.startsWith('.'));
+
+  const pending = [];
+  const ready = [];
+
+  videos.forEach(v => {
+    const base = path.basename(v, path.extname(v));
+    const hasAss = fs.existsSync(path.join(targetDir, `${base}.ass`)) || fs.existsSync(path.join(targetDir, `${base}.vie.ass`));
+    if (hasAss) {
+      ready.push(v);
+    } else {
+      pending.push(v);
+    }
+  });
+
+  console.log(`Tổng số video tìm thấy: ${videos.length}`);
+  console.log(`\n[+] ĐÃ CÓ PHỤ ĐỀ VIỆT (${ready.length} tập):`);
+  ready.forEach((r, i) => console.log(`    ${i + 1}. ${r}`));
+
+  console.log(`\n[-] CHƯA CÓ SUB VIỆT - CẦN DỊCH (${pending.length} tập):`);
+  pending.forEach((p, i) => console.log(`    ${i + 1}. ${p}`));
+
+  if (pending.length === 0) {
+    console.log(`\n🎉 TUYỆT VỜI: 100% video trong thư mục đều đã có phụ đề tiếng Việt!`);
+  } else {
+    console.log(`\n⚡ Lệnh dịch hết: AI tự động bóc tách và dịch trọn gói toàn bộ ${pending.length} tập chưa có sub!`);
+  }
 } else {
-  console.error(`Action không hợp lệ: ${action}. Hãy dùng 'raw', 'prepare' hoặc 'finish'.`);
+  console.error(`Action không hợp lệ: ${action}. Hãy dùng 'raw', 'prepare', 'finish' hoặc 'scan'.`);
 }
+

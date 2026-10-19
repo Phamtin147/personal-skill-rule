@@ -101,4 +101,16 @@ Khi gặp các dòng Credit ở cuối tập phim (các dòng có style `credits
 4. **Lưu file với UTF-8 with BOM (`\uFEFF`)**:
    * Đảm bảo mọi renderer trên Windows (MPC-HC, VSFilter, DirectVobSub, VLC) nhận diện chính xác UTF-8 ngay khi mở phim.
 
+---
+
+## 6. NGUYÊN TẮC TỰ ĐỘNG HÓA HOÀN TOÀN KHI DỊCH HÀNG LOẠT (FULL BATCH AUTOMATION)
+
+1. **Thực thi một mạch không ngắt quãng**:
+   * Khi người dùng ra lệnh *"dịch hết"*, *"dịch tất cả"* hoặc cung cấp thư mục chứa nhiều tập anime/phim: AI **bắt buộc tự động quét toàn bộ**, lập danh sách tất cả các tập chưa có phụ đề tiếng Việt.
+   * Tiến hành xử lý tuần tự từng tập một: *Trích xuất/Nghe âm thanh ➔ Nghiên cứu Lore ➔ Lập ma trận xưng hô ➔ Dịch 2-pass ➔ Kiểm thử QA ➔ Xuất sub Segoe UI*.
+2. **Tuyệt đối không dừng lại xin phép nửa chừng**:
+   * Nghiêm cấm mọi hành vi dịch được 1 tập rồi dừng lại hỏi: *"Bạn có muốn dịch tiếp tập X không?"*.
+   * Toàn bộ quy trình phải được thực thi tự động 100% (Full Automation). Chỉ gửi báo cáo tổng kết sau khi TẤT CẢ các tập phim đã được dịch xong xuôi và kiểm thử đạt chuẩn.
+
+
 

@@ -13,6 +13,16 @@ metadata:
 
 ---
 
+## ⚡ NGUYÊN TẮC THỰC THI BẮT BUỘC: TỰ ĐỘNG HÓA HOÀN TOÀN (FULL AUTOMATION & BATCH RUN)
+
+> [!IMPORTANT]
+> **QUY TẮC DỊCH HẾT TOÀN BỘ DANH SÁCH (ZERO INTERRUPTIONS / NO STOPPING HALFWAY)**:
+> 1. **Tự động quét và thực thi một mạch**: Khi người dùng yêu cầu *"dịch hết"*, *"dịch tất cả"* hoặc chỉ định một thư mục có nhiều video: AI **bắt buộc tự động quét toàn bộ thư mục**, lọc ra tất cả các video chưa có phụ đề tiếng Việt (hoặc cần dịch Fansub).
+> 2. **Chạy trọn gói không dừng**: Tự động thực thi tuần tự từ tập đầu tiên đến tập cuối cùng: *Bóc tách ➔ Lập cẩm nang bối cảnh/xưng hô ➔ Dịch Fansub 2-pass ➔ Kiểm thử QA ➔ Xuất sub chuẩn Segoe UI*.
+> 3. **Tuyệt đối cấm lười biếng / hỏi xin phép ngang xương**: Nghiêm cấm hành vi chỉ làm 1-2 tập rồi dừng lại hỏi thừa kiểu: *"Nếu bạn muốn dịch nốt tập X thì nhắn nhé"*. AI phải tự động làm xong 100% tất cả các tập rồi mới xuất báo cáo hoàn tất tổng hợp cho người dùng!
+
+---
+
 ## 6 BƯỚC CỐT LÕI CỦA PHƯƠNG PHÁP DỊCH ANIME CHUẨN XÁC
 
 ```
