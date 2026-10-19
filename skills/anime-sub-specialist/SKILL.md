@@ -120,3 +120,45 @@ metadata:
   - Hệ thống remux an toàn qua file tạm và thay thế file gốc. Thư mục **LUÔN DUY TRÌ DUY NHẤT 1 FILE VIDEO**, không nhân đôi dung lượng!
 - **3. Chế độ Tạo bản sao riêng biệt (`--copy`)**:
   - Chỉ áp dụng khi người dùng yêu cầu rõ ràng: *"hãy tạo một bản copy riêng giữ lại file gốc"*.
+
+---
+
+## 📂 QUY TẮC QUẢN LÝ & TỔ CHỨC CẤU TRÚC THƯ MỤC THÔNG MINH (SMART FOLDER HIERARCHY RULE)
+
+> [!IMPORTANT]
+> **TIÊU CHUẨN LƯU TRỮ CHUYÊN NGHIỆP & GỌN GÀNG (CLEAN FANSUB DIRECTORY ARCHITECTURE)**:
+> Khi tải hoặc xử lý nhiều tập phim, việc xuất 4-5 file trung gian vào thẳng thư mục gốc sẽ gây tràn lan, rối rắm và khó theo dõi. AI **BẮT BUỘC** tuân thủ cấu trúc phân cấp thư mục sau:
+>
+> ```
+> <Thư_mục_Anime_Gốc>/
+> ├── <Tên_Bộ_Anime_1>/
+> │   ├── [TÊN_BỘ_PHIM]_TRANSLATION_GUIDE.md  (Cẩm nang thuật ngữ & ma trận xưng hô của bộ phim)
+> │   ├── Tập 01/
+> │   │   ├── [Tên_Video_Ep01].mkv            (Video gốc)
+> │   │   ├── [Tên_Video_Ep01].vie.ass        (Sub Việt chuẩn Fansub - Segoe UI)
+> │   │   ├── [Tên_Video_Ep01].ass            (Sub Việt fallback để player tự nhận diện)
+> │   │   ├── [Tên_Video_Ep01].vie.srt        (Sub SRT tương thích TV / Mobile)
+> │   │   └── .cache/                         (Thư mục ẩn chứa các file kỹ thuật trung gian)
+> │   │       ├── [Tên_Video_Ep01]_extracted.ass
+> │   │       ├── [Tên_Video_Ep01]_dialogues.json
+> │   │       └── [Tên_Video_Ep01]_translations.json
+> │   ├── Tập 02/
+> │   │   ├── ...
+> │   └── Tập 03/
+> │       ├── ...
+> └── <Tên_Bộ_Anime_2>/
+>     ├── ...
+> ```
+>
+> 1. **Tự động gom nhóm theo Bộ & Tập (`<Tên_Bộ>/Tập XX/`)**:
+>    - Mỗi bộ anime nằm trong một folder riêng mang tên chuẩn của anime.
+>    - Mỗi tập anime nằm trong folder riêng `Tập 01/`, `Tập 02/`, `Tập 03/`...
+> 2. **Giữ nguyên khả năng Tự động nạp Sub (Auto-load Subtitle)**:
+>    - File video `.mkv` và các file phụ đề thành phẩm (`.ass`, `.vie.ass`, `.vie.srt`) **phải luôn nằm cùng trong thư mục `Tập XX/`** với phần tên (basename) trùng khớp 100%.
+>    - Khi mở video bằng bất kỳ phần mềm nào (MPC-HC, VLC, PotPlayer, MPV), phụ đề tiếng Việt sẽ tự động hiển thị mà người dùng không cần kéo thả chuột.
+> 3. **Cô lập rác kỹ thuật vào `.cache/`**:
+>    - Toàn bộ các file nháp, file trích xuất thô, json danh sách câu thoại và json bản dịch trung gian được tự động chuyển vào thư mục ẩn `.cache/` bên trong thư mục tập tương ứng.
+>    - Không gian thư mục của người dùng luôn sạch sẽ, ngăn nắp và trực quan.
+> 4. **Tích hợp công cụ tự động hóa**:
+>    - Chạy `node tools/pipeline.js organize [duong_dan_thu_muc]` để tự động phân loại và gom toàn bộ file về đúng cấu trúc thư mục chuẩn mực.
+

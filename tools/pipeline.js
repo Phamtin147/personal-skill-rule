@@ -21,21 +21,29 @@ const path = require('path');
 const fs = require('fs');
 
 const action = process.argv[2];
-const videoFile = process.argv[3];
+let targetArg = process.argv[3];
 
-if (!action || !videoFile) {
+if (!action || (!targetArg && !['organize', 'scan'].includes(action))) {
   console.log(`
 === ANIME SUBTITLE PIPELINE TOOLKIT (By Phamtin147) ===
 Cách dùng:
-  1. Xử lý video thô (Chưa có sub):
+  1. Phân loại & quy hoạch thư mục chuẩn Fansub:
+     node tools/pipeline.js organize [duong_dan_thu_muc]
+     -> Tự động đưa video và phụ đề vào <Tên_Anime>/<Tập_XX>/ và ẩn file kỹ thuật vào .cache/
+
+  2. Quét toàn bộ video và trạng thái phụ đề:
+     node tools/pipeline.js scan [duong_dan_thu_muc]
+     -> Quét đệ quy toàn bộ thư mục tìm tập nào đã có / chưa có phụ đề tiếng Việt.
+
+  3. Xử lý video thô (Chưa có sub):
      node tools/pipeline.js raw <duong_dan_video.mkv>
      -> Tự động tách âm, loại bỏ nhạc nền và chép lời thoại gốc (tiếng Nhật/Hàn/Anh) sang dialogues.json.
 
-  2. Chuẩn bị dữ liệu từ phim đã có sẵn sub tiếng Anh:
+  4. Chuẩn bị dữ liệu từ phim đã có sẵn sub tiếng Anh:
      node tools/pipeline.js prepare <duong_dan_video.mkv>
      -> Tự động trích xuất sub và tạo dialogues.json sẵn sàng đưa vào AI dịch.
 
-  3. Hoàn thiện sau khi AI trả về kết quả dịch:
+  5. Hoàn thiện sau khi AI trả về kết quả dịch:
      node tools/pipeline.js finish <duong_dan_video.mkv> [file_dich.json]
      -> [MẶC ĐỊNH] Tạo file .vie.ass, .ass và .vie.srt (Mở video trên MPC-HC/VLC là tự nạp ngay, 0MB tốn thêm!).
      -> [ĐÓNG GÓI MKV]: node tools/pipeline.js finish <video.mkv> [file_dich.json] --remux
@@ -45,12 +53,27 @@ Cách dùng:
 }
 
 const toolsDir = __dirname;
-const dir = path.dirname(videoFile);
-const base = path.basename(videoFile, path.extname(videoFile));
-const extractedAss = path.join(dir, `${base}_extracted.ass`);
-const dialoguesJson = path.join(dir, `${base}_dialogues.json`);
+const videoFile = targetArg ? path.resolve(targetArg) : null;
+const dir = videoFile ? (fs.existsSync(videoFile) && fs.statSync(videoFile).isDirectory() ? videoFile : path.dirname(videoFile)) : null;
+const base = videoFile && fs.existsSync(videoFile) && fs.statSync(videoFile).isFile() ? path.basename(videoFile, path.extname(videoFile)) : '';
 
-if (action === 'raw') {
+// Quản lý thư mục .cache thông minh
+const cacheDir = dir ? path.join(dir, '.cache') : null;
+function getCachePath(filename) {
+  if (cacheDir && fs.existsSync(cacheDir)) {
+    return path.join(cacheDir, filename);
+  }
+  return path.join(dir, filename);
+}
+
+const extractedAss = base ? (fs.existsSync(path.join(cacheDir, `${base}_extracted.ass`)) ? path.join(cacheDir, `${base}_extracted.ass`) : (fs.existsSync(path.join(dir, `${base}_extracted.ass`)) ? path.join(dir, `${base}_extracted.ass`) : getCachePath(`${base}_extracted.ass`))) : '';
+const dialoguesJson = base ? (fs.existsSync(path.join(cacheDir, `${base}_dialogues.json`)) ? path.join(cacheDir, `${base}_dialogues.json`) : (fs.existsSync(path.join(dir, `${base}_dialogues.json`)) ? path.join(dir, `${base}_dialogues.json`) : getCachePath(`${base}_dialogues.json`))) : '';
+
+if (action === 'organize') {
+  const target = targetArg ? path.resolve(targetArg) : path.resolve(toolsDir, '..', '..');
+  console.log(`\n=== TỔ CHỨC CẤU TRÚC THƯ MỤC THÔNG MINH ===`);
+  execSync(`node "${path.join(toolsDir, 'organize.js')}" "${target}"`, { stdio: 'inherit' });
+} else if (action === 'raw') {
   console.log(`\n=== CHẾ ĐỘ XỬ LÝ VIDEO THÔ (SPEECH-TO-TEXT ENGINE) ===`);
   const rootDir = path.join(toolsDir, '..');
   const batScript = path.join(rootDir, 'run_transcribe.bat');
@@ -66,6 +89,9 @@ if (action === 'raw') {
   console.log(`\n[HOÀN TẤT BÓC TÁCH ÂM THANH] File ${dialoguesJson} đã sẵn sàng cho AI dịch!`);
 } else if (action === 'prepare') {
   console.log(`\n=== BƯỚC 1: TRÍCH XUẤT SUBTITLE TỪ VIDEO ===`);
+  if (cacheDir && !fs.existsSync(cacheDir)) {
+    fs.mkdirSync(cacheDir, { recursive: true });
+  }
   execSync(`node "${path.join(toolsDir, 'extract.js')}" "${videoFile}" "${extractedAss}"`, { stdio: 'inherit' });
 
   console.log(`\n=== BƯỚC 2: PHÂN TÍCH DIALOGUES CHO AI ===`);
@@ -76,7 +102,10 @@ if (action === 'raw') {
   console.log(`Áp dụng System Prompt trong thư mục 'prompts/AI_TRANSLATION_PROMPT.md' để AI tiến hành dịch.`);
 } else if (action === 'finish') {
   const extraArgs = process.argv.slice(4);
-  let transJson = path.join(dir, `${base}_translations.json`);
+  let transJson = path.join(cacheDir, `${base}_translations.json`);
+  if (!fs.existsSync(transJson) && fs.existsSync(path.join(dir, `${base}_translations.json`))) {
+    transJson = path.join(dir, `${base}_translations.json`);
+  }
 
   // Nếu arg thứ 4 là file json thì dùng file đó
   if (extraArgs[0] && !extraArgs[0].startsWith('-') && extraArgs[0].endsWith('.json')) {
@@ -95,7 +124,7 @@ if (action === 'raw') {
   execSync(`node "${path.join(toolsDir, 'verify_sub.js')}" "${dialoguesJson}" "${transJson}"`, { stdio: 'inherit' });
 
   console.log(`\n=== BƯỚC 2: TÁI TẠO FILE PHỤ ĐỀ VIỆT (.ASS & .SRT) ===`);
-  const templateAss = fs.existsSync(extractedAss) ? extractedAss : path.join(dir, `${base}_raw.ass`);
+  const templateAss = fs.existsSync(extractedAss) ? extractedAss : (fs.existsSync(path.join(dir, `${base}_raw.ass`)) ? path.join(dir, `${base}_raw.ass`) : path.join(cacheDir, `${base}_raw.ass`));
   const subViAss = path.join(dir, `${base}.vie.ass`);
   execSync(`node "${path.join(toolsDir, 'build_sub.js')}" "${templateAss}" "${transJson}" "${path.join(dir, base)}"`, { stdio: 'inherit' });
 
@@ -118,27 +147,45 @@ if (action === 'raw') {
 
   console.log(`\n[HOÀN TẤT TOÀN BỘ QUY TRÌNH!]`);
 } else if (action === 'scan') {
-  const targetDir = videoFile;
+  const targetDir = targetArg ? path.resolve(targetArg) : path.resolve(toolsDir, '..', '..');
   if (!fs.existsSync(targetDir) || !fs.statSync(targetDir).isDirectory()) {
     console.error(`Lỗi: Thư mục không tồn tại: ${targetDir}`);
     process.exit(1);
   }
 
   console.log(`\n=== QUÉT DANH SÁCH ANIME / PHIM: ${targetDir} ===`);
-  const files = fs.readdirSync(targetDir);
-  const videoExts = ['.mkv', '.mp4', '.avi', '.ts'];
-  const videos = files.filter(f => videoExts.includes(path.extname(f).toLowerCase()) && !f.includes('_vi.') && !f.startsWith('.'));
 
+  function findVideos(scanPath) {
+    let results = [];
+    const entries = fs.readdirSync(scanPath, { withFileTypes: true });
+    for (const entry of entries) {
+      const full = path.join(scanPath, entry.name);
+      if (entry.isDirectory()) {
+        if (['.cache', 'node_modules', 'anime-sub-toolkit', '.git'].includes(entry.name)) continue;
+        results = results.concat(findVideos(full));
+      } else if (entry.isFile()) {
+        const ext = path.extname(entry.name).toLowerCase();
+        if (['.mkv', '.mp4', '.avi', '.ts'].includes(ext) && !entry.name.includes('_vi.') && !entry.name.startsWith('.')) {
+          results.push(full);
+        }
+      }
+    }
+    return results;
+  }
+
+  const videos = findVideos(targetDir);
   const pending = [];
   const ready = [];
 
-  videos.forEach(v => {
-    const base = path.basename(v, path.extname(v));
-    const hasAss = fs.existsSync(path.join(targetDir, `${base}.ass`)) || fs.existsSync(path.join(targetDir, `${base}.vie.ass`));
+  videos.forEach(vPath => {
+    const vDir = path.dirname(vPath);
+    const vBase = path.basename(vPath, path.extname(vPath));
+    const hasAss = fs.existsSync(path.join(vDir, `${vBase}.ass`)) || fs.existsSync(path.join(vDir, `${vBase}.vie.ass`));
+    const relPath = path.relative(targetDir, vPath);
     if (hasAss) {
-      ready.push(v);
+      ready.push(relPath);
     } else {
-      pending.push(v);
+      pending.push(relPath);
     }
   });
 
@@ -155,6 +202,6 @@ if (action === 'raw') {
     console.log(`\n⚡ Lệnh dịch hết: AI tự động bóc tách và dịch trọn gói toàn bộ ${pending.length} tập chưa có sub!`);
   }
 } else {
-  console.error(`Action không hợp lệ: ${action}. Hãy dùng 'raw', 'prepare', 'finish' hoặc 'scan'.`);
+  console.error(`Action không hợp lệ: ${action}. Hãy dùng 'organize', 'raw', 'prepare', 'finish' hoặc 'scan'.`);
 }
 
