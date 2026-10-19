@@ -134,7 +134,8 @@ def main():
         compute_type = "float16" if device == "cuda" else "int8"
         print(f" -> Chạy trên phần cứng: {device.upper()} (Compute: {compute_type})")
 
-        model = WhisperModel(args.model, device=device, compute_type=compute_type)
+        cache_hub = os.environ.get("HF_HUB_CACHE", r"F:\AI_Cache\huggingface\hub")
+        model = WhisperModel(args.model, download_root=cache_hub, device=device, compute_type=compute_type)
         segments, info = model.transcribe(
             str(target_wav),
             language=args.language,

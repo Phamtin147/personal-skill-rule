@@ -16,6 +16,7 @@ echo [Dang xu ly file]: %VIDEO_FILE%
 
 :: Thiet lap thu muc luu Model AI sang o F de bao ve o C 128GB
 set "HF_HOME=F:\AI_Cache\huggingface"
+set "HF_HUB_CACHE=F:\AI_Cache\huggingface\hub"
 set "TORCH_HOME=F:\AI_Cache\torch"
 
 :: 1. Uu tien so 1: Chay truc tiep bang Python 3.11 GPU cuc bo (NVIDIA RTX 3070 Ti)
