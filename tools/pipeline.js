@@ -25,7 +25,7 @@ let targetArg = process.argv[3];
 
 if (!action || (!targetArg && !['organize', 'scan'].includes(action))) {
   console.log(`
-=== ANIME SUBTITLE PIPELINE TOOLKIT (By Phamtin147) ===
+=== ANIME SUBTITLE PIPELINE TOOLKIT (By Amtia(NOFACE)) ===
 Cách dùng:
   1. Phân loại & quy hoạch thư mục chuẩn Fansub:
      node tools/pipeline.js organize [duong_dan_thu_muc]

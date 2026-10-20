@@ -67,11 +67,11 @@
 
 ## 6. THÔNG TIN GHI CÔNG (FANSUB CREDITS)
 
-* **Dịch giả / Người thực hiện**: **Phamtin147**
+* **Dịch giả / Người thực hiện**: **Amtia(NOFACE)**
 * **Quy chuẩn hiển thị credit cuối phim**:
-  - `Phụ đề Việt ngữ (VietSub): Phamtin147`
-  - `Dịch thuật & Biên tập: Phamtin147`
-  - `Timing & Căn chỉnh: Phamtin147`
-  - `Kiểm định chất lượng (QC): Phamtin147`
-  - `Phát hành bởi: Phamtin147`
+  - `Phụ đề Việt ngữ (VietSub): Amtia(NOFACE)`
+  - `Dịch thuật & Biên tập: Amtia(NOFACE)`
+  - `Timing & Căn chỉnh: Amtia(NOFACE)`
+  - `Kiểm định chất lượng (QC): Amtia(NOFACE)`
+  - `Phát hành bởi: Amtia(NOFACE)`
 

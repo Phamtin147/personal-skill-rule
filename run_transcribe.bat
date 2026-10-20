@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 >nul
 echo ========================================================
-echo   ANIME SPEECH-TO-TEXT ENGINE (By Phamtin147)
+echo   ANIME SPEECH-TO-TEXT ENGINE (By Amtia(NOFACE))
 echo ========================================================
 
 if "%~1"=="" (
@@ -30,7 +30,7 @@ if exist "F:\Python311\python.exe" (
 where docker >nul 2>nul
 if %errorlevel% equ 0 (
     echo [Phat hien Docker] Dang chay AI Engine qua Docker GPU...
-    docker run --rm --gpus all -v "%~dp1:/videos" phamtin147/anime-transcribe-engine:latest "/videos/%~nx1" --model large-v3 --separate
+    docker run --rm --gpus all -v "%~dp1:/videos" 1193:latest "/videos/%~nx1" --model large-v3 --separate
     echo [Giai phong tai nguyen] Dang tat Docker de tiet kiem RAM va GPU...
     docker compose down >nul 2>nul
     goto END

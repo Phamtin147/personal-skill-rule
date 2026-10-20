@@ -65,7 +65,7 @@ const newLines = lines.map(line => {
 
   // 2. Chuẩn hóa Title
   if (line.startsWith('Title: ')) {
-    return 'Title: Vietnamese Fansub (VietSub by Phamtin147)';
+    return 'Title: Vietnamese Fansub (VietSub by Amtia(NOFACE))';
   }
 
   // 3. Chuẩn hóa câu thoại Dialogue

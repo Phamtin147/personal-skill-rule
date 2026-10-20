@@ -86,7 +86,7 @@ metadata:
   - Thoại phải gãy gọn, súc tích, hợp nhịp thở và chuyển động môi của nhân vật.
   - Tuyệt đối tránh dịch "word-by-word" thô ráp từ tiếng Anh (ví dụ: *"my ass"* -> *"cái con khỉ"*, *"hocus pocus"* -> *"úm ba la xì bùa"*, *"snot-nosed kid"* -> *"thằng nhóc hỉ mũi chưa sạch"*).
   - Giữ nguyên thẻ định dạng ASS: `\N` (viết hoa), `{\i1}...{\i0}` (in nghiêng), các thẻ tọa độ/màu.
-  - **Bản địa hóa Credits cuối phim**: Tự động thay thế tên nhóm sub ngoại quốc (Translator, Timer, Editor, QC,...) thành tên dịch giả tiếng Việt: **Phamtin147** (Ví dụ: *Phụ đề Việt ngữ: Phamtin147, Dịch & Timer: Phamtin147, QC: Phamtin147*).
+  - **Bản địa hóa Credits cuối phim**: Tự động thay thế tên nhóm sub ngoại quốc (Translator, Timer, Editor, QC,...) thành tên dịch giả tiếng Việt: **Amtia(NOFACE)** (Ví dụ: *Phụ đề Việt ngữ: Amtia(NOFACE), Dịch & Timer: Amtia(NOFACE), QC: Amtia(NOFACE)*).
 
 ### Bước 5: Kiểm thử toàn vẹn & Tương thích Font (QA & Font Verification)
 - Chạy `tools/verify_sub.js`:

@@ -1,5 +1,5 @@
 # Dockerfile for Anime Sub Speech-to-Text Engine
-# Author: Phamtin147
+# Author: Amtia(NOFACE)
 FROM pytorch/pytorch:2.2.0-cuda12.1-cudnn8-runtime
 
 ENV DEBIAN_FRONTEND=noninteractive

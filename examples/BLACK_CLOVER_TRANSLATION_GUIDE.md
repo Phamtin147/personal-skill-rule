@@ -1,7 +1,7 @@
 # CẨM NANG DỊCH THUẬT: BLACK CLOVER (SEASON 2)
 > **Tên tác phẩm**: Black Clover (ブラッククローバー)  
 > **Tập phim**: Season 2 - Episode 03 (Overall Episode 173): "Black Guardian" (黒き守護者 - Người Hộ Vệ Đen)  
-> **Dịch giả / Timer / QC**: **Phamtin147**  
+> **Dịch giả / Timer / QC**: **Amtia(NOFACE)**  
 
 ---
 
@@ -55,4 +55,4 @@
 * **Demon-Dweller Sword (宿魔の剣)**: Túc Ma Kiếm
 * **Demon-Destroyer Sword (滅魔の剣)**: Diệt Ma Kiếm
 * **Demon-Slasher Katana (斬魔の刀)**: Trảm Ma Katana
-* **Translator / Timer / QC**: **Phamtin147**
+* **Translator / Timer / QC**: **Amtia(NOFACE)**

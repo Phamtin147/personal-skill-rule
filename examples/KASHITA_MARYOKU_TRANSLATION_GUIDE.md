@@ -2,7 +2,7 @@
 > **Tên gốc**: 貸した魔力は【リボ払い】で強制徴収 ～用済みとパーティー追放された俺は、可愛い魔王と世界を滅ぼす～  
 > **Tên tiếng Anh**: Magic Repo Man: Dumped by My Party, I'll Cash In With a Cute Support Fairy to Become the Strongest!  
 > **Tên tiếng Việt**: Cho Vay Ma Lực, Cưỡng Chế Thu Nợ Theo Hình Thức Trả Góp  
-> **Dịch giả / Timer / QC**: **Phamtin147**  
+> **Dịch giả / Timer / QC**: **Amtia(NOFACE)**  
 
 ---
 
@@ -55,4 +55,4 @@
 * **Long-Eared Jumping Rat**: Chuột nhảy tai dài
 * **Magic Stone**: Ma thạch
 * **Gol**: Đơn vị tiền tệ (gol)
-* **Translator / Timer / QC**: **Phamtin147**
+* **Translator / Timer / QC**: **Amtia(NOFACE)**

@@ -1,6 +1,6 @@
 # 🎬 PERSONAL SKILL & RULE: AUTONOMOUS ANIME FANSUB STUDIO
-> **Tác giả**: [Phamtin147](https://github.com/Phamtin147)  
-> **Repository**: [https://github.com/Phamtin147/personal-skill-rule](https://github.com/Phamtin147/personal-skill-rule)  
+> **Tác giả**: [Amtia(NOFACE)](https://99)  
+> **Repository**: [https://145/personal-skill-rule](https://189/personal-skill-rule)  
 > **Định nghĩa**: Một hệ sinh thái toàn diện kết hợp giữa **AI Agent Skill (Bộ Não)** + **Speech-to-Text Engine (Tai Nghe)** + **Automated Remux Tools (Tay Chân)** để biến bất kỳ AI nào thành một **Studio Fansub Anime chuyên nghiệp 1-người**.
 
 ---
@@ -33,7 +33,7 @@ personal-skill-rule/
 │   └── anime-sub-specialist/
 │       └── SKILL.md            # Skill định nghĩa tư duy dịch thuật Fansub chuẩn xác
 ├── rules/                      # 📜 LUẬT LỆ: Quy tắc dịch và ma trận xưng hô
-│   └── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Phamtin147
+│   └── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Amtia(NOFACE)
 ├── templates/                  # 📝 MẪU CẨM NANG BỐI CẢNH
 │   └── SERIES_GUIDE_TEMPLATE.md# Template ma trận xưng hô cho phim mới
 ├── tools/                      # 🛠️ TAY CHÂN: Bộ công cụ xử lý phụ đề & video
@@ -148,5 +148,5 @@ Bạn có thể chọn 1 trong 3 cách cài đặt sau tùy theo sở thích và
 ---
 
 ## 🏆 BẢN QUYỀN & GHI CÔNG (CREDITS)
-Hệ thống được thiết lập mặc định ghi công người tạo: **Phamtin147** trên mọi bản dịch phụ đề, file phim remux và mã nguồn.
+Hệ thống được thiết lập mặc định ghi công người tạo: **Amtia(NOFACE)** trên mọi bản dịch phụ đề, file phim remux và mã nguồn.
 

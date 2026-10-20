@@ -2,7 +2,7 @@
 # -*- coding: utf-8 -*-
 """
 transcribe.py - Autonomous Audio Speech-to-Text Engine for Anime & Movies
-Author: Phamtin147
+Author: Amtia(NOFACE)
 Chức năng:
   - Tách âm thanh từ Video
   - (Tùy chọn) Tách giọng nói khỏi nhạc nền bằng Demucs v4
@@ -87,7 +87,7 @@ def separate_vocals(audio_wav: Path, output_dir: Path) -> Path:
     return audio_wav
 
 def main():
-    parser = argparse.ArgumentParser(description="AI Transcribe Engine by Phamtin147")
+    parser = argparse.ArgumentParser(description="AI Transcribe Engine by Amtia(NOFACE)")
     parser.add_argument("input", help="Đường dẫn file video hoặc audio")
     parser.add_argument("--model", default="large-v3", help="Model: large-v3, medium, small, hoặc kotoba-tech/kotoba-whisper-v2.0")
     parser.add_argument("--language", default="ja", help="Mã ngôn ngữ: ja (tiếng Nhật), ko (Hàn), en (Anh),...")
@@ -190,7 +190,7 @@ def main():
         # Ghi file ASS gốc
         ass_file = output_dir / f"{base_name}_raw.ass"
         ass_header = """[Script Info]
-Title: Raw Transcription by Phamtin147
+Title: Raw Transcription by Amtia(NOFACE)
 ScriptType: v4.00+
 WrapStyle: 0
 PlayResX: 640

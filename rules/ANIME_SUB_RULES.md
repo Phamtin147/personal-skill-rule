@@ -78,13 +78,13 @@ Khi gặp nhân vật phụ, người qua đường (Citizen, Mob, Soldier, Stra
 ## 4. QUY TẮC GHI CÔNG & CREDITS FANSUB (CREDITS LOCALIZATION)
 
 Khi gặp các dòng Credit ở cuối tập phim (các dòng có style `credits` hoặc nội dung về Translator, Timer, Editor, Quality Control, QC, Typesetter, Encoder,...):
-* **Quy chuẩn ghi công**: Bắt buộc thay thế toàn bộ tên của nhóm sub ngoại quốc ban đầu bằng tên dịch giả tiếng Việt: **Phamtin147**.
+* **Quy chuẩn ghi công**: Bắt buộc thay thế toàn bộ tên của nhóm sub ngoại quốc ban đầu bằng tên dịch giả tiếng Việt: **Amtia(NOFACE)**.
 * **Mẫu chuyển ngữ chuẩn Fansub**:
-  - `Translator: [Tên gốc]` ➔ `Phụ đề Việt ngữ (VietSub): Phamtin147`
-  - `Timer: [Tên gốc]` ➔ `Timing & Kỹ thuật: Phamtin147`
-  - `Editor: [Tên gốc]` ➔ `Dịch thuật & Biên tập: Phamtin147`
-  - `Quality Control / QC: [Tên gốc]` ➔ `Kiểm định chất lượng (QC): Phamtin147`
-  - `Final QC / Release: [Tên gốc]` ➔ `Phát hành bởi: Phamtin147`
+  - `Translator: [Tên gốc]` ➔ `Phụ đề Việt ngữ (VietSub): Amtia(NOFACE)`
+  - `Timer: [Tên gốc]` ➔ `Timing & Kỹ thuật: Amtia(NOFACE)`
+  - `Editor: [Tên gốc]` ➔ `Dịch thuật & Biên tập: Amtia(NOFACE)`
+  - `Quality Control / QC: [Tên gốc]` ➔ `Kiểm định chất lượng (QC): Amtia(NOFACE)`
+  - `Final QC / Release: [Tên gốc]` ➔ `Phát hành bởi: Amtia(NOFACE)`
 
 ---
 
