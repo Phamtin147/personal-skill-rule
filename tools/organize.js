@@ -72,7 +72,7 @@ function parseAnimeInfo(filename) {
   // 5. Generic SxxExx: Name.S01E02...
   m = base.match(/^(.*?)[.\s]+[sS](\d+)[eE](\d+)/i);
   if (m) {
-    const cleanSeries = m[1].replace(/\./g, ' ').trim();
+    const cleanSeries = m[1].replace(/\./g, ' ').replace(/\s*-\s*$/, '').trim();
     return {
       series: cleanSeries,
       episode: `Tập ${m[3].padStart(2, '0')}`,
