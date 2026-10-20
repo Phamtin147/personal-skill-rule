@@ -28,8 +28,14 @@ if (!outputFile) {
 console.log(`[1/2] Đang trích xuất subtitle track s:${trackIndex} từ: ${videoFile}`);
 
 try {
-  const cmd = `"${ffmpeg}" -i "${videoFile}" -map 0:s:${trackIndex} -c:s copy "${outputFile}" -y`;
-  execSync(cmd, { stdio: 'inherit' });
+  let cmd = `"${ffmpeg}" -i "${videoFile}" -map 0:s:${trackIndex} -c:s copy "${outputFile}" -y`;
+  try {
+    execSync(cmd, { stdio: 'inherit' });
+  } catch (copyErr) {
+    // Nếu source là subrip (srt) hoặc format khác, tự động convert sang .ass
+    cmd = `"${ffmpeg}" -i "${videoFile}" -map 0:s:${trackIndex} -c:s ass "${outputFile}" -y`;
+    execSync(cmd, { stdio: 'inherit' });
+  }
   console.log(`[2/2] Trích xuất thành công: ${outputFile}`);
 } catch (err) {
   console.error('Lỗi khi trích xuất subtitle:', err.message);

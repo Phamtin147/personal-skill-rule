@@ -45,7 +45,7 @@ const outAss = outputBase.endsWith('.ass') ? outputBase : `${outputBase}.vie.ass
 const outSrt = outputBase.endsWith('.srt') ? outputBase : `${outputBase}.vie.srt`;
 
 const transData = JSON.parse(fs.readFileSync(transJson, 'utf8'));
-const list = transData.dialogues || transData;
+const list = transData.dialogues || transData.translations || transData;
 const translations = list.map(item => (typeof item === 'string' ? item : (item.translatedText !== undefined ? item.translatedText : item.text)));
 
 const rawAss = fs.readFileSync(templateAss, 'utf8');

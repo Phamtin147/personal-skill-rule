@@ -69,17 +69,7 @@ function parseAnimeInfo(filename) {
     };
   }
 
-  // 5. Generic anime pattern: [Group] Name - 01 (1080p)...
-  m = base.match(/^(?:\[.*?\]\s*)?(.*?)\s*-\s*(\d+)(?:\s*\(.*?\))?/i);
-  if (m && m[1].trim().length > 1) {
-    return {
-      series: m[1].trim(),
-      episode: `Tập ${m[2].padStart(2, '0')}`,
-      epNum: parseInt(m[2], 10)
-    };
-  }
-
-  // 6. Generic SxxExx: Name.S01E02...
+  // 5. Generic SxxExx: Name.S01E02...
   m = base.match(/^(.*?)[.\s]+[sS](\d+)[eE](\d+)/i);
   if (m) {
     const cleanSeries = m[1].replace(/\./g, ' ').trim();
@@ -87,6 +77,16 @@ function parseAnimeInfo(filename) {
       series: cleanSeries,
       episode: `Tập ${m[3].padStart(2, '0')}`,
       epNum: parseInt(m[3], 10)
+    };
+  }
+
+  // 6. Generic anime pattern with potential hyphens in title: [Group] Name - With - Hyphens - 01 (1080p) [hash]
+  m = base.match(/^(?:\[.*?\]\s*)?(.*?)\s*-\s*(\d+)(?:\s*(?:\([^)]*\)|\[[^\]]*\]))*$/i);
+  if (m && m[1].trim().length > 1) {
+    return {
+      series: m[1].trim(),
+      episode: `Tập ${m[2].padStart(2, '0')}`,
+      epNum: parseInt(m[2], 10)
     };
   }
 
