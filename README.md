@@ -30,8 +30,12 @@ personal-skill-rule/
 │   └── Google_Colab_Anime_Transcribe.ipynb # Colab 1-click dùng GPU T4 miễn phí của Google
 ├── run_transcribe.bat          # ⚡ Script 1-click kéo thả video trên Windows
 ├── skills/                     # 🧠 BỘ NÃO: Kỹ năng chuyên gia cho AI Agent
-│   └── anime-sub-specialist/
-│       └── SKILL.md            # Skill định nghĩa tư duy dịch thuật Fansub chuẩn xác
+│   ├── anime-sub-specialist/
+│   │   └── SKILL.md            # Skill định nghĩa tư duy dịch thuật Fansub chuẩn xác
+│   ├── slides/
+│   │   └── SKILL.md            # Tạo slide HTML 16:9 scroll-snap & Markdown dàn ý chuẩn
+│   └── presentation-slides/
+│       └── SKILL.md            # Quy chuẩn thiết kế slide thuyết trình chuyên nghiệp
 ├── rules/                      # 📜 LUẬT LỆ: Quy tắc dịch và ma trận xưng hô
 │   └── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Amtia(NOFACE)
 ├── templates/                  # 📝 MẪU CẨM NANG BỐI CẢNH
