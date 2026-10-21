@@ -1,64 +1,70 @@
 ---
 name: slides
-description: Tạo bộ slide trình chiếu tương tác 16:9 scroll-snap HTML và file dàn ý Markdown chuẩn. Tự động hiển thị số slide rõ ràng (SLIDE XX / YY), thuần nội dung màn chiếu (không kèm thoại/phân vai rườm rà), hỗ trợ Light/Dark mode, dot nav, phím tắt điều hướng, bảng so sánh responsive và macOS code block. Kích hoạt khi gõ /slides, /slide hoặc yêu cầu làm slide thuyết trình.
+description: Generate polished, scroll-snapped 16:9 HTML presentation slide decks and matching Markdown outlines. Features slide number badges (SLIDE XX / YY), clean visual-only presentation content (zero speaker dialogue/notes), strict zero-emoji anti-slop typography, responsive tables, light/dark mode, and macOS code blocks. Use whenever the user asks to create or update slides, or types /slides, /slide, or /presentation-slides.
 ---
 
-# Kỹ Năng Thiết Kế Slide Thuyết Trình (Slides Generator)
+# Presentation Slides Skill (Editorial Scroll-Snap Template)
 
-Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuyết trình thành **bộ slide HTML tương tác 16:9 scroll-snap** kèm **tài liệu dàn ý Markdown** chuẩn chỉnh, hiện đại, phục vụ trình chiếu chuyên nghiệp và học tập/thi cử.
-
----
-
-## 🎯 7 NGUYÊN TẮC BẮT BUỘC (NON-NEGOTIABLES)
-
-1. **Bộ Đôi Sản Phẩm Luôn Đi Kèm (Paired Deliverables):**
-   - **File HTML độc lập:** Chứa toàn bộ CSS & JS nội tuyến, zero build-step, không phụ thuộc thư viện ngoài/CDN, chạy mượt trên mọi trình duyệt.
-   - **File Markdown song hành:** Dàn ý cô đọng, định dạng chuẩn `### 📌 SLIDE XX / YY: [Tiêu đề]`.
-
-2. **Bắt Buộc Đánh Số Slide Rõ Ràng (Slide Number Badges):**
-   - Trên mỗi slide HTML, phần `eyebrow` **BẮT BUỘC** có huy hiệu số slide:
-     `<span class="slide-badge">SLIDE XX / YY</span>` (Ví dụ: `SLIDE 01 / 14`, `SLIDE 02 / 14`).
-   - Có bộ đếm cố định góc dưới bên trái: `<div id="counter">X / Y</div>`.
-   - Trên file Markdown, tiêu đề từng slide phải ghi rõ: `### 📌 SLIDE XX / YY: [Tiêu đề]`.
-
-3. **Thuần Nội Dung Trình Chiếu (Pure Visual Slide Content):**
-   - **LOẠI BỎ** toàn bộ lời thoại (speaker notes) hoặc kịch bản đọc dài dòng khỏi màn chiếu (trừ khi người dùng yêu cầu làm kịch bản thuyết trình riêng).
-   - **LOẠI BỎ** các nhãn phân vai người nói (Người 1, Người 2, Người 3) trên slide.
-   - Trình bày thông tin bằng: thẻ card (`.card-box`), danh sách ngắn gọn, bảng biểu so sánh (`.styled-table`), quy trình luồng (`.flow-row`), hộp trích dẫn (`.quote-box`).
-
-4. **Đồng Nhất Giao Diện & Theme Tối/Sáng (Theme Consistency):**
-   - Hỗ trợ chuyển đổi giao diện Sáng/Tối qua nút `#dark-toggle`.
-   - **TUYỆT ĐỐI KHÔNG** dùng `.slide.invert` hay ép màu nền đen ở slide cuối cùng. Mọi slide (kể cả slide kết luận/Q&A) phải đồng bộ nền theo theme đang chọn.
-
-5. **Hệ Thống Thiết Kế Editorial Tinh Tế (Design Tokens & Typography):**
-   - **Màu sắc Warm Editorial:**
-     - Nền sáng: `--ivory: #FAF9F5` | Nền tối: `--slate: #141413`
-     - Màu nhấn chính: `--clay: #D97757`
-     - Màu phối học thuật: `--olive: #788C5D`, `--sage: #A3B18A`, `--sand: #C4A882`, `--coral: #E07A5F`, `--teal: #3D5A80`
-   - **Font chữ:**
-     - Serif: `"Playfair Display", "Source Serif 4", Georgia, serif` (dành cho tiêu đề H1, H2, trích dẫn).
-     - Sans: `"Inter", system-ui, -apple-system, sans-serif` (nội dung chính).
-     - Mono: `"JetBrains Mono", ui-monospace, monospace` (số slide, thẻ tag, code).
-
-6. **Khối Code macOS Chuẩn (Nếu có mã nguồn):**
-   - Luôn bọc trong `<pre class="code-content"><code>...</code></pre>` với thụt lề chuẩn 4 dấu cách, `white-space: pre; tab-size: 4;`.
-   - Header kiểu macOS có 3 chấm tròn đỏ - vàng - xanh (`.code-dot.red`, `.code-dot.yellow`, `.code-dot.green`) và tên file/ngôn ngữ.
-
-7. **Tính Sư Phạm & Chiều Sâu Kiến Thức:**
-   - Khi làm slide môn học đại học (MLN111, PRN232, PRM392...), nội dung phải súc tích nhưng đầy đủ chiều sâu lý luận, bản chất kỹ thuật, sơ đồ quan hệ biện chứng và bảng so sánh trực quan.
+Always use this skill when creating presentations, decks, or slide-like deliverables.
 
 ---
 
-## 🛠 CẤU TRÚC HTML BOILERPLATE MẪU
+## 🎯 8 NON-NEGOTIABLE CORE RULES
+
+1. **Paired Deliverables (Always generate both):**
+   - **Standalone HTML slide deck:** Self-contained file with embedded CSS and JavaScript. Zero build steps, zero external CDN dependencies.
+   - **Companion Markdown outline:** Structured with `### 📌 SLIDE XX / YY: [Title]`, preserving the exact information hierarchy.
+
+2. **Slide Number Badges (MANDATORY):**
+   - On every slide, the `eyebrow` header **MUST** contain a slide badge:
+     `<span class="slide-badge">SLIDE XX / YY</span>` (e.g., `SLIDE 01 / 10`, `SLIDE 02 / 10`).
+   - A fixed slide counter at bottom-left: `<div id="counter">1 / 10</div>`.
+   - In Markdown, every slide header explicitly states: `### 📌 SLIDE XX / YY: [Title]`.
+
+3. **ZERO EMOJIS & ZERO AI SLOP (Strict Aesthetic Quality):**
+   - **STRICTLY PROHIBIT** using emojis (e.g., 🔐, 🛡️, 🌐, 🚀, 💡, 🎯, 📦, 🧪, 📱, ☁️, ⚙️, 📋, 🔑, etc.) in headings, cards, subtitles, or bullet points. Emojis make slides look like cheap, automated "AI slop".
+   - Rely strictly on refined editorial typography: uppercase tracked mono tags (`font-family: var(--mono)`), clean numbered prefixes (`1.`, `2.`), serif titles, and subtle color accent lines (`border-top: 2px solid var(--clay)`).
+   - The only acceptable colored dots are the 3 macOS window controls (🔴 🟡 🟢) inside code block headers.
+
+4. **Pure Visual Presentation Content:**
+   - **REMOVE** all spoken speaker scripts, dialogues, or lengthy paragraphs from the slides.
+   - **REMOVE** presenter assignment badges ("Speaker 1", "Speaker 2", "Người 1, 2, 3").
+   - Present information cleanly through summary cards (`.card-box`), structured comparison tables (`.styled-table`), flow steps (`.flow-row`), and quote boxes (`.quote-box`).
+
+5. **Theme Consistency (Light & Dark Mode):**
+   - Provide an interactive `#dark-toggle` button.
+   - **NEVER** use `.slide.invert` or forced black/dark backgrounds on the final slide. All slides must consistently adhere to the active theme.
+
+6. **Refined Typography & Warm Editorial Palette:**
+   - **Colors:**
+     - Light background: `--ivory: #FAF9F5` | Dark background: `--slate: #141413`
+     - Primary accent: `--clay: #D97757`
+     - Editorial tones: `--olive: #788C5D`, `--sage: #A3B18A`, `--sand: #C4A882`, `--coral: #E07A5F`, `--teal: #3D5A80`
+   - **Typography:**
+     - Serif: `"Playfair Display", "Source Serif 4", Georgia, serif` (H1, H2, quotes).
+     - Sans: `"Inter", system-ui, -apple-system, sans-serif` (body, cards).
+     - Mono: `"JetBrains Mono", ui-monospace, monospace` (slide badge, tags, code).
+
+7. **macOS Code Blocks:**
+   - Use `<pre class="code-content"><code>...</code></pre>` with `white-space: pre; tab-size: 4;` and exact 4-space indentation.
+   - Include macOS header with 3 window dots (`.code-dot.red`, `.code-dot.yellow`, `.code-dot.green`) and context/file badge.
+
+8. **Language & Technical Rigor:**
+   - Default to **English** for technical topics, engineering, Web API, and computer science presentations, unless the user explicitly asks for Vietnamese.
+   - Maintain high educational depth, architectural precision, and production-grade clarity.
+
+---
+
+## 🛠 STANDARD HTML BOILERPLATE
 
 ```html
-<!-- Copyright 2026 · [Tên bài thuyết trình] -->
+<!-- Copyright 2026 · [Presentation Title] -->
 <!doctype html>
-<html lang="vi">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>[Tiêu đề thuyết trình]</title>
+<title>[Presentation Title]</title>
 <style>
   :root {
     --ivory:   #FAF9F5;
@@ -119,15 +125,16 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 6vh 6vw;
+    padding: 5vh 6vw;
     position: relative;
+    overflow: hidden;
   }
   .slide-inner {
     width: 100%;
-    max-width: 880px;
+    max-width: 900px;
     opacity: 0;
-    transform: translateY(24px);
-    transition: opacity .6s ease, transform .6s ease;
+    transform: translateY(22px);
+    transition: opacity .6s cubic-bezier(0.16, 1, 0.3, 1), transform .6s cubic-bezier(0.16, 1, 0.3, 1);
   }
   .slide.visible .slide-inner { opacity: 1; transform: translateY(0); }
 
@@ -137,7 +144,7 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--text-soft);
-    margin-bottom: 14px;
+    margin-bottom: 12px;
     display: flex;
     align-items: center;
     gap: 8px;
@@ -152,29 +159,30 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
     font-family: var(--mono);
     font-size: 11px;
     font-weight: 600;
-    padding: 2px 8px;
+    padding: 2.5px 8.5px;
     border-radius: 4px;
     letter-spacing: 0.06em;
   }
 
-  h1 { font-family: var(--serif); font-size: clamp(34px, 5.2vw, 50px); line-height: 1.15; margin-bottom: 14px; }
-  h2 { font-family: var(--serif); font-size: clamp(24px, 3.4vw, 34px); line-height: 1.22; margin-bottom: 16px; }
-  .subtitle { font-size: 15px; line-height: 1.6; color: var(--text-muted); max-width: 800px; margin-bottom: 20px; }
+  h1 { font-family: var(--serif); font-weight: 500; font-size: clamp(30px, 4.6vw, 46px); line-height: 1.15; margin-bottom: 12px; }
+  h2 { font-family: var(--serif); font-weight: 500; font-size: clamp(22px, 3.2vw, 32px); line-height: 1.22; margin-bottom: 12px; }
+  h3 { font-family: var(--sans); font-weight: 600; font-size: 14.5px; margin-bottom: 8px; color: var(--text); }
+  .subtitle { font-size: 14px; line-height: 1.55; color: var(--text-muted); max-width: 820px; margin-bottom: 16px; }
 
-  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
-  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-  .card-box { padding: 18px 20px; border: 1px solid var(--border); border-radius: 10px; background: var(--card-bg); }
+  .grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: 15px; }
+  .grid-3 { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 13px; }
+  .card-box { padding: 15px 17px; border: 1px solid var(--border); border-radius: 8px; background: var(--card-bg); }
 
-  .flow-row { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; margin-top: 14px; margin-bottom: 16px; }
-  .flow-step { font-family: var(--mono); font-size: 11.5px; padding: 7px 13px; border-radius: 6px; border: 1px solid var(--border); background: var(--card-bg); }
+  .flow-row { display: flex; align-items: center; gap: 7px; flex-wrap: wrap; margin-top: 10px; margin-bottom: 14px; }
+  .flow-step { font-family: var(--mono); font-size: 11px; padding: 6px 12px; border-radius: 6px; border: 1px solid var(--border); background: var(--card-bg); }
   .flow-step.highlight { background: var(--clay); color: #fff; border-color: var(--clay); }
   .flow-arrow { font-size: 12px; color: var(--text-soft); }
 
-  .styled-table { width: 100%; border-collapse: collapse; margin-top: 10px; font-size: 13px; }
-  .styled-table th { text-align: left; padding: 10px 12px; background: rgba(217,119,87,0.1); color: var(--text); border-bottom: 2px solid var(--border); font-family: var(--mono); }
-  .styled-table td { padding: 10px 12px; border-bottom: 1px solid var(--border); }
+  .styled-table { width: 100%; border-collapse: collapse; margin-top: 8px; font-size: 12.2px; }
+  .styled-table th { text-align: left; padding: 7px 10px; background: rgba(217,119,87,0.1); color: var(--text); border-bottom: 2px solid var(--border); font-family: var(--mono); font-size: 11px; }
+  .styled-table td { padding: 7px 10px; border-bottom: 1px solid var(--border); }
 
-  #nav-dots { position: fixed; right: 22px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 9px; z-index: 20; }
+  #nav-dots { position: fixed; right: 20px; top: 50%; transform: translateY(-50%); display: flex; flex-direction: column; gap: 8px; z-index: 20; }
   .nav-dot { width: 8px; height: 8px; border-radius: 50%; background: var(--nav-dot); border: none; cursor: pointer; transition: background .25s, transform .25s; padding: 0; }
   .nav-dot.active { background: var(--nav-dot-active); transform: scale(1.45); }
 
@@ -183,12 +191,12 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
     bottom: 20px;
     left: 24px;
     font-family: var(--mono);
-    font-size: 12px;
+    font-size: 11.5px;
     font-weight: 600;
     color: var(--text-soft);
     background: var(--card-bg);
     border: 1px solid var(--border);
-    padding: 5px 12px;
+    padding: 4px 11px;
     border-radius: 999px;
     user-select: none;
     z-index: 10;
@@ -197,12 +205,12 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
   #dark-toggle {
     position: fixed;
     bottom: 18px;
-    right: 22px;
+    right: 20px;
     z-index: 20;
     background: none;
     border: 1px solid var(--border);
     border-radius: 999px;
-    padding: 6px 13px;
+    padding: 5px 12px;
     font-family: var(--mono);
     font-size: 11px;
     color: var(--text-soft);
@@ -214,9 +222,8 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
 </style>
 </head>
 <body>
-
   <div id="nav-dots"></div>
-  <div id="counter">1 / 14</div>
+  <div id="counter">1 / 10</div>
   <button id="dark-toggle" aria-label="Toggle dark mode">
     <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
     <span>Dark</span>
@@ -226,28 +233,14 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
   <section class="slide" id="s1">
     <div class="slide-inner">
       <div class="eyebrow">
-        <span class="slide-badge">SLIDE 01 / 14</span>
-        <span>HỌC PHẦN: [TÊN MÔN HỌC]</span>
+        <span class="slide-badge">SLIDE 01 / 10</span>
+        <span>TOPIC CATEGORY · SUBSECTION</span>
       </div>
-      <h1>[Tiêu Đề Lớn Của Báo Cáo]</h1>
-      <p class="subtitle">[Tóm tắt giá trị cốt lõi của đề tài]</p>
-      ...
+      <h1>Presentation Title</h1>
+      <p class="subtitle">Subtitle explaining the core architectural value.</p>
     </div>
   </section>
 
-  <!-- Slide 2 -->
-  <section class="slide" id="s2">
-    <div class="slide-inner">
-      <div class="eyebrow">
-        <span class="slide-badge">SLIDE 02 / 14</span>
-        <span>[CHỦ ĐỀ SLIDE]</span>
-      </div>
-      <h2>[Tiêu Đề Nội Dung Slide]</h2>
-      ...
-    </div>
-  </section>
-
-  <!-- JS Controller -->
   <script>
   (function () {
     var slides = Array.from(document.querySelectorAll('.slide'));
@@ -259,6 +252,7 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
     slides.forEach(function (_, i) {
       var dot = document.createElement('button');
       dot.className = 'nav-dot' + (i === 0 ? ' active' : '');
+      dot.setAttribute('aria-label', 'Go to slide ' + (i + 1));
       dot.addEventListener('click', function () { go(i); });
       navDots.appendChild(dot);
     });
@@ -301,50 +295,3 @@ Kỹ năng này chuyên dùng để tạo hoặc chuyển đổi nội dung thuy
 </body>
 </html>
 ```
-
----
-
-## 📝 MẪU ĐỊNH DẠNG DÀN Ý MARKDOWN
-
-Mỗi khi tạo slide, luôn tạo kèm file `.md` với cấu trúc sau:
-
-```markdown
-# BỘ SLIDE THUYẾT TRÌNH: [TÊN ĐỀ TÀI]
-**Môn học:** [Mã HP & Tên môn học]
-**Số lượng slide:** [Tổng số slide] slide
-
----
-
-### 📌 SLIDE 01 / [TỔNG SỐ]: [Tiêu đề Slide 1]
-* **Nội dung chính:**
-  - Điểm cốt lõi 1
-  - Điểm cốt lõi 2
-* **Mục tiêu:** Định vị vấn đề nghiên cứu
-
----
-
-### 📌 SLIDE 02 / [TỔNG SỐ]: [Tiêu đề Slide 2]
-* **Khái niệm / Định nghĩa:**
-  > "[Nội dung trích dẫn hoặc định nghĩa chính thức]"
-* **Phân tích cấu trúc:**
-  - 1. Thành phần thứ nhất
-  - 2. Thành phần thứ hai
-...
-```
-
----
-
-## 🚀 QUY TRÌNH THỰC HIỆN KHI ĐƯỢC KÍCH HOẠT
-
-1. **Phân Tích Yêu Cầu:**
-   - Xác định chủ đề, đối tượng nghe, số lượng slide mong muốn (hoặc tự tính toán phân bổ tối ưu nếu người dùng chưa chỉ định).
-2. **Soạn Thảo Dàn Ý (Markdown First):**
-   - Đảm bảo cấu trúc sư phạm chặt chẽ, chắt lọc nội dung màn chiếu cô đọng.
-   - Đánh số `SLIDE XX / YY` chuẩn xác.
-3. **Hiện Thực Hóa Slide HTML:**
-   - Dùng template chuẩn ở trên.
-   - Gắn huy hiệu `<span class="slide-badge">SLIDE XX / YY</span>` cho từng slide.
-   - Đảm bảo slide kết luận đồng bộ theme, không đảo màu nền.
-4. **Kiểm Tra & Bàn Giao:**
-   - Lưu trữ tại thư mục làm việc của dự án (ví dụ `slides.html` và `slides.md`).
-   - Cung cấp link có thể click trực tiếp `file://...` cho người dùng.
