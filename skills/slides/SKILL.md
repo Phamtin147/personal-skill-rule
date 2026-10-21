@@ -13,13 +13,13 @@ Always use this skill when creating presentations, decks, or slide-like delivera
 
 1. **Paired Deliverables (Always generate both):**
    - **Standalone HTML slide deck:** Self-contained file with embedded CSS and JavaScript. Zero build steps, zero external CDN dependencies.
-   - **Companion Markdown outline:** Structured with `### 📌 SLIDE XX / YY: [Title]`, preserving the exact information hierarchy.
+   - **Companion Markdown outline:** Structured with `### SLIDE XX / YY: [Title]`, preserving the exact information hierarchy.
 
 2. **Slide Number Badges (MANDATORY):**
    - On every slide, the `eyebrow` header **MUST** contain a slide badge:
      `<span class="slide-badge">SLIDE XX / YY</span>` (e.g., `SLIDE 01 / 10`, `SLIDE 02 / 10`).
    - A fixed slide counter at bottom-left: `<div id="counter">1 / 10</div>`.
-   - In Markdown, every slide header explicitly states: `### 📌 SLIDE XX / YY: [Title]`.
+   - In Markdown, every slide header explicitly states: `### SLIDE XX / YY: [Title]`.
 
 3. **ZERO EMOJIS & ZERO AI SLOP (Strict Aesthetic Quality):**
    - **STRICTLY PROHIBIT** using emojis (e.g., 🔐, 🛡️, 🌐, 🚀, 💡, 🎯, 📦, 🧪, 📱, ☁️, ⚙️, 📋, 🔑, etc.) in headings, cards, subtitles, or bullet points. Emojis make slides look like cheap, automated "AI slop".
