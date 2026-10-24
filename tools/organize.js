@@ -13,6 +13,7 @@
 
 const fs = require('fs');
 const path = require('path');
+const { execSync } = require('child_process');
 
 const targetDir = process.argv[2] ? path.resolve(process.argv[2]) : path.resolve(__dirname, '..', '..');
 
@@ -105,9 +106,20 @@ function safeMove(src, dest) {
   try {
     fs.renameSync(src, dest);
   } catch (err) {
-    // Nếu đổi tên khác ổ đĩa hoặc bị lỗi, dùng copy + unlink
-    fs.copyFileSync(src, dest);
-    fs.unlinkSync(src);
+    // Nếu rename bị khóa (EBUSY do torrent client đang seed hoặc app đang mở)
+    // Ưu tiên tạo Hardlink để 0MB dung lượng thừa và video có ngay trong thư mục tập!
+    try {
+      execSync(`cmd.exe /c mklink /H "${dest}" "${src}"`, { stdio: 'ignore' });
+      try { fs.unlinkSync(src); } catch (e) {}
+    } catch (linkErr) {
+      // Fallback copy nếu khác ổ đĩa
+      try {
+        fs.copyFileSync(src, dest);
+        try { fs.unlinkSync(src); } catch (e) {}
+      } catch (copyErr) {
+        console.error(`[Lỗi di chuyển] Không thể chuyển ${src} sang ${dest}: ${copyErr.message}`);
+      }
+    }
   }
 }
 

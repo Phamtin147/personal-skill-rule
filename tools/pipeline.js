@@ -156,6 +156,14 @@ if (action === 'organize') {
     }
   }
 
+    // Tự động tổ chức cấu trúc thư mục chuẩn Fansub nếu video nằm ở thư mục gốc
+  const organizeScript = path.join(toolsDir, 'organize.js');
+  if (fs.existsSync(organizeScript)) {
+    try {
+      execSync(`node "${organizeScript}" "${dir}"`, { stdio: 'inherit' });
+    } catch (e) {}
+  }
+
   console.log(`\n[HOÀN TẤT TOÀN BỘ QUY TRÌNH!]`);
 } else if (action === 'scan') {
   const targetDir = targetArg ? path.resolve(targetArg) : path.resolve(toolsDir, '..', '..');
