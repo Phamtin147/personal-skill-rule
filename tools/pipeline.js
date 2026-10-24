@@ -145,6 +145,17 @@ if (action === 'organize') {
     console.log(`-> Nếu muốn tích hợp thẳng vào container MKV, chạy lại với cờ: --remux`);
   }
 
+    // Tự động sao lưu lên GitHub Subtitle Archive (https://github.com/Phamtin147/sub-film-vietnamese)
+  const syncScript = path.join(toolsDir, 'sync_repo.js');
+  if (fs.existsSync(syncScript)) {
+    try {
+      console.log(`\n=== BƯỚC 4: TỰ ĐỘNG SAO LƯU LÊN KHO GITHUB (SUBTITLE ARCHIVE) ===`);
+      execSync(`node "${syncScript}" "${dir}" "${base}"`, { stdio: 'inherit' });
+    } catch (e) {
+      console.log(`[Git Backup] Ghi chú: ${e.message}`);
+    }
+  }
+
   console.log(`\n[HOÀN TẤT TOÀN BỘ QUY TRÌNH!]`);
 } else if (action === 'scan') {
   const targetDir = targetArg ? path.resolve(targetArg) : path.resolve(toolsDir, '..', '..');
