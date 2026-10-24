@@ -23,7 +23,7 @@ metadata:
 
 ---
 
-## 6 BƯỚC CỐT LÕI CỦA PHƯƠNG PHÁP DỊCH ANIME CHUẨN XÁC
+## 7 BƯỚC CỐT LÕI CỦA PHƯƠNG PHÁP DỊCH ANIME CHUẨN XÁC
 
 ```
 [BƯỚC 0: TÁCH ÂM & BẬT/TẮT DOCKER TỰ ĐỘNG (Dành cho Video thô chưa có sub)]
@@ -45,6 +45,9 @@ metadata:
        │
        ▼
 [BƯỚC 6: XUẤT PHỤ ĐỀ CHUẨN FONT TIẾNG VIỆT & BẢO VỆ Ổ CỨNG (Segoe UI & Zero Disk Bloat)]
+       │
+       ▼
+[BƯỚC 7: TỰ ĐỘNG ĐỒNG BỘ & ĐẨY LÊN GITHUB REPOSITORY (Auto-Sync Subtitle Archive)]
 ```
 
 ### Bước 0: Xử lý Video thô & Tự động nhận diện phần cứng (Auto-Detect Engine)
@@ -161,4 +164,17 @@ metadata:
 >    - Không gian thư mục của người dùng luôn sạch sẽ, ngăn nắp và trực quan.
 > 4. **Tích hợp công cụ tự động hóa**:
 >    - Chạy `node tools/pipeline.js organize [duong_dan_thu_muc]` để tự động phân loại và gom toàn bộ file về đúng cấu trúc thư mục chuẩn mực.
+---
 
+## ☁️ BƯỚC 7: QUY TẮC ĐỒNG BỘ & LƯU TRỮ PHỤ ĐỀ TRÊN GITHUB (AUTO-PUSH SUBTITLE REPO)
+
+> [!IMPORTANT]
+> **TỰ ĐỘNG SAO LƯU TOÀN BỘ PHỤ ĐỀ LÊN GITHUB (ZERO-LOSS CLOUD BACKUP)**:
+> 1. **Repository lưu trữ**: `https://github.com/Phamtin147/sub-film-vietnamese` (Thư mục local: `F:\sub-film-vietnamese`).
+> 2. **Tự động đẩy khi hoàn tất (Auto-Push on Finish)**:
+>    - Sau khi hoàn thành bản dịch và bước QA (Bước 6), hệ thống (hoặc `node tools/sync_repo.js "<video_hoặc_thư_mục>"`) sẽ tự động sao chép các file phụ đề thành phẩm (`.vie.ass`, `.ass`, `.vie.srt`) cùng các file cẩm nang `*_TRANSLATION_GUIDE.md` vào kho lưu trữ `F:\sub-film-vietnamese`.
+>    - Tự động thực hiện `git add`, `git commit` và `git push origin main` để lưu trữ phụ đề an toàn trên đám mây.
+> 3. **Bảo vệ tuyệt đối: CẤM PUSH VIDEO LÊN GITHUB (.gitignore Rule)**:
+>    - Trong file `.gitignore` của repository phụ đề, BẮT BUỘC bỏ qua toàn bộ các định dạng file video:
+>      `*.mkv`, `*.mp4`, `*.avi`, `*.ts`, `*.m2ts`, `*.webm`, `*.flv`, `*.vob`, `*.wmv`, `*.mov`.
+>    - Tuyệt đối KHÔNG BAO GIỜ commit hoặc push file video lên GitHub để tránh làm phình dung lượng repository và vi phạm chính sách của GitHub.
