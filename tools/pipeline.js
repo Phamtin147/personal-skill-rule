@@ -158,7 +158,7 @@ if (action === 'organize') {
 
     // Tự động tổ chức cấu trúc thư mục chuẩn Fansub nếu video nằm ở thư mục gốc
   const organizeScript = path.join(toolsDir, 'organize.js');
-  if (fs.existsSync(organizeScript)) {
+  if (fs.existsSync(organizeScript) && !/Tập\s*\d+/i.test(dir)) {
     try {
       execSync(`node "${organizeScript}" "${dir}"`, { stdio: 'inherit' });
     } catch (e) {}

@@ -22,6 +22,11 @@ console.log(`  HỆ THỐNG PHÂN LOẠI & TỔ CHỨC THƯ MỤC ANIME FANSUB  
 console.log(`======================================================`);
 console.log(`Thư mục mục tiêu: ${targetDir}\n`);
 
+if (/Tập\s*\d+/i.test(path.basename(targetDir))) {
+  console.log(`[Bỏ qua] Thư mục đã ở cấp độ Tập: ${targetDir}`);
+  process.exit(0);
+}
+
 if (!fs.existsSync(targetDir)) {
   console.error(`Lỗi: Thư mục không tồn tại: ${targetDir}`);
   process.exit(1);
