@@ -55,6 +55,16 @@ function parseAnimeInfo(filename) {
     };
   }
 
+  // 2b. Kashita Maryoku
+  m = base.match(/Kashita\s*Maryoku.*?\s*-\s*(\d+)/i);
+  if (m) {
+    return {
+      series: 'Kashita Maryoku',
+      episode: `Tập ${m[1].padStart(2, '0')}`,
+      epNum: parseInt(m[1], 10)
+    };
+  }
+
   // 3. Even the Student Council Has Its Holes / Seitokai ni mo Ana wa Aru
   m = base.match(/Even\.the\.Student\.Council\.Has\.Its\.Holes.*?[sS](\d+)[eE](\d+)/i);
   if (m) {
