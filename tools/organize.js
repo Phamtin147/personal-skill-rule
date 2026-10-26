@@ -96,8 +96,8 @@ function parseAnimeInfo(filename) {
     };
   }
 
-  // 6. Generic anime pattern with potential hyphens in title: [Group] Name - With - Hyphens - 01 (1080p) [hash]
-  m = base.match(/^(?:\[.*?\]\s*)?(.*?)\s*-\s*(\d+)(?:\s*(?:\([^)]*\)|\[[^\]]*\]))*$/i);
+  // 6. Generic anime pattern with potential hyphens in title: [Group] Name - With - Hyphens - 01 V2 (1080p) [hash]
+  m = base.match(/^(?:\[.*?\]\s*)?(.*?)\s*-\s*(\d+)(?:\s*[vV]\d+)?(?:\s*(?:\([^)]*\)|\[[^\]]*\]))*$/i);
   if (m && m[1].trim().length > 1) {
     return {
       series: m[1].trim(),

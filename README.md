@@ -32,6 +32,8 @@ personal-skill-rule/
 ├── skills/                     # 🧠 BỘ NÃO: Kỹ năng chuyên gia cho AI Agent
 │   ├── anime-sub-specialist/
 │   │   └── SKILL.md            # Skill định nghĩa tư duy dịch thuật Fansub chuẩn xác
+│   ├── session-monitor/
+│   │   └── SKILL.md            # Giám sát & tiếp quản session chạy ngầm trên Antigravity
 │   ├── slides/
 │   │   └── SKILL.md            # Tạo slide HTML 16:9 scroll-snap & Markdown dàn ý chuẩn
 │   └── presentation-slides/
@@ -47,6 +49,7 @@ personal-skill-rule/
 │   ├── build_sub.js            # Tái tạo file .vie.ass và .vie.srt từ JSON bản dịch
 │   ├── remux.js                # Đóng gói phim MKV mới với sub Việt mặc định
 │   ├── pipeline.js             # Bộ điều phối toàn bộ chu trình (CLI)
+│   ├── session_monitor.js      # Giám sát & trích xuất log brain của các session Antigravity
 │   └── ffmpeg-helper.js        # Helper tự tìm ffmpeg có sẵn trên hệ thống
 ├── prompts/
 │   └── AI_TRANSLATION_PROMPT.md# Prompt mẫu chuẩn để copy-paste gửi cho bất kỳ AI nào
@@ -148,6 +151,26 @@ Bạn có thể chọn 1 trong 3 cách cài đặt sau tùy theo sở thích và
   2. Tải file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](notebooks/Google_Colab_Anime_Transcribe.ipynb) lên.
   3. Chọn menu **Runtime** ➔ **Change runtime type** ➔ Chọn **T4 GPU**.
   4. Bấm **Run All**, tải file video lên, chờ 2 phút và tải về file `_dialogues.json` để dịch!
+
+---
+
+## 🛰️ SKILL: SESSION MONITOR & TASK HANDOFF (`skills/session-monitor`)
+
+Giám sát thời gian thực các phiên làm việc đang chạy trên Antigravity qua nhật ký `transcript.jsonl` trong `~/.gemini/antigravity/brain/`:
+
+```bash
+# Kiểm tra phiên đang chạy gần nhất
+node tools/session_monitor.js status
+
+# Xem danh sách các phiên gần đây
+node tools/session_monitor.js list
+
+# Xem 10 bước log mới nhất của phiên đang hoạt động
+node tools/session_monitor.js tail 10
+
+# Kiểm tra phiên theo từ khóa hoặc ID
+node tools/session_monitor.js status linh-lung
+```
 
 ---
 
