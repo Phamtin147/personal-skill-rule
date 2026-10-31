@@ -36,10 +36,14 @@ personal-skill-rule/
 │   │   └── SKILL.md            # Giám sát & tiếp quản session chạy ngầm trên Antigravity
 │   ├── slides/
 │   │   └── SKILL.md            # Tạo slide HTML 16:9 scroll-snap & Markdown dàn ý chuẩn
-│   └── presentation-slides/
-│       └── SKILL.md            # Quy chuẩn thiết kế slide thuyết trình chuyên nghiệp
+│   ├── presentation-slides/
+│   │   └── SKILL.md            # Quy chuẩn thiết kế slide thuyết trình chuyên nghiệp
+│   └── graphify/
+│       └── SKILL.md            # Xây dựng Knowledge Graph codebase & giảm ~300x token cho AI Agent
 ├── rules/                      # 📜 LUẬT LỆ: Quy tắc dịch và ma trận xưng hô
-│   └── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Amtia(NOFACE)
+│   ├── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Amtia(NOFACE)
+│   ├── PRM_EXAM_PROTOCOL.md    # Quy trình thi thực hành PRM392/393 Flutter & Firebase
+│   └── GRAPHIFY_RULE.md        # Rule ưu tiên đọc Knowledge Graph trước khi quét codebase
 ├── templates/                  # 📝 MẪU CẨM NANG BỐI CẢNH
 │   └── SERIES_GUIDE_TEMPLATE.md# Template ma trận xưng hô cho phim mới
 ├── tools/                      # 🛠️ TAY CHÂN: Bộ công cụ xử lý phụ đề & video
@@ -170,6 +174,26 @@ node tools/session_monitor.js tail 10
 
 # Kiểm tra phiên theo từ khóa hoặc ID
 node tools/session_monitor.js status linh-lung
+```
+
+---
+
+## 🕸️ SKILL & RULE: GRAPHIFY KNOWLEDGE GRAPH (`skills/graphify` & `rules/GRAPHIFY_RULE.md`)
+
+Tự động biến toàn bộ codebase thành đồ thị tri thức (Knowledge Graph) trực quan kèm báo cáo `GRAPH_REPORT.md` và Wiki, giúp AI Agent nắm bắt toàn bộ kiến trúc ngay lập tức và **tiết kiệm ~250x – 300x lượng token** mỗi truy vấn:
+
+```bash
+# Cài đặt rule & skill cho Antigravity trong dự án bất kỳ
+graphify antigravity install
+
+# Cập nhật đồ thị AST và xuất HTML + Call-flow + Wiki
+graphify update . --force
+graphify export html
+graphify export callflow-html
+graphify export wiki
+
+# Đo lường mức giảm thiểu token
+graphify benchmark graphify-out/graph.json
 ```
 
 ---
