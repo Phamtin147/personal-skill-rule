@@ -31,7 +31,25 @@
     - Tự mình quan sát, soi kỹ ảnh chụp: kiểm tra khoảng cách (padding/margin), độ tương phản, responsive và thẩm mỹ tổng thể.
     - Nếu phát hiện điểm chưa hoàn hảo, chủ động sửa lại ngay trước khi bàn giao cho người dùng.
 
-## 5. Tiêu chuẩn Sao lưu & Đẩy lên Repo (100% Full Độc lập)
+## 5. Quy chuẩn Mermaid Diagram (Tuyệt đối không dùng Mindmap / Header lỗi)
+- **100% Bắt buộc chỉ dùng các loại Diagram được hỗ trợ**:
+  - `flowchart TD` / `flowchart LR` / `graph TD` / `graph LR` (Lưu đồ & đồ thị quan hệ)
+  - `sequenceDiagram` (Biểu đồ tuần tự tương tác)
+  - `stateDiagram-v2` hoặc `stateDiagram` (Biểu đồ trạng thái)
+  - `classDiagram` (Biểu đồ lớp)
+  - `erDiagram` (Sơ đồ cơ sở dữ liệu quan hệ thực thể ERD)
+  - `xychart-beta` (Biểu đồ dữ liệu trục XY)
+  - `pie` (Biểu đồ hình tròn)
+- **CẤM TUYỆT ĐỐI**:
+  - Nghiêm cấm dùng `mindmap`, `gitGraph`, `gantt`, `quadrantChart`, `journey`, `timeline`, `sankey-beta`, `block-beta`, `packet-beta`. Bất kỳ sơ đồ nào có các header này đều sẽ crash trình render markdown (`Failed to render Mermaid diagram: Invalid mermaid header`).
+- **Cách biểu diễn thay thế**:
+  - Vẽ sơ đồ tư duy (mindmap): Luôn dùng `flowchart TD` / `flowchart LR` dạng cây phân nhánh hoặc danh sách Markdown.
+  - Vẽ lộ trình / tiến độ (timeline / gantt): Dùng `flowchart LR` hoặc bảng Markdown.
+- **An toàn cú pháp**:
+  - Bọc tất cả nhãn node có ký tự đặc biệt trong nháy kép `id["Label (Chi tiết)"]`.
+  - Không nhúng HTML tags thô vào nhãn node.
+
+## 6. Tiêu chuẩn Sao lưu & Đẩy lên Repo (100% Full Độc lập)
 - Khi thực hiện push hoặc backup lên Git (như `personal-skill-rule`, `dotfiles`):
   - **100% bắt buộc sao lưu BẢN FULL trọn vẹn**: Giải quyết toàn bộ symlink thành file/thư mục thật (`copy dereference`).
   - Tuyệt đối không lưu dạng symlink rỗng hay trỏ link ra ngoài phòng trường hợp sau này tác giả xóa repo hoặc mất mạng thì vẫn có đủ 100% file để tải về và chạy độc lập.
