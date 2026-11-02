@@ -14,11 +14,16 @@
     - **`ui-ux-pro-max`** & **`ui-ux-designer`**: Tư duy trải nghiệm người dùng, phân cấp thị giác (visual hierarchy), UX copy rõ ràng, micro-interactions tinh tế.
     - **`design-taste-frontend` (tasteskill v2)**: Tuyệt đối không làm ra giao diện AI chung chung, vô hồn hay "slop". Áp dụng phong cách nghệ thuật sắc sảo, bảng màu chuẩn, kiểu chữ có chủ đích.
     - **`impeccable`**: Chuẩn mực thiết kế cao cấp nhất, hoàn thiện từng chi tiết từ spacing, token, responsive cho đến edge cases.
-  - **Quy chuẩn Icon chuyên nghiệp (Tuyệt đối không dùng Icon AI Slop)**:
-    - Khi dùng icon: **BẮT BUỘC LUÔN DÙNG các bộ icon chuẩn, sắc nét như `Radix Icons`**, **`Lucide Icons`**, **`Phosphor Icons`**, **`Tabler Icons`** hoặc **`Heroicons`** (thông qua package import hoặc trích xuất đúng chuẩn SVG gốc của thư viện).
-    - **NGHIÊM CẤM**: Tuyệt đối không tự bịa vẽ SVG icon méo mó (AI-generated icon slop) hay dùng emoji rẻ tiền để thay thế icon giao diện.
 
-## 3. Kiểm thử & Thẩm định Trực quan (Visual Inspection Loop)
+## 3. Quy chuẩn Icon Bắt buộc & Triệt tiêu Icon AI Slop (100% Tuyệt đối)
+- Khi chèn hoặc sử dụng icon trong UI, Frontend, Markdown, Documentation, hay Presentation:
+  - **Bước 1: Quét hệ thống icon của dự án trước**: Luôn kiểm tra `package.json`, thư mục `assets/icons/`, hoặc các import trong code xem dự án hiện tại đang dùng bộ icon nào (`@radix-ui/react-icons`, `lucide-react`, `phosphor-react`, `@tabler/icons-react`, `@heroicons/react`...). **Nếu dự án đã có bộ icon, 100% BẮT BUỘC PHẢI DÙNG ĐÚNG BỘ ICON ĐÓ** để giữ đồng bộ nguyên vẹn cho toàn bộ codebase.
+  - **Bước 2: Mặc định sang Radix Icons**: Nếu dự án chưa có hoặc cần thêm icon mới vào docs/markdown/UI: **100% BẮT BUỘC DÙNG `Radix Icons`** (hoặc SVG chuẩn lấy từ `assets/icons/` hay thư viện chính thức).
+  - **CẤM TUYỆT ĐỐI (Không có ngoại lệ)**:
+    - **Nghiêm cấm dùng icon do AI tự bịa / hallucinated SVG slop**: Không bao giờ để AI tự vẽ các SVG icon méo mó, không đồng nhất, hình glyph generic vô hồn.
+    - **Nghiêm cấm dùng Emoji làm icon UI**: Tuyệt đối không dùng emoji (như rockets, lightbulbs, brains, packages, etc.) để thay thế icon trong nút bấm, thanh điều hướng, bảng biểu, tài liệu kỹ thuật, hay tiêu đề markdown.
+
+## 4. Kiểm thử & Thẩm định Trực quan (Visual Inspection Loop)
 - Sau khi code xong:
   - Chạy test kiểm thử logic và build đầy đủ.
   - **Đối với các thay đổi liên quan đến UI/UX**:
@@ -26,7 +31,7 @@
     - Tự mình quan sát, soi kỹ ảnh chụp: kiểm tra khoảng cách (padding/margin), độ tương phản, responsive và thẩm mỹ tổng thể.
     - Nếu phát hiện điểm chưa hoàn hảo, chủ động sửa lại ngay trước khi bàn giao cho người dùng.
 
-## 4. Tiêu chuẩn Sao lưu & Đẩy lên Repo (100% Full Độc lập)
+## 5. Tiêu chuẩn Sao lưu & Đẩy lên Repo (100% Full Độc lập)
 - Khi thực hiện push hoặc backup lên Git (như `personal-skill-rule`, `dotfiles`):
   - **100% bắt buộc sao lưu BẢN FULL trọn vẹn**: Giải quyết toàn bộ symlink thành file/thư mục thật (`copy dereference`).
   - Tuyệt đối không lưu dạng symlink rỗng hay trỏ link ra ngoài phòng trường hợp sau này tác giả xóa repo hoặc mất mạng thì vẫn có đủ 100% file để tải về và chạy độc lập.

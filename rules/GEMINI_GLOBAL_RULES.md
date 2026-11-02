@@ -8,11 +8,14 @@
 - **Always Auto-Graphify First**: For ANY task (coding, tooling, scripts, configs, documentation, debugging, or analyzing), ALWAYS automatically generate or update `graphify` on the current root working directory (`folder root`) immediately as the first action. Do NOT wait for code-specific tasks or explicit user prompts.
 - **Navigate & Read via Graphify**: Always use the generated `graphify-out/` (knowledge graph, `GRAPH_REPORT.md`, community clusters, node paths) to deeply understand the workspace, locate files, trace dependencies, and read/inspect the system before and while making changes.
 
-# UI/UX & Frontend Standards (100% Mandatory)
+# UI/UX, Frontend & Icon Standards (100% Mandatory)
 - **High Taste & Craftsmanship**: Every frontend, web, mobile, or interface task must 100% apply the principles of `ui-ux-pro-max`, `design-taste-frontend` (tasteskill v2 anti-slop art direction), and `impeccable`. No generic, sloppy, or bland AI-generated interfaces. Enforce intentional typography, distinctive palettes, spatial rhythm, micro-interactions, and accessible contrast.
-- **Professional Icon Systems Only (Zero AI Icon Slop)**:
-  - When using icons in frontend, web, mobile, or presentations: **MUST ALWAYS use standard, high-quality icon sets** such as **Radix Icons**, **Lucide Icons**, **Phosphor Icons**, **Tabler Icons**, or **Heroicons** (via official package import or official SVG paths).
-  - **STRICTLY PROHIBITED**: Never use AI-generated/hallucinated ad-hoc SVG icon slop, generic AI glyphs, or emojis as UI icons.
+- **Strict Icon Ecosystem & Zero AI Slop (100% Enforced)**:
+  - **Phase 1 - Project Audit First**: Before adding or modifying any icon in UI, code, markdown, documentation, or slides, **ALWAYS inspect what icon system the current project is already using** (e.g. check `package.json`, `assets/icons/`, or imports like `@radix-ui/react-icons`, `lucide-react`, `phosphor-react`, `@tabler/icons-react`, `@heroicons/react`). If the project already uses a specific icon library, **100% MUST follow and use that exact icon system** for complete codebase consistency.
+  - **Phase 2 - Default to Radix Icons**: If the project does not specify an icon library, **100% MUST default to Radix Icons** (using official SVG files from `assets/icons/` or `@radix-ui/react-icons`), or clean professional vector libraries like Lucide / Phosphor.
+  - **STRICTLY PROHIBITED (Zero Tolerance)**:
+    - **Never use AI-generated/hallucinated ad-hoc SVG icon slop** (generic distorted shapes, unstandardized paths).
+    - **Never use emojis as UI icons** (no rockets, lightbulbs, brains, packages, etc.) in interfaces, buttons, menus, markdown headers, or technical documentation.
 - **Thorough Testing & Visual Inspection**:
   - After completing any code implementation, perform rigorous testing across edge cases.
   - For any UI/UX or frontend changes: **MUST capture rendered screenshots** (via browser snapshot, headless dev server, or visual validator tools), inspect the visual output directly, critique visual hierarchy, spacing, typography, and contrast, and proactively fix any flaws before concluding.

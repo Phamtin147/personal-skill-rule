@@ -37,8 +37,8 @@ Tiếng Anh chỉ có *I - You*, nhưng tiếng Việt có hệ thống đại t
 Khi gặp nhân vật phụ, người qua đường (Citizen, Mob, Soldier, Stranger, Mysterious voice), hoặc nhân vật mới mà:
 * Không có nguồn tra cứu / Wiki / Fandom để biết giới tính (nam hay nữ) hoặc tuổi tác.
 * Không rõ vai vế xã hội hoặc quan hệ chính xác giữa các bên.
-👉 **TUYỆT ĐỐI KHÔNG ĐOÁN MÒ**: Cấm tự ý gán ghép xưng hô thân mật kiểu gia đình/tình cảm (*anh - em*, *chú - cháu*, *chị - em*) khi chưa rõ giới tính hay tuổi tác thật sự.
-👉 **BẮT BUỘC DÙNG ĐẠI TỪ TRUNG TÍNH / CHUNG CHUNG PHÙ HỢP VỚI BỐI CẢNH TỨC THỜI CỦA PHIM**:
+-> **TUYỆT ĐỐI KHÔNG ĐOÁN MÒ**: Cấm tự ý gán ghép xưng hô thân mật kiểu gia đình/tình cảm (*anh - em*, *chú - cháu*, *chị - em*) khi chưa rõ giới tính hay tuổi tác thật sự.
+-> **BẮT BUỘC DÙNG ĐẠI TỪ TRUNG TÍNH / CHUNG CHUNG PHÙ HỢP VỚI BỐI CẢNH TỨC THỜI CỦA PHIM**:
 * **Bối cảnh Hiện đại, Đời thường, Học đường, Phiêu lưu đồng trang lứa (Casual / Modern / Peers)**:
   * Dùng: **`Tôi - Cậu`** (hoặc `Tớ - Cậu` / `Tôi - Bạn`).
   * Đây là cặp đại từ an toàn tuyệt đối, dùng được cho cả nam lẫn nữ, không sợ bị nhầm lẫn giới tính.
