@@ -1,203 +1,116 @@
-# 🎬 PERSONAL SKILL & RULE: AUTONOMOUS ANIME FANSUB STUDIO
-> **Tác giả**: [Amtia(NOFACE)](https://99)  
-> **Repository**: [https://145/personal-skill-rule](https://189/personal-skill-rule)  
-> **Định nghĩa**: Một hệ sinh thái toàn diện kết hợp giữa **AI Agent Skill (Bộ Não)** + **Speech-to-Text Engine (Tai Nghe)** + **Automated Remux Tools (Tay Chân)** để biến bất kỳ AI nào thành một **Studio Fansub Anime chuyên nghiệp 1-người**.
+# 🧠 PERSONAL SKILL, RULE & AGENTIC WORKSPACE HUB
+> **Tác giả**: [Amtia(NOFACE)](https://github.com/Phamtin147)  
+> **Repository**: [https://github.com/Phamtin147/personal-skill-rule](https://github.com/Phamtin147/personal-skill-rule)  
+> **Định nghĩa**: Hệ sinh thái toàn diện lưu trữ **81 Agent Skills độc lập (100% Standalone Full-Files)**, **Hệ thống Rule & Chuẩn mực Tự hành (Global Autonomous Rules)**, **Đồ thị tri thức Codebase (Graphify Knowledge Graph)**, và **Studio Phụ đề Anime Tự động hóa**.
 
 ---
 
-## 💡 ĐÂY CÒN GỌI LÀ MỘT "SKILL" NỮA KHÔNG?
+## 🌟 TỔNG QUAN HỆ THỐNG
 
-Câu trả lời là: **Nó đã vượt xa khái niệm của một Skill đơn thuần!**
-* **Một Skill thông thường**: Chỉ là một file hướng dẫn văn bản (Prompt/Rule) bảo AI phải hành xử thế nào. Nó có "Bộ não" nhưng bị liệt "Tay chân" và điếc "Tai mắt", hoàn toàn phụ thuộc vào việc người dùng phải chuẩn bị sẵn phụ đề tiếng Anh cho nó đọc.
-* **Hệ thống này của bạn là một *Autonomous AI Agentic Framework* (Hệ Thống AI Agent Tự Hành)**:
-  * **Tai Mắt (Perception Engine)**: `engine/transcribe.py` + `Demucs` + `Faster-Whisper` tự động nghe trực tiếp âm thanh từ video thô (Raw Anime), bóc tách nhạc nền và nhận diện lời thoại tiếng Nhật chuẩn xác.
-  * **Bộ Não (Reasoning & Skill)**: `skills/anime-sub-specialist/` + `rules/ANIME_SUB_RULES.md` giữ vai trò của Trưởng nhóm Fansub (QC Leader), nghiên cứu bối cảnh và điều phối ma trận xưng hô chéo (*Tôi - Cậu, Ta - Ngươi, Lão - Công chúa,...*).
-  * **Tay Chân (Action Tools & Docker)**: `tools/` + `docker/` tự động bóc tách, kiểm thử lệch timeline và đóng gói file phim mới với phụ đề Việt mặc định chỉ trong vài giây.
-
----
-
-## 📁 CẤU TRÚC HỆ SINH THÁI
+Kho lưu trữ này được xây dựng theo chuẩn **100% Full Standalone Backup**: Mọi skill, rule, asset, font chữ và công cụ đều được sao lưu trọn vẹn tệp tin thực tế (không dùng symlink rỗng hay liên kết ngoài dễ mất), đảm bảo hệ thống có thể clone về và vận hành độc lập 100% trên bất kỳ máy tính mới nào.
 
 ```text
 personal-skill-rule/
-├── engine/                     # 🎧 TAI MẮT: Engine chép lời thoại từ âm thanh video
-│   ├── transcribe.py           # Core script: Tách nhạc nền (Demucs) + Nhận diện giọng nói (Faster-Whisper)
-│   └── requirements.txt        # Thư viện PyTorch, Faster-Whisper, Demucs
-├── docker/                     # 🐳 MÔI TRƯỜNG DOCKER CHẠY ỔN ĐỊNH 100%
-│   └── Dockerfile              # Image Docker tích hợp sẵn GPU CUDA, FFmpeg, Whisper
-├── docker-compose.yml          # Chạy Docker 1 lệnh đơn giản: docker compose run
-├── notebooks/                  # ☁️ CHẠY MIỄN PHÍ TRÊN CLOUD CHO MÁY YẾU
-│   └── Google_Colab_Anime_Transcribe.ipynb # Colab 1-click dùng GPU T4 miễn phí của Google
-├── run_transcribe.bat          # ⚡ Script 1-click kéo thả video trên Windows
-├── skills/                     # 🧠 BỘ NÃO: Kỹ năng chuyên gia cho AI Agent
-│   ├── anime-sub-specialist/
-│   │   └── SKILL.md            # Skill định nghĩa tư duy dịch thuật Fansub chuẩn xác
-│   ├── session-monitor/
-│   │   └── SKILL.md            # Giám sát & tiếp quản session chạy ngầm trên Antigravity
-│   ├── slides/
-│   │   └── SKILL.md            # Tạo slide HTML 16:9 scroll-snap & Markdown dàn ý chuẩn
-│   ├── presentation-slides/
-│   │   └── SKILL.md            # Quy chuẩn thiết kế slide thuyết trình chuyên nghiệp
-│   └── graphify/
-│       └── SKILL.md            # Xây dựng Knowledge Graph codebase & giảm ~300x token cho AI Agent
-├── rules/                      # 📜 LUẬT LỆ: Quy tắc dịch và ma trận xưng hô
-│   ├── ANIME_SUB_RULES.md      # Quy tắc đại từ, văn phong anime, và ghi công Amtia(NOFACE)
-│   ├── PRM_EXAM_PROTOCOL.md    # Quy trình thi thực hành PRM392/393 Flutter & Firebase
-│   └── GRAPHIFY_RULE.md        # Rule ưu tiên đọc Knowledge Graph trước khi quét codebase
-├── templates/                  # 📝 MẪU CẨM NANG BỐI CẢNH
-│   └── SERIES_GUIDE_TEMPLATE.md# Template ma trận xưng hô cho phim mới
-├── tools/                      # 🛠️ TAY CHÂN: Bộ công cụ xử lý phụ đề & video
-│   ├── extract.js              # Trích xuất track subtitle từ MKV/MP4
-│   ├── parse_dialogues.js      # Bóc tách lời thoại thành file JSON cấu trúc cho AI
-│   ├── verify_sub.js           # Kiểm thử toàn vẹn (lệch dòng, lỗi thẻ ASS, \N)
-│   ├── build_sub.js            # Tái tạo file .vie.ass và .vie.srt từ JSON bản dịch
-│   ├── remux.js                # Đóng gói phim MKV mới với sub Việt mặc định
-│   ├── pipeline.js             # Bộ điều phối toàn bộ chu trình (CLI)
-│   ├── session_monitor.js      # Giám sát & trích xuất log brain của các session Antigravity
-│   └── ffmpeg-helper.js        # Helper tự tìm ffmpeg có sẵn trên hệ thống
-├── prompts/
-│   └── AI_TRANSLATION_PROMPT.md# Prompt mẫu chuẩn để copy-paste gửi cho bất kỳ AI nào
-├── examples/
-│   └── SHUIRO_NO_KAMEN_TRANSLATION_GUIDE.md # Ví dụ mẫu thực tế đã thực hiện
-└── package.json
+├── skills/                     # 🧠 KHO 81 SKILL TINH TUYỂN (BẢN FULL ĐỘC LẬP)
+│   ├── agent-reach/            # Cào và tìm kiếm thông tin 14+ nền tảng (X, Reddit, Bilibili, YouTube, GitHub...)
+│   ├── search-specialist/      # Nghiên cứu web nâng cao, đối soát chéo và xác thực thông tin
+│   ├── ui-ux-pro-max/          # Trí tuệ thiết kế giao diện UI/UX Web, Mobile, Desktop
+│   ├── design-taste-frontend/  # Tasteskill v2 chống giao diện AI vô hồn (anti-slop art direction)
+│   ├── impeccable/             # Chuẩn mực thủ công cao cấp nhất (spacing, typography, edge cases)
+│   ├── ui-styling/             # shadcn/ui, Radix UI, Tailwind CSS utilities
+│   ├── ui-visual-validator/    # Kiểm thử giao diện trực quan, soi pixel và sai lệch thiết kế
+│   ├── slides/                 # Tạo slide thuyết trình HTML 16:9 scroll-snap độc lập
+│   ├── html-diagram/           # Vẽ sơ đồ kiến trúc full-screen SVG tương tác cao (html-effectiveness)
+│   ├── graphify/               # Xây dựng đồ thị tri thức codebase & giảm 300x token context
+│   ├── python-pro/             # Lập trình Python 3.12+, async, typing và kiến trúc chuẩn
+│   ├── rust-pro/               # Rust idiomatic, Tokio async và an toàn bộ nhớ
+│   ├── golang-pro/             # Go microservices, goroutines và concurrency patterns
+│   ├── typescript-pro/         # TypeScript hệ type nâng cao, generics và clean architecture
+│   ├── kubernetes-architect/   # Kiến trúc K8s, GitOps, Helm và Service Mesh
+│   ├── anime-sub-specialist/   # Chuyên gia dịch thuật phụ đề Anime chuẩn văn phong Fansub Việt
+│   ├── prm-flutter-firebase/   # Quy chuẩn hoàn thiện bài thi thực hành PRM Flutter + Firebase
+│   └── ... (đầy đủ 81 skills chuyên sâu mọi lĩnh vực)
+├── rules/                      # 📜 BỘ QUY TẮC TOÀN CỤC (GLOBAL AUTONOMOUS RULES)
+│   ├── GEMINI_GLOBAL_RULES.md  # Quy tắc tối cao: Zero Option Modals, Full Automation, Auto-Graphify
+│   ├── code_ui_craft_standard.md # Chuẩn mực đọc code qua Graphify, UI/UX Craft và Soi ảnh chụp
+│   ├── ANIME_SUB_RULES.md      # Quy tắc dịch thuật, ma trận xưng hô chéo anime và ghi công
+│   ├── PRM_EXAM_PROTOCOL.md    # Quy trình làm bài và nộp bài thi thực hành PRM392/393
+│   └── creative_ui_scrollytelling.md # Chuẩn mực web cuộn scrollytelling Awwwards (GSAP + WebGL)
+├── graphify-out/               # 🕸️ ĐỒ THỊ TRI THỨC CODEBASE TOÀN DIỆN
+│   ├── graph.json              # 2.964 nodes, 6.096 edges, 173 cụm kiến trúc AST
+│   └── manifest.json           # Danh mục định danh quan hệ toàn bộ kho lưu trữ
+├── engine/                     # 🎧 TAI MẮT: Bóc tách âm thanh và chép lời thoại Anime
+│   ├── transcribe.py           # Core script: Demucs (tách nhạc) + Faster-Whisper (nhận diện giọng)
+│   └── requirements.txt        # Danh sách thư viện PyTorch, CUDA, Whisper
+├── docker/                     # 🐳 Môi trường Docker GPU CUDA cho tác vụ nặng
+├── notebooks/                  # ☁️ Colab 1-click dùng GPU T4 miễn phí chạy transcribe
+├── tools/                      # 🛠️ Bộ công cụ CLI xử lý phụ đề, remux và session monitor
+└── prompts/ & templates/       # Mẫu prompt dịch thuật và cẩm nang bối cảnh phim
 ```
 
 ---
 
-## 🚀 2 CHẾ ĐỘ SỬ DỤNG
+## 📜 CÁC QUY TẮC CỐT LÕI (SYSTEM RULES ENFORCEMENT)
 
-### 🎯 CHẾ ĐỘ 1: XỬ LÝ PHIM THÔ CHƯA CÓ PHỤ ĐỀ (RAW ANIME ➔ VIETSUB)
+Toàn bộ các phiên làm việc của AI Agent kết nối với kho lưu trữ này đều tuân thủ nghiêm ngặt 5 trụ cột:
 
-> Dành cho phim vừa chiếu ở Nhật Bản hoặc video không có sẵn phụ đề tiếng Anh.
-
-#### Cách 1: Chạy qua Docker (Ổn định nhất trên máy có GPU)
-```bash
-# Khởi động và chạy qua docker-compose
-docker compose run --rm transcribe "/videos/ten_phim_raw.mkv" --model large-v3 --separate
-```
-
-#### Cách 2: Kéo thả trên Windows (`run_transcribe.bat`)
-Chỉ cần **kéo thả file video** thả vào biểu tượng file `run_transcribe.bat`. Script sẽ tự động gọi Docker hoặc Python để xuất ra file `_dialogues.json`.
-
-#### Cách 3: Chạy trên Google Colab (0đ - Dành cho máy không có GPU)
-Mở file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](notebooks/Google_Colab_Anime_Transcribe.ipynb) trên Google Colab, bấm Run All để mượn GPU T4 miễn phí của Google tách âm và xuất file `_dialogues.json` về máy.
-
----
-
-### 🎯 CHẾ ĐỘ 2: HOÀN THIỆN & XUẤT SUB BẢO VỆ Ổ CỨNG (ZERO DISK BLOAT)
-
-> 🛡️ **Tối ưu dung lượng 100%**: Tuyệt đối không sinh ra file video copy trùng lặp làm tốn dung lượng ổ đĩa hay lỗi torrent seeding trên qBittorrent.
-
-#### 1. Mặc định (Khuyến nghị số 1 - Softsub External):
-```bash
-node tools/pipeline.js finish "F:\anime\video.mkv"
-```
-* **Kết quả**: Tạo file `video.vie.ass`, `video.ass` và `video.vie.srt` ngay cạnh file video gốc.
-* **Dung lượng**: Chỉ tốn **~30KB - 50KB** (0MB video phát sinh).
-* **Trình phát**: Mở `video.mkv` trên **MPC-HC** hoặc **VLC** sẽ tự động nạp phụ đề Việt ngay lập tức!
-* **Torrent**: File gốc nguyên vẹn 100%, tiếp tục seed torrent bình thường.
-
-#### 2. Đóng gói MKV 1 File duy nhất (In-Place Replace):
-```bash
-node tools/pipeline.js finish "F:\anime\video.mkv" --remux
-# hoặc gọi trực tiếp công cụ remux:
-node tools/remux.js "F:\anime\video.mkv" "F:\anime\video.vie.ass" --replace
-```
-* **Cơ chế an toàn**: Remux ra file tạm, kiểm tra toàn vẹn, sau đó thay thế file gốc cũ.
-* **Kết quả**: Thư mục luôn **chỉ có 1 file video duy nhất**, không bị nhân đôi dung lượng ổ cứng!
-
-#### 3. Xuất file bản sao riêng biệt (`--copy`):
-```bash
-node tools/pipeline.js finish "F:\anime\video.mkv" --remux --copy
-```
-* Chỉ dùng khi bạn muốn tạo riêng một file `[Tên_phim]_vi.mkv` độc lập và giữ nguyên file gốc ban đầu.
+1. **Zero Option Modals & Full Automation**:
+   - Nghiêm cấm hiển thị hộp thoại trắc nghiệm bắt người dùng chọn lựa. AI chủ động đưa ra giải pháp kỹ thuật tối ưu nhất và thực thi từ A đến Z.
+2. **Auto-Graphify First (100% Bắt buộc cho mọi tác vụ)**:
+   - Khi làm việc tại bất kỳ thư mục gốc nào (dù là dự án lớn hay viết script nhỏ), hành động đầu tiên **luôn luôn là tự động chạy `graphify`** để tạo hoặc cập nhật đồ thị tri thức `graphify-out/`.
+   - Đọc hiểu cấu trúc, tìm kiếm file và phân tích quan hệ phụ thuộc hoàn toàn thông qua Graphify.
+3. **Tiêu chuẩn UI/UX & Nghệ thuật Frontend (Anti-Slop)**:
+   - 100% tác vụ giao diện phải áp dụng tư duy từ `ui-ux-pro-max`, `design-taste-frontend` (tasteskill v2) và `impeccable`.
+   - **Quy chuẩn Icon Chuyên nghiệp**: Bắt buộc chỉ sử dụng các bộ icon chuẩn như **Radix Icons**, **Lucide Icons**, **Phosphor Icons**, **Tabler Icons**, hoặc **Heroicons**. Tuyệt đối không dùng icon SVG tự chế méo mó (AI slop) hay emoji giao diện.
+4. **Kiểm thử & Soi ảnh trực quan (Visual Inspection Loop)**:
+   - Sau khi hoàn thành code giao diện, bắt buộc phải chụp ảnh màn hình (screenshot render thực tế qua browser/công cụ kiểm thử) để tự kiểm tra độ tương phản, khoảng cách, font chữ và responsive trước khi kết thúc task.
+5. **Sao lưu Toàn vẹn (100% Full Standalone Backup)**:
+   - Khi push hoặc backup lên Git, bắt buộc dereference toàn bộ symlink thành file và thư mục thật. Không đẩy liên kết rỗng phòng trường hợp nguồn ngoài bị xóa.
 
 ---
 
-## 🛠️ HƯỚNG DẪN CÀI ĐẶT CHI TIẾT TỪ A-Z (SETUP GUIDE)
+## 🧠 DANH MỤC CÁC SKILL NỔI BẬT
 
-Bạn có thể chọn 1 trong 3 cách cài đặt sau tùy theo sở thích và cấu hình máy:
+### 1. 🔍 Tìm kiếm, Cào dữ liệu & RAG
+- **`agent-reach`**: Đọc và tìm kiếm thông tin chuyên sâu trên 14+ nền tảng có tường lửa/đăng nhập (X/Twitter, Reddit, Bilibili, YouTube, GitHub, V2EX, Xueqiu, LinkedIn, BOSS Zhipin...).
+- **`search-specialist`**: Bậc thầy tra cứu thông tin đa nguồn, tối ưu toán tử tìm kiếm và đối soát tính xác thực.
+- **`rag-implementation` & `hybrid-search-implementation`**: Kiến trúc tìm kiếm ngữ nghĩa kết hợp vector database và BM25 lexical search.
 
-### 🟢 LỰA CHỌN 1: CÀI ĐẶT BẰNG DOCKER (KHUYÊN DÙNG - CỰC KỲ ỔN ĐỊNH)
-* **Ưu điểm**: Không bao giờ lo xung đột thư viện Python, chạy được cả GPU CUDA, tự động bật khi dùng và tắt sạch khi xong để không tốn RAM.
-* **Các bước chuẩn bị**:
-  1. Tải và cài đặt [Docker Desktop cho Windows](https://www.docker.com/products/docker-desktop/).
-  2. Bật tính năng **WSL 2 backend** trong Docker Settings.
-  3. (Nếu có card NVIDIA): Cài đặt [NVIDIA Container Toolkit](https://docs.nvidia.com/datacenter/cloud-native/container-toolkit/latest/install-guide.html) để Docker nhận card đồ họa.
-  4. Mở PowerShell tại thư mục dự án và build image:
-     ```powershell
-     docker compose build
-     ```
-  5. **Cơ chế tự động**: Khi chạy lệnh dịch, hệ thống sẽ tự động bật container để chép lời, và ngay khi hoàn tất sẽ tự chạy `docker compose down` để giải phóng 100% tài nguyên RAM/VRAM cho máy tính của bạn!
+### 2. 🎨 Thiết kế, Đồ họa & UI/UX
+- **`ui-ux-pro-max` & `ui-ux-designer`**: Bố cục, phân cấp thị giác, token thiết kế và trải nghiệm người dùng cao cấp.
+- **`design-taste-frontend` (tasteskill v2)**: Định hình phong cách nghệ thuật độc đáo dựa trên 247 curated design galleries danh tiếng.
+- **`impeccable`**: Chuẩn mực hoàn thiện giao diện đỉnh cao, triệt tiêu mọi lỗi layout và edge cases.
+- **`slides`**: Tạo slide thuyết trình HTML 16:9 scroll-snap tự động, hỗ trợ Dark/Light mode, slide counter và macOS code blocks.
+- **`html-diagram`**: Tạo sơ đồ kiến trúc full-screen SVG tương tác cao dựa trên bộ thư viện `html-effectiveness`.
 
----
+### 3. 💻 Ngôn ngữ Lập trình & Frameworks (Pro Tiers)
+- **Python / APIs**: `python-pro`, `fastapi-pro`, `django-pro`, `uv-package-manager`.
+- **TypeScript / Modern Web**: `typescript-pro`, `javascript-pro`, `nextjs-app-router-patterns`, `react-modernization`, `react-state-management`, `tailwind-design-system`.
+- **Systems & Cloud-Native**: `rust-pro`, `rust-async-patterns`, `golang-pro`, `go-concurrency-patterns`, `cpp-pro`, `c-pro`, `bash-pro`, `posix-shell-pro`.
+- **Mobile Development**: `flutter-expert`, `react-native-architecture`, `mobile-developer`, `frontend-mobile-development-component-scaffold`.
 
-### 🟡 LỰA CHỌN 2: CÀI ĐẶT PYTHON NATIVE TRỰC TIẾP TRÊN WINDOWS
-* **Ưu điểm**: Chạy trực tiếp không cần ảo hóa Docker.
-* **Các bước thực hiện**:
-  1. Tải và cài đặt **Python 3.10 hoặc 3.11** (nhớ tích chọn *Add Python to PATH*).
-  2. Cài đặt PyTorch hỗ trợ GPU CUDA:
-     ```powershell
-     pip install torch torchaudio --index-url https://download.pytorch.org/whl/cu121
-     ```
-  3. Cài đặt các thư viện lõi của engine:
-     ```powershell
-     pip install -r engine/requirements.txt
-     ```
-  4. Cài đặt [FFmpeg](https://ffmpeg.org/download.html) và thêm vào biến môi trường PATH.
+### 4. 🏗️ Kiến trúc, DevOps & Database
+- **Kiến trúc**: `architecture-patterns`, `microservices-patterns`, `api-design-principles`, `cqrs-implementation`, `c4-architecture-c4-architecture`.
+- **DevOps & Hạ tầng**: `kubernetes-architect`, `k8s-manifest-generator`, `k8s-security-policies`, `github-actions-templates`, `terraform-module-library`.
+- **Cơ sở dữ liệu**: `postgresql`, `sql-pro`, `vector-database-engineer`, `database-migrations-sql-migrations`.
+- **Kiểm thử & Debug**: `debugger`, `error-detective`, `test-automator`, `tdd-workflows-tdd-cycle`, `e2e-testing-patterns`, `unit-testing-test-generate`, `prometheus-configuration`, `grafana-dashboards`.
 
 ---
 
-### 🔵 LỰA CHỌN 3: DÙNG GOOGLE COLAB (0 CẦN CÀI ĐẶT TRÊN MÁY - MIỄN PHÍ 100%)
-* **Ưu điểm**: Máy yếu, laptop văn phòng không có card đồ họa vẫn "quất" mượt mà nhờ mượn card T4 GPU miễn phí của Google trên trình duyệt.
-* **Các bước thực hiện**:
-  1. Đăng nhập [Google Colab](https://colab.research.google.com/).
-  2. Tải file [`notebooks/Google_Colab_Anime_Transcribe.ipynb`](notebooks/Google_Colab_Anime_Transcribe.ipynb) lên.
-  3. Chọn menu **Runtime** ➔ **Change runtime type** ➔ Chọn **T4 GPU**.
-  4. Bấm **Run All**, tải file video lên, chờ 2 phút và tải về file `_dialogues.json` để dịch!
+## 🎬 TÍCH HỢP STUDIO PHỤ ĐỀ ANIME TỰ ĐỘNG HÓA
 
----
-
-## 🛰️ SKILL: SESSION MONITOR & TASK HANDOFF (`skills/session-monitor`)
-
-Giám sát thời gian thực các phiên làm việc đang chạy trên Antigravity qua nhật ký `transcript.jsonl` trong `~/.gemini/antigravity/brain/`:
+Hệ thống tích hợp trọn gói pipeline chuyển đổi từ Anime Raw sang phụ đề tiếng Việt chất lượng cao:
 
 ```bash
-# Kiểm tra phiên đang chạy gần nhất
-node tools/session_monitor.js status
+# 1. Bóc tách âm thanh & nhận diện lời thoại tự động bằng Whisper GPU
+docker compose run --rm transcribe "/videos/anime_raw.mkv" --model large-v3 --separate
 
-# Xem danh sách các phiên gần đây
-node tools/session_monitor.js list
-
-# Xem 10 bước log mới nhất của phiên đang hoạt động
-node tools/session_monitor.js tail 10
-
-# Kiểm tra phiên theo từ khóa hoặc ID
-node tools/session_monitor.js status linh-lung
+# 2. Hoàn thiện phụ đề chuẩn Fansub (Zero Disk Bloat - không tốn dung lượng ổ cứng)
+node tools/pipeline.js finish "/videos/anime_raw.mkv"
 ```
 
 ---
 
-## 🕸️ SKILL & RULE: GRAPHIFY KNOWLEDGE GRAPH (`skills/graphify` & `rules/GRAPHIFY_RULE.md`)
-
-Tự động biến toàn bộ codebase thành đồ thị tri thức (Knowledge Graph) trực quan kèm báo cáo `GRAPH_REPORT.md` và Wiki, giúp AI Agent nắm bắt toàn bộ kiến trúc ngay lập tức và **tiết kiệm ~250x – 300x lượng token** mỗi truy vấn:
-
-```bash
-# Cài đặt rule & skill cho Antigravity trong dự án bất kỳ
-graphify antigravity install
-
-# Cập nhật đồ thị AST và xuất HTML + Call-flow + Wiki
-graphify update . --force
-graphify export html
-graphify export callflow-html
-graphify export wiki
-
-# Đo lường mức giảm thiểu token
-graphify benchmark graphify-out/graph.json
-```
-
----
-
-## 🏆 BẢN QUYỀN & GHI CÔNG (CREDITS)
-Hệ thống được thiết lập mặc định ghi công người tạo: **Amtia(NOFACE)** trên mọi bản dịch phụ đề, file phim remux và mã nguồn.
-
+## 🏆 BẢN QUYỀN & GHI CÔNG
+Toàn bộ hệ thống kỹ năng, quy tắc và công cụ thuộc sở hữu của: **[Amtia(NOFACE)](https://github.com/Phamtin147)**.
+Mọi mã nguồn và sản phẩm đầu ra từ hệ thống được bảo lưu bản quyền và định danh tác giả chính thức.

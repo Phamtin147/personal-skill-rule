@@ -3503,14 +3503,19 @@
       "degree": 38
     },
     {
+      "id": "skills_ui_styling_scripts_shadcn_add_shadcninstaller",
+      "label": "ShadcnInstaller",
+      "degree": 34
+    },
+    {
       "id": "skills_impeccable_scripts_live_browser_connectsse",
       "label": "connectSSE()",
       "degree": 34
     },
     {
-      "id": "skills_ui_styling_scripts_shadcn_add_shadcninstaller",
-      "label": "ShadcnInstaller",
-      "degree": 34
+      "id": "skills_impeccable_scripts_live_browser_resumesession",
+      "label": "resumeSession()",
+      "degree": 33
     },
     {
       "id": "skills_impeccable_scripts_live_browser_setlivestate",
@@ -3520,11 +3525,6 @@
     {
       "id": "skills_impeccable_scripts_live_browser_showtoast",
       "label": "showToast()",
-      "degree": 33
-    },
-    {
-      "id": "skills_impeccable_scripts_live_browser_resumesession",
-      "label": "resumeSession()",
       "degree": 33
     },
     {
@@ -3540,58 +3540,58 @@
   ],
   "surprises": [
     {
-      "source": "enableInlineEdit()",
-      "target": "own()",
+      "source": "TestTailwindConfigGenerator",
+      "target": "TailwindConfigGenerator",
       "source_files": [
-        "skills/impeccable/scripts/live-browser.js",
-        "skills/impeccable/scripts/live-browser-dom.js"
+        "skills/ui-styling/scripts/tests/test_tailwind_config_gen.py",
+        "skills/ui-styling/scripts/tailwind_config_gen.py"
       ],
       "confidence": "INFERRED",
-      "relation": "indirect_call",
+      "relation": "uses",
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "removalOriginalText()",
-      "target": "own()",
+      "source": "TestReasoningContract",
+      "target": "DesignSystemGenerator",
       "source_files": [
-        "skills/impeccable/scripts/live-browser.js",
-        "skills/impeccable/scripts/live-browser-dom.js"
+        "skills/ui-ux-pro-max/scripts/tests/test_data_contracts.py",
+        "skills/ui-ux-pro-max/scripts/design_system.py"
       ],
       "confidence": "INFERRED",
-      "relation": "indirect_call",
+      "relation": "uses",
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "layoutFlowChildren()",
-      "target": "pickable()",
+      "source": "TestEndToEndCoherence",
+      "target": "DesignSystemGenerator",
       "source_files": [
-        "skills/impeccable/scripts/live-browser.js",
-        "skills/impeccable/scripts/live-browser-dom.js"
+        "skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+        "skills/ui-ux-pro-max/scripts/design_system.py"
       ],
       "confidence": "INFERRED",
-      "relation": "indirect_call",
+      "relation": "uses",
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "init()",
-      "target": "stopFocusOutIntoChrome()",
+      "source": "TestLightResultOutputCoherence",
+      "target": "DesignSystemGenerator",
       "source_files": [
-        "skills/impeccable/scripts/live-browser.js",
-        "skills/impeccable/scripts/live-browser-dom.js"
+        "skills/ui-ux-pro-max/scripts/tests/test_design_system_mode.py",
+        "skills/ui-ux-pro-max/scripts/design_system.py"
       ],
       "confidence": "INFERRED",
-      "relation": "indirect_call",
+      "relation": "uses",
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     },
     {
-      "source": "teardown()",
-      "target": "stopFocusOutIntoChrome()",
+      "source": "TestGeneratedConfigIsValidJs",
+      "target": "TailwindConfigGenerator",
       "source_files": [
-        "skills/impeccable/scripts/live-browser.js",
-        "skills/impeccable/scripts/live-browser-dom.js"
+        "skills/ui-styling/scripts/tests/test_tailwind_config_gen.py",
+        "skills/ui-styling/scripts/tailwind_config_gen.py"
       ],
       "confidence": "INFERRED",
-      "relation": "indirect_call",
+      "relation": "uses",
       "why": "inferred connection - not explicitly stated in source; bridges separate communities"
     }
   ],
