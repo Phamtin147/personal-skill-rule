@@ -1,0 +1,231 @@
+{
+  "communities": {
+    "0": [
+      "ref_child_process",
+      "ref_path",
+      "tools_build_sub",
+      "tools_build_sub_execsync",
+      "tools_build_sub_fidx",
+      "tools_build_sub_fs",
+      "tools_build_sub_lines",
+      "tools_build_sub_newlines",
+      "tools_build_sub_path",
+      "tools_build_sub_rawass",
+      "tools_build_sub_transdata",
+      "tools_build_sub_translations",
+      "tools_extract",
+      "tools_extract_execsync",
+      "tools_extract_ffmpeg",
+      "tools_extract_fs",
+      "tools_extract_path",
+      "tools_ffmpeg_helper",
+      "tools_ffmpeg_helper_execsync",
+      "tools_ffmpeg_helper_fs",
+      "tools_ffmpeg_helper_getffmpegpath",
+      "tools_ffmpeg_helper_path"
+    ],
+    "1": [
+      "argparse",
+      "engine_transcribe",
+      "engine_transcribe_extract_audio",
+      "engine_transcribe_format_timestamp_ass",
+      "engine_transcribe_format_timestamp_srt",
+      "engine_transcribe_main",
+      "engine_transcribe_rationale_3",
+      "engine_transcribe_rationale_44",
+      "engine_transcribe_rationale_55",
+      "engine_transcribe_rationale_66",
+      "engine_transcribe_rationale_76",
+      "engine_transcribe_separate_vocals",
+      "json",
+      "os",
+      "path",
+      "pathlib",
+      "shutil",
+      "subprocess",
+      "sys"
+    ],
+    "2": [
+      "package",
+      "package_author",
+      "package_dependencies",
+      "package_dependencies_ffmpeg_static",
+      "package_description",
+      "package_keywords",
+      "package_license",
+      "package_main",
+      "package_name",
+      "package_scripts",
+      "package_scripts_build",
+      "package_scripts_extract",
+      "package_scripts_parse",
+      "package_scripts_pipeline",
+      "package_scripts_remux",
+      "package_scripts_verify",
+      "package_version",
+      "ref_ffmpeg_static"
+    ],
+    "3": [
+      "docker_compose",
+      "docker_compose_build_context",
+      "docker_compose_build_dockerfile",
+      "docker_compose_deploy_resources",
+      "docker_compose_reservations_devices",
+      "docker_compose_resources_reservations",
+      "docker_compose_services",
+      "docker_compose_services_transcribe",
+      "docker_compose_transcribe_build",
+      "docker_compose_transcribe_container_name",
+      "docker_compose_transcribe_deploy",
+      "docker_compose_transcribe_environment",
+      "docker_compose_transcribe_image",
+      "docker_compose_transcribe_volumes",
+      "docker_compose_version",
+      "docker_compose_volumes",
+      "docker_compose_volumes_huggingface_cache"
+    ],
+    "4": [
+      "ref_fs",
+      "tools_pipeline",
+      "tools_pipeline_execsync",
+      "tools_pipeline_findvideos",
+      "tools_pipeline_fs",
+      "tools_pipeline_getcachepath",
+      "tools_pipeline_path",
+      "tools_verify_sub",
+      "tools_verify_sub_assstyles",
+      "tools_verify_sub_fs",
+      "tools_verify_sub_origdata",
+      "tools_verify_sub_transtexts"
+    ],
+    "5": [
+      "ref_os",
+      "tools_session_monitor",
+      "tools_session_monitor_brain_dir",
+      "tools_session_monitor_convs",
+      "tools_session_monitor_currentid",
+      "tools_session_monitor_fs",
+      "tools_session_monitor_getallconversations",
+      "tools_session_monitor_getconversationdetails",
+      "tools_session_monitor_getcurrentconvid",
+      "tools_session_monitor_os",
+      "tools_session_monitor_parselaststeps",
+      "tools_session_monitor_path"
+    ],
+    "6": [
+      "tools_remux",
+      "tools_remux_args",
+      "tools_remux_base",
+      "tools_remux_dir",
+      "tools_remux_execsync",
+      "tools_remux_ext",
+      "tools_remux_ffmpeg",
+      "tools_remux_fs",
+      "tools_remux_iscopy",
+      "tools_remux_oidx",
+      "tools_remux_path",
+      "tools_remux_tempoutputfile"
+    ],
+    "7": [
+      "tools_organize",
+      "tools_organize_allfiles",
+      "tools_organize_execsync",
+      "tools_organize_fs",
+      "tools_organize_guidemap",
+      "tools_organize_organizedepisodes",
+      "tools_organize_parseanimeinfo",
+      "tools_organize_path",
+      "tools_organize_safemove",
+      "tools_organize_videoexts",
+      "tools_organize_videofiles"
+    ],
+    "8": [
+      "tools_parse_dialogues",
+      "tools_parse_dialogues_content",
+      "tools_parse_dialogues_dialogues",
+      "tools_parse_dialogues_fs",
+      "tools_parse_dialogues_lines",
+      "tools_parse_dialogues_path",
+      "tools_parse_dialogues_speakerscount",
+      "tools_parse_dialogues_summary"
+    ],
+    "9": [
+      "tools_sync_repo",
+      "tools_sync_repo_copyfile",
+      "tools_sync_repo_execsync",
+      "tools_sync_repo_fs",
+      "tools_sync_repo_path",
+      "tools_sync_repo_repocandidates",
+      "tools_sync_repo_reporoot"
+    ]
+  },
+  "cohesion": {
+    "0": 0.11688311688311688,
+    "1": 0.1695906432748538,
+    "2": 0.11764705882352941,
+    "3": 0.11764705882352941,
+    "4": 0.16666666666666666,
+    "5": 0.18181818181818182,
+    "6": 0.16666666666666666,
+    "7": 0.18181818181818182,
+    "8": 0.25,
+    "9": 0.2857142857142857
+  },
+  "gods": [
+    {
+      "id": "engine_transcribe_main",
+      "label": "main()",
+      "degree": 9
+    },
+    {
+      "id": "docker_compose_services_transcribe",
+      "label": "transcribe",
+      "degree": 7
+    },
+    {
+      "id": "package_scripts",
+      "label": "scripts",
+      "degree": 7
+    },
+    {
+      "id": "engine_transcribe_extract_audio",
+      "label": "extract_audio()",
+      "degree": 5
+    },
+    {
+      "id": "engine_transcribe_separate_vocals",
+      "label": "separate_vocals()",
+      "degree": 5
+    },
+    {
+      "id": "tools_ffmpeg_helper_getffmpegpath",
+      "label": "getFfmpegPath()",
+      "degree": 5
+    },
+    {
+      "id": "docker_compose_transcribe_build",
+      "label": "build",
+      "degree": 3
+    },
+    {
+      "id": "engine_transcribe_format_timestamp_ass",
+      "label": "format_timestamp_ass()",
+      "degree": 3
+    },
+    {
+      "id": "engine_transcribe_format_timestamp_srt",
+      "label": "format_timestamp_srt()",
+      "degree": 3
+    },
+    {
+      "id": "ref_ffmpeg_static",
+      "label": "ffmpeg-static",
+      "degree": 3
+    }
+  ],
+  "surprises": [],
+  "tokens": {
+    "input": 0,
+    "output": 0
+  }
+}

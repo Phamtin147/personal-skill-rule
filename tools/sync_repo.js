@@ -12,8 +12,13 @@ const fs = require('fs');
 const path = require('path');
 const { execSync } = require('child_process');
 
-const repoRoot = 'F:/sub-film-vietnamese';
-if (!fs.existsSync(repoRoot) || !fs.existsSync(path.join(repoRoot, '.git'))) {
+const repoCandidates = [
+  '/run/media/amtia/games/sub-film-vietnamese',
+  'F:/sub-film-vietnamese',
+  path.resolve(__dirname, '../../sub-film-vietnamese')
+];
+const repoRoot = repoCandidates.find(p => fs.existsSync(p) && fs.existsSync(path.join(p, '.git')));
+if (!repoRoot) {
   process.exit(0);
 }
 
@@ -27,7 +32,11 @@ function copyFile(src, dest) {
 }
 
 if (targetDir && fs.existsSync(targetDir)) {
-  const relPath = path.relative('F:/anime', targetDir);
+  let animeRoot = 'F:/anime';
+  if (targetDir.includes('/run/media/amtia/games/anime')) {
+    animeRoot = '/run/media/amtia/games/anime';
+  }
+  const relPath = path.relative(animeRoot, targetDir);
   let category = 'Anime';
   let subRel = relPath;
 

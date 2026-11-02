@@ -24,8 +24,8 @@ let assStyles = [];
 
 if (transPath.endsWith('.json')) {
   const transData = JSON.parse(fs.readFileSync(transPath, 'utf8'));
-  const transList = transData.dialogues || transData.translations || transData;
-  transTexts = transList.map(item => (typeof item === 'string' ? item : item.translatedText || item.text));
+  const transList = transData.translations || transData.dialogues || transData;
+  transTexts = transList.map(item => (typeof item === 'string' ? item : (item.translatedText !== undefined ? item.translatedText : item.text)));
 } else {
   // Đọc file ASS trực tiếp
   const content = fs.readFileSync(transPath, 'utf8');

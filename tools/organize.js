@@ -65,6 +65,28 @@ function parseAnimeInfo(filename) {
     };
   }
 
+  // 2c. Chii Fuyo / The Laid Off Cheat Granting Mage
+  m = base.match(/(?:Chii\s*Fuyo|The\.Laid\.Off\.Cheat\.Granting\.Mage).*?[sS](\d+)[eE](\d+)/i) || base.match(/(?:Chii\s*Fuyo|The\s*Laid\s*Off\s*Cheat\s*Granting\s*Mage)\s*-\s*(\d+)/i);
+  if (m) {
+    const ep = m[2] || m[1];
+    return {
+      series: 'The Laid Off Cheat Granting Mage Enjoys a Second Lease on Life',
+      episode: `Tập ${ep.padStart(2, '0')}`,
+      epNum: parseInt(ep, 10)
+    };
+  }
+
+  // 2d. Choujun! Choujou-senpai / Super Psychic Policeman Chojo
+  m = base.match(/(?:Choujun!?\s*Choujou-senpai|Super\.Psychic\.Policeman\.Chojo).*?[sS](\d+)[eE](\d+)/i) || base.match(/(?:Choujun!?\s*Choujou-senpai|Super\s*Psychic\s*Policeman\s*Chojo)\s*-\s*(\d+)/i);
+  if (m) {
+    const ep = m[2] || m[1];
+    return {
+      series: 'Super Psychic Policeman Chojo',
+      episode: `Tập ${ep.padStart(2, '0')}`,
+      epNum: parseInt(ep, 10)
+    };
+  }
+
   // 3. Even the Student Council Has Its Holes / Seitokai ni mo Ana wa Aru
   m = base.match(/Even\.the\.Student\.Council\.Has\.Its\.Holes.*?[sS](\d+)[eE](\d+)/i);
   if (m) {
