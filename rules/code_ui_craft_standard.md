@@ -14,6 +14,9 @@
     - **`ui-ux-pro-max`** & **`ui-ux-designer`**: Tư duy trải nghiệm người dùng, phân cấp thị giác (visual hierarchy), UX copy rõ ràng, micro-interactions tinh tế.
     - **`design-taste-frontend` (tasteskill v2)**: Tuyệt đối không làm ra giao diện AI chung chung, vô hồn hay "slop". Áp dụng phong cách nghệ thuật sắc sảo, bảng màu chuẩn, kiểu chữ có chủ đích.
     - **`impeccable`**: Chuẩn mực thiết kế cao cấp nhất, hoàn thiện từng chi tiết từ spacing, token, responsive cho đến edge cases.
+  - **Quy chuẩn Icon chuyên nghiệp (Tuyệt đối không dùng Icon AI Slop)**:
+    - Khi dùng icon: **BẮT BUỘC LUÔN DÙNG các bộ icon chuẩn, sắc nét như `Radix Icons`**, **`Lucide Icons`**, **`Phosphor Icons`**, **`Tabler Icons`** hoặc **`Heroicons`** (thông qua package import hoặc trích xuất đúng chuẩn SVG gốc của thư viện).
+    - **NGHIÊM CẤM**: Tuyệt đối không tự bịa vẽ SVG icon méo mó (AI-generated icon slop) hay dùng emoji rẻ tiền để thay thế icon giao diện.
 
 ## 3. Kiểm thử & Thẩm định Trực quan (Visual Inspection Loop)
 - Sau khi code xong:
