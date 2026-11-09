@@ -128,6 +128,20 @@ metadata:
 
 ## 📂 QUY TẮC QUẢN LÝ & TỔ CHỨC CẤU TRÚC THƯ MỤC THÔNG MINH (SMART FOLDER HIERARCHY RULE)
 
+> [!CRITICAL]
+> **QUY TẮC BẮT BUỘC: TÁI SỬ DỤNG THƯ MỤC ĐÃ CÓ (FOLDER REUSE & ANTI-DUPLICATION RULE)**:
+> 1. **QUÉT THƯ MỤC TRƯỚC KHI TẠO MỚI (SCAN BEFORE CREATE)**:
+>    - Trước khi phân loại hoặc di chuyển bất kỳ video, phụ đề hoặc cẩm nang nào vào thư mục bộ anime, AI **BẮT BUỘC QUÉT DANH SÁCH TẤT CẢ CÁC THƯ MỤC CON HIỆN CÓ** trong thư mục anime đích.
+> 2. **TỰ ĐỘNG SO KHỚP THÔNG MINH (SMART FUZZY & KEYWORD MATCHING)**:
+>    - Kiểm tra xem đã có thư mục nào đại diện cho bộ phim đó chưa (bỏ qua khác biệt về chữ hoa/thường, dấu cách, dấu gạch nối, dấu chấm, hậu tố Season/Phần, năm phát hành, hoặc tag nhóm rip):
+>      + **Ví dụ thực tế**: Khi phân loại tập phim *Black Clover* (ví dụ tập 176) mà trong thư mục đã có sẵn `Black Clover 2nd Season` ➔ **BẮT BUỘC TÁI SỬ DỤNG THƯ MỤC `Black Clover 2nd Season` ĐÃ CÓ**, TUYỆT ĐỐI KHÔNG ĐƯỢC TẠO THÊM THƯ MỤC `Black Clover` MỚI làm đẻ thêm thư mục rác, xé lẻ các tập của cùng một bộ anime!
+>      + **Ví dụ tương tự**: Nếu đã có thư mục `Kashita Maryoku` thì dùng luôn `Kashita Maryoku` (kể cả tên file là `[SubsPlease] Kashita Maryoku wa Revo Barai...`); nếu đã có `Blue Box` thì dùng luôn `Blue Box` (kể cả tên file là `Blue.Box.S02E05...`).
+> 3. **QUY TẮC DUY NHẤT 1 THƯ MỤC GỐC CHO MỖI BỘ (SINGLE CANONICAL DIRECTORY)**:
+>    - Mỗi bộ anime chỉ được phép có DUY NHẤT 1 thư mục mẹ trên ổ cứng. Toàn bộ các tập (kể cả Season 1, Season 2, OVA, Movie) phải được gom chung vào thư mục mẹ đang có.
+>    - **CHỈ TẠO THƯ MỤC MỚI** khi và chỉ khi bộ anime đó hoàn toàn chưa có bất kỳ thư mục tương ứng nào trong thư mục đích.
+> 4. **TỰ ĐỘNG SÁP NHẬP NẾU PHÁT HIỆN TRÙNG LẶP (AUTO-MERGE DUPLICATES)**:
+>    - Nếu phát hiện thư mục bị phân tách do sơ suất trước đó (như `Black Clover` và `Black Clover 2nd Season`), hệ thống phải tự động chuyển toàn bộ các tập về thư mục mẹ có sẵn và dọn sạch thư mục dư thừa.
+
 > [!IMPORTANT]
 > **TIÊU CHUẨN LƯU TRỮ CHUYÊN NGHIỆP & GỌN GÀNG (CLEAN FANSUB DIRECTORY ARCHITECTURE)**:
 > Khi tải hoặc xử lý nhiều tập phim, việc xuất 4-5 file trung gian vào thẳng thư mục gốc sẽ gây tràn lan, rối rắm và khó theo dõi. AI **BẮT BUỘC** tuân thủ cấu trúc phân cấp thư mục sau:
