@@ -36,7 +36,6 @@ personal-skill-rule/
 │   ├── GEMINI_GLOBAL_RULES.md  # Quy tắc tối cao: Zero Option Modals, Full Automation, Auto-Graphify
 │   ├── code_ui_craft_standard.md # Chuẩn mực đọc code qua Graphify, UI/UX Craft và Soi ảnh chụp
 │   ├── ANIME_SUB_RULES.md      # Quy tắc dịch thuật, ma trận xưng hô chéo anime và ghi công
-│   ├── PRM_EXAM_PROTOCOL.md    # Quy trình làm bài và nộp bài thi thực hành PRM392/393
 │   └── creative_ui_scrollytelling.md # Chuẩn mực web cuộn scrollytelling Awwwards (GSAP + WebGL)
 ├── graphify-out/               # ĐỒ THỊ TRI THỨC CODEBASE TOÀN DIỆN
 │   ├── graph.json              # 2.964 nodes, 6.096 edges, 173 cụm kiến trúc AST
