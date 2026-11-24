@@ -83,10 +83,18 @@ const newLines = lines.map(line => {
     // Chuẩn hóa Unicode NFC (Precomposed) - quy tụ các dấu thanh tiếng Việt về mã dựng sẵn
     normalized = normalized.normalize('NFC');
 
-    // Khử/thay thế các thẻ override font inline bị dính font subset tiếng Anh
+    // Gỡ bỏ các ký tự điều khiển hướng chữ BiDi (từ nguồn phụ đề tiếng Ả Rập RTL)
+    normalized = normalized.replace(/[\u200e\u200f\u202a-\u202e\u2066-\u2069]/g, '');
+
+    // Khử/thay thế các thẻ override font inline bị dính font subset tiếng Anh hoặc font Ả Rập
+    const unsafeFonts = [
+      'trebuchet', 'times', 'georgia', 'arabic', 'roboto', 'aparajita',
+      'bahij', 'amareddine', 'hacen', 'sc_rehan', 'ammar', 'hsn razan',
+      'omnes', 'b shams', 'almarai', '29lt', 'isra', 'sarchia', 'sf grunge', 'sovba'
+    ];
     normalized = normalized.replace(/\\fn([A-Za-z0-9 _\-]+)/gi, (match, font) => {
       const lower = font.toLowerCase().trim();
-      if (lower.includes('trebuchet') || lower.includes('times') || lower.includes('georgia') || lower.includes('arabic') || lower.includes('roboto') || lower.includes('aparajita')) {
+      if (unsafeFonts.some(uf => lower.includes(uf))) {
         return `\\fn${targetFont}`;
       }
       return match;
@@ -112,11 +120,18 @@ if (outAss !== directAss) {
   } catch (e) {}
 }
 
-// Chuyển đổi sang file SRT bằng ffmpeg
+// Chuyển đổi sang file SRT sạch bằng ffmpeg (lọc bỏ dòng vector drawing \p1..\p4 để không làm rác SRT)
 try {
   const ffmpeg = getFfmpegPath();
-  const cmd = `"${ffmpeg}" -i "${outAss}" "${outSrt}" -y`;
-  execSync(cmd, { stdio: 'ignore' });
+  const cleanLinesForSrt = newLines.filter(l => !(l.startsWith('Dialogue: ') && /\\p[1-9]/.test(l)));
+  const tmpSrtAss = `${outAss}.tmp_srt.ass`;
+  fs.writeFileSync(tmpSrtAss, '\uFEFF' + cleanLinesForSrt.join('\r\n'), 'utf8');
+  const cmd = `"${ffmpeg}" -nostdin -i "${tmpSrtAss}" "${outSrt}" -y`;
+  try {
+    execSync(cmd, { stdio: 'ignore' });
+  } finally {
+    try { fs.unlinkSync(tmpSrtAss); } catch (e) {}
+  }
 
   // Đọc lại SRT và ghi thêm UTF-8 BOM nếu cần
   if (fs.existsSync(outSrt)) {

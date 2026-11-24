@@ -112,5 +112,18 @@ Khi gặp các dòng Credit ở cuối tập phim (các dòng có style `credits
    * Nghiêm cấm mọi hành vi dịch được 1 tập rồi dừng lại hỏi: *"Bạn có muốn dịch tiếp tập X không?"*.
    * Toàn bộ quy trình phải được thực thi tự động 100% (Full Automation). Chỉ gửi báo cáo tổng kết sau khi TẤT CẢ các tập phim đã được dịch xong xuôi và kiểm thử đạt chuẩn.
 
+---
+
+## 7. NGUYÊN TẮC ƯU TIÊN PHỤ ĐỀ TIẾNG Ả RẬP & BẢO TOÀN HIỆU ỨNG ASS (ARABIC-FIRST FX RULES)
+
+1. **Ưu tiên dịch từ phụ đề tiếng Ả Rập trước tiên**:
+   * Khi một tập phim có nhiều file phụ đề hoặc nhiều track phụ đề (Multi-Sub MKV), **BẮT BUỘC kiểm tra và ưu tiên chọn phụ đề tiếng Ả Rập (`ara` / `ar`, đặc biệt là định dạng `.ass` của các nhóm Fansub Ả Rập như *KiyoshiiSubs*) trước tiên**, sau đó mới đến tiếng Anh `.ass`, tiếng Anh `.srt` và các nguồn khác.
+   * Mục đích: Tận dụng trọn vẹn hệ thống hiệu ứng Typesetting/Aegisub FX công phu (vòng ma pháp vector, chiêu thức phát sáng, karaoke OP/ED, tiêu đề tập) mà các bản rip tiếng Anh thông thường không có.
+2. **Bảo toàn 100% FX & Chuyển đổi chuẩn RTL (Ả Rập) -> LTR (Tiếng Việt)**:
+   * Giữ nguyên 1:1 toàn bộ số dòng ASS, không xóa các dòng vẽ vector (`\p1`–`\p4`) và karaoke Romaji/JP.
+   * Dịch trọn vẹn mọi lớp chữ Ả Rập (thoại chính, dẫn chuyện, OP/ED, tiêu đề tập, Credits đổi sang **Amtia(NOFACE)** và mọi chiêu thức `SPELL`); xác minh sau dịch còn **0 ký tự Ả Rập (`[\u0600-\u06FF]`)**.
+   * Với các chiêu thức tách nhiều từ cùng thời điểm (Ả Rập bố trí phải-sang-trái), bắt buộc sắp xếp lại thứ tự và căn lại tọa độ X (`\pos`/`\move`) sang chiều đọc trái-sang-phải của tiếng Việt để không bị ngược hay chồng chữ.
+   * Xóa sạch ký tự điều khiển BiDi (`\u200e`, `\u200f`, `\u202a`–`\u202e`, `\u2066`–`\u2069`), đổi `Encoding: 178` -> `Encoding: 1`, thay toàn bộ font Ả Rập (cả ở Style lẫn thẻ inline `\fn...`) sang **`Segoe UI`**, cân lại kích cỡ chữ hợp lý cho 1080p và lọc bỏ dòng vector/karaoke rời khi xuất file `.vie.srt`.
+
 
 

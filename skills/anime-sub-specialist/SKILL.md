@@ -7,9 +7,9 @@ metadata:
 
 ## KHI NÀO SỬ DỤNG SKILL NÀY
 
-- Dịch phụ đề phim/anime từ tiếng Anh/tiếng Nhật sang tiếng Việt.
+- Dịch phụ đề phim/anime từ tiếng Ả Rập (ưu tiên số 1 để giữ hiệu ứng FX/Typesetting ASS), tiếng Anh hoặc tiếng Nhật sang tiếng Việt.
 - Thiết lập hệ thống xưng hô, bảng quan hệ nhân vật và cẩm nang dịch thuật cho một bộ phim bất kỳ.
-- Trích xuất phụ đề, chuyển ngữ, kiểm tra tính toàn vẹn (lệch dòng, lỗi thẻ hiệu ứng) và đóng gói video có phụ đề.
+- Trích xuất phụ đề, chuyển ngữ, bảo toàn hiệu ứng ASS, kiểm tra tính toàn vẹn (lệch dòng, lỗi thẻ hiệu ứng) và đóng gói video có phụ đề.
 
 ---
 
@@ -62,9 +62,26 @@ metadata:
        - **Khởi động**: `docker compose run --rm transcribe "/videos/[tên_phim].mkv" --model large-v3 --separate`
        - **Tắt sạch ngay lập tức**: Ngay sau khi file `_dialogues.json` xuất hiện, AI **BẮT BUỘC CHẠY** `docker compose down` để giải phóng 100% VRAM và RAM.
 
-### Bước 1: Trích xuất & Khảo sát Subtitle
-- Dùng công cụ `tools/extract.js` hoặc ffmpeg để lấy stream subtitle (nếu video đã có sẵn track phụ đề gốc).
-- Dùng `tools/parse_dialogues.js` để bóc tách thành danh sách câu thoại và nhận diện các speaker (tên nhân vật xuất hiện trong subtitle).
+### Bước 1: Trích xuất & Khảo sát Subtitle (Ưu tiên Nguồn Tiếng Ả Rập FX)
+
+> [!IMPORTANT]
+> **QUY TẮC ƯU TIÊN DỊCH TỪ PHỤ ĐỀ TIẾNG Ả RẬP TRƯỚC (ARABIC-FIRST FX PRIORITY RULE)**:
+> 1. **Thứ tự ưu tiên nguồn phụ đề bắt buộc** (khi thư mục có nhiều file sub/video cùng tập, hoặc video MKV có nhiều track phụ đề Multi-Sub):
+>    - **Ưu tiên 1 (Số 1 — Bắt buộc kiểm tra & chọn trước):** Phụ đề **tiếng Ả Rập định dạng `.ass`** (track ngôn ngữ `ara` / `ar`, file `.ara.ass`, hoặc bản Fansub Ả Rập giàu hiệu ứng như *KiyoshiiSubs*...). Lý do: Các nhóm Fansub Ả Rập thường có hệ thống Typesetting/Aegisub FX cực kỳ công phu (hiệu ứng chiêu thức phát sáng, vòng ma pháp vector `\p1`–`\p4`, karaoke OP/ED, tiêu đề tập).
+>    - **Ưu tiên 2:** Phụ đề **tiếng Ả Rập** các định dạng khác (`.srt`).
+>    - **Ưu tiên 3:** Phụ đề **tiếng Anh định dạng `.ass`** (SubsPlease, Erai-raws, Fansub Anh có signs/typesetting).
+>    - **Ưu tiên 4:** Phụ đề **tiếng Anh `.srt`** hoặc các ngôn ngữ khác.
+>    - **Ưu tiên 5:** Video thô RAW không có track sub (chuyển sang Bước 0 Speech-to-Text).
+> 2. **Quy chuẩn xử lý kỹ thuật bắt buộc khi dịch từ Sub Tiếng Ả Rập (RTL -> LTR FX Preservation)**:
+>    - **Bảo toàn 100% hiệu ứng gốc**: Giữ nguyên 1:1 toàn bộ số dòng ASS, tuyệt đối không xóa các dòng vẽ vector (`\p1`–`\p4`), karaoke Romaji/JP (`OP - Romaji`, `EDJP`), và giữ nguyên toàn bộ thẻ hiệu ứng (`\pos`, `\move`, `\t`, `\blur`, `\fad`, `\clip`, `\bord`, `\3c`...).
+>    - **Chuyển ngữ trọn vẹn mọi lớp văn bản Ả Rập**: Dịch đầy đủ hội thoại chính, dẫn chuyện (Narrator), lời OP/ED, tiêu đề tập (`EpTitle`), Credit (đổi sang **Amtia(NOFACE)**) và **tất cả tên chiêu thức (`SPELL`)**. Sau khi dịch phải kiểm tra đảm bảo **0 ký tự Ả Rập (`[\u0600-\u06FF]`)** còn sót lại.
+>    - **Đảo chiều & căn chỉnh tọa độ X từ RTL (Ả Rập) sang LTR (Tiếng Việt)**: Với các chiêu thức/tiêu đề tách thành nhiều từ đặt cạnh nhau trên cùng mốc thời gian (tiếng Ả Rập đặt từ đầu bên phải, từ sau bên trái), BẮT BUỘC sắp xếp lại đúng thứ tự trái-sang-phải của tiếng Việt và điều chỉnh tọa độ X (`\pos` / `\move`) để không bị ngược nghĩa hay chồng chữ.
+>    - **Làm sạch BiDi, Encoding & Font Ả Rập**: Xóa sạch ký tự điều khiển hướng đọc BiDi (`\u200e`, `\u200f`, `\u202a`–`\u202e`, `\u2066`–`\u2069`), ép toàn bộ `[V4+ Styles]` (chuyển `Encoding: 178` sang `Encoding: 1`) và mọi thẻ inline `\fn...` (font Ả Rập như *Bahij*, *Omnes Arabic*, *B Shams*, *Amareddine*, *SC_REHAN*, *Ammar*, *HSN Razan*, *Hacen*, *Almarai*...) sang **`Segoe UI`**. Cân chỉnh lại `Fontsize` (khoảng `72–76` trên canvas `1920x1080`) và chuẩn hóa `\fscx100\fscy100` nếu gốc bị phóng đại quá mức cho font Ả Rập.
+>    - **Xuất SRT sạch (Clean SRT)**: Khi file ASS gốc có hàng chục nghìn dòng karaoke/vector FX, file `.vie.srt` / `.srt` xuất kèm phải lọc bỏ toàn bộ dòng vẽ vector (`\p1`–`\p4`) và karaoke ký tự rời để đảm bảo phụ đề SRT gọn sạch trên TV/Mobile.
+>    - **Kiểm định trực quan (Visual QA)**: Kết xuất ảnh khung hình thực tế bằng `ffmpeg` + `libass` tại mốc tiêu đề tập, chiêu thức nhiều từ và thoại chính để xác nhận không chồng chữ, không vỡ dấu tofu.
+
+- Dùng công cụ `tools/extract.js` hoặc ffmpeg để kiểm tra toàn bộ stream phụ đề và trích xuất theo đúng thứ tự ưu tiên trên (ưu tiên track `ara` / `ar` ASS trước tiên).
+- Dùng `tools/parse_dialogues.js` để bóc tách thành danh sách câu thoại, phân loại style (hội thoại, dẫn chuyện, chiêu thức `SPELL`, OP/ED, credits, vector/karaoke) và nhận diện các speaker.
 
 ### Bước 2: Nghiên cứu Thực thể (Character & Lore Discovery)
 - Trước khi dịch bất kỳ từ nào, PHẢI tra cứu:

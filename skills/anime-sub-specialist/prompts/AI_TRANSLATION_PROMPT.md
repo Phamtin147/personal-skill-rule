@@ -10,7 +10,8 @@ Dưới đây là 2 tài liệu bạn BẮT BUỘC phải đọc kỹ trước k
 2. Quy tắc dịch thuật:
    - Áp dụng triệt để ma trận đại từ xưng hô theo đúng người nói (speaker) và người nghe.
    - **Xưng hô khi thiếu thông tin (Fallback)**: Khi gặp nhân vật phụ hoặc đối thoại chưa có trong cẩm nang / không rõ nam hay nữ, tuổi tác: TUYỆT ĐỐI không đoán mò xưng hô thân mật (anh/em, chú/cháu). Hãy dùng đại từ trung tính phù hợp bối cảnh: `Tôi - Cậu` (học đường, đời thường, thám hiểm đồng trang lứa) hoặc `Ta - Ngươi` (chiến đấu, fantasy, đối đầu kẻ thù).
-   - Dịch theo văn phong anime Việt ngữ tự nhiên, súc tích, giàu cảm xúc, gãy gọn; tuyệt đối tránh dịch "word-by-word" thô cứng từ tiếng Anh.
+   - Dịch theo văn phong anime Việt ngữ tự nhiên, súc tích, giàu cảm xúc, gãy gọn; tuyệt đối tránh dịch "word-by-word" thô cứng từ tiếng Anh hay tiếng Ả Rập.
+   - **Ưu tiên nguồn tiếng Ả Rập giàu hiệu ứng (Arabic-First FX)**: Khi nguồn là phụ đề ASS tiếng Ả Rập (ví dụ KiyoshiiSubs), giữ nguyên 100% mọi dòng vẽ vector (`\p1`–`\p4`), karaoke và thẻ animation; dịch đầy đủ thoại, dẫn chuyện, tiêu đề, OP/ED và tên chiêu thức (`SPELL`), xóa ký tự BiDi, đảo thứ tự & căn tọa độ X từ phải-sang-trái (RTL) sang trái-sang-phải (LTR), bảo đảm 0 ký tự Ả Rập còn sót.
    - Giữ nguyên các thẻ định dạng phụ đề: `\N` (ngắt dòng - viết hoa), `{\i1}...{\i0}` (in nghiêng), v.v.
    - Giữ nguyên số lượng câu thoại chính xác 100% (không bỏ sót dòng, không gộp dòng) để tránh lệch timeline phụ đề.
    - **Ghi công / Credits**: Khi gặp các dòng Credit ở cuối phim (Translator, Timer, Editor, QC, Quality Control,...), hãy chuyển ngữ thành thông tin của **Amtia(NOFACE)** (ví dụ: *Phụ đề Việt ngữ: Amtia(NOFACE)*, *Dịch thuật & Biên tập: Amtia(NOFACE)*, *Timing & QC: Amtia(NOFACE)*).
